@@ -1,0 +1,26 @@
+.auth_page {
+	flex: 9;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.form {
+	box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+	max-width: 27rem !important;
+	padding: 2rem;
+}
+input {
+	width: 90% !important;
+	margin: 0.6rem 0 0.6rem 0 !important;
+	outline: none !important;
+	border: none !important;
+	border-bottom: 1px solid lightgrey !important;
+	border-left: 1px solid lightgrey !important;
+}
+button {
+	text-transform: none !important;
+	margin: 0.5rem 0 auto !important;
+}
+input:focus {
+	outline-width: 0 !important;
+}

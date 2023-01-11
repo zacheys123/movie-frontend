@@ -1,0 +1,53 @@
+.header {
+	flex: 0.3;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background: rgb(115, 208, 240);
+	.title{
+		margin-left:1rem;
+	}
+
+.toggle__button {
+	display: flex;
+	justify-content: space-evenly;
+	margin-right: 1rem;
+	align-items: center;
+}
+}
+/* For Mobile phones */
+@media screen and (max-device-width: 480px) and (min-device-width: 320px) {
+	.menu {
+		display: flex !important;
+	}
+}
+
+/* For tablet and ipad */
+@media screen and (min-device-width: 480px) and (max-device-width: 768px) {
+	.menu {
+		display: flex !important;
+	}
+}
+/* For laptop and ipad */
+@media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+	.menu {
+		display: none !important;
+	}
+}
+/* For Desktop and Large-size screen */
+@media screen and (min-device-width: 1024px) and (max-device-width: 1200px) {
+	.menu {
+		display: none !important;
+	}
+}
+/* For Desktop and Large-size screen */
+@media screen and (min-device-width: 1200px) {
+	.menu {
+		display: none !important;
+	}
+}
+@media screen and (min-device-width: 1200px) and (max-device-width: 1280px) {
+	.menu {
+		display: none !important;
+	}
+}
