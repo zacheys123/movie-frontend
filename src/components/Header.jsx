@@ -21,14 +21,28 @@ const Header = () => {
 				</h3>
 			</Box>
 			<Box className="sites">
-				<Button>Add New User</Button>
-				<Button onClick={() => navigate('/popular')}>
+				<Button variant="outlined" size="small">
+					Add New User
+				</Button>
+				<Button
+					variant="outlined"
+					size="small"
+					onClick={() => navigate('/popular')}
+				>
 					popular movies
 				</Button>
-				<Button onClick={() => navigate('/suggested')}>
+				<Button
+					variant="outlined"
+					size="small"
+					onClick={() => navigate('/suggested')}
+				>
 					Suggested Movies
 				</Button>
-				<Button onClick={() => navigate('/latest')}>
+				<Button
+					variant="outlined"
+					size="small"
+					onClick={() => navigate('/latest')}
+				>
 					Latest Movies
 				</Button>
 			</Box>

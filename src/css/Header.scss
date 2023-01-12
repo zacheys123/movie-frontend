@@ -1,53 +1,143 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+$breakpoint-phone: 480px;
+$breakpoint-tablet: 768px;
+$breakpoint-laptop: 992px;
+$breakpoint-desktop: 1200px;
+$breakpoint-lgdesktop: 1480px;
+@mixin phone($breakpoint-phone) {
+	@media (max-width: $breakpoint-phone) {
+		@content;
+	}
+}
+
+// tablet mixin
+@mixin tablet($breakpoint-phone) {
+	@media (min-width: $breakpoint-phone) and (max-width: $breakpoint-tablet) {
+		@content;
+	}
+}
+// laptop mixin
+@mixin laptop($breakpoint-tablet) {
+	@media (min-width: $breakpoint-tablet) and (max-width: $breakpoint-laptop) {
+		@content;
+	}
+}
+// laptop mixin
+@mixin desktop($breakpoint-laptop) {
+	@media (min-width: $breakpoint-tablet) and (max-width: $breakpoint-laptop) {
+		@content;
+	}
+}
+// laptop mixin
+@mixin lgdesktop($breakpoint-desktop) {
+	@media (min-width: $breakpoint-tablet) and (max-width: $breakpoint-laptop) {
+		@content;
+	}
+}
+// laptop mixin
+@mixin lg($breakpoint-lgdesktop) {
+	@media (min-width: $breakpoint-lgdesktop) {
+		@content;
+	}
+}
 .header {
 	flex: 0.3;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	background: rgb(115, 208, 240);
-	.title{
-		margin-left:1rem;
-	}
+	margin: auto 4rem;
 
-.toggle__button {
-	display: flex;
-	justify-content: space-evenly;
-	margin-right: 1rem;
-	align-items: center;
-}
-}
-/* For Mobile phones */
-@media screen and (max-device-width: 480px) and (min-device-width: 320px) {
-	.menu {
-		display: flex !important;
+	.title {
+		margin-left: 1rem;
+		.nav {
+			font-weight: bold;
+			font-family: 'Ubuntu', sans-serif;
+			font-weight: bolder;
+			color: rgba(132, 12, 145, 0.61);
+			text-align: center;
+			letter-spacing: 5px;
+			text-shadow: 6px 3px 20px #ff99cc, -4px 4px 30px #7fa710;
+		}
 	}
-}
-
-/* For tablet and ipad */
-@media screen and (min-device-width: 480px) and (max-device-width: 768px) {
-	.menu {
-		display: flex !important;
+	.sites {
+		button {
+			margin: 0.4rem !important;
+			font-family: 'Ubuntu', sans-serif;
+			color: purple !important;
+		}
 	}
-}
-/* For laptop and ipad */
-@media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-	.menu {
-		display: none !important;
+	.toggle__button {
+		display: flex;
+		justify-content: space-evenly;
+		margin-right: 1rem;
+		align-items: center;
 	}
-}
-/* For Desktop and Large-size screen */
-@media screen and (min-device-width: 1024px) and (max-device-width: 1200px) {
-	.menu {
-		display: none !important;
+	/* For Mobile phones */
+	@include phone($breakpoint-phone) {
+		.title {
+			.nav {
+				font-size: 0.9rem !important;
+			}
+		}
+		.sites {
+			button {
+				font-size: 0.6rem !important;
+			}
+		}
 	}
-}
-/* For Desktop and Large-size screen */
-@media screen and (min-device-width: 1200px) {
-	.menu {
-		display: none !important;
+	/* For tablets and large phones */
+	@include tablet($breakpoint-phone) {
+		.title {
+			.nav {
+				font-size: 0.9rem !important;
+			}
+		}
+		.sites {
+			button {
+				font-size: 0.6rem !important;
+			}
+		}
 	}
-}
-@media screen and (min-device-width: 1200px) and (max-device-width: 1280px) {
-	.menu {
-		display: none !important;
+	/* For tablets and large phones */
+	@include laptop($breakpoint-tablet) {
+		.title {
+			.nav {
+				font-size: 0.9rem !important;
+			}
+		}
+		.sites {
+			button {
+				font-size: 0.6rem !important;
+			}
+		}
+	}
+	/* For desktops */
+	@include desktop($breakpoint-laptop) {
+		.title {
+			.nav {
+				font-size: 0.9rem !important;
+			}
+		}
+		.sites {
+			button {
+				font-size: 0.6rem !important;
+			}
+		}
+	}
+	/* For large desktops*/
+	@include lgdesktop($breakpoint-lgdesktop) {
+		.title {
+			.nav {
+				font-size: 0.9rem !important;
+			}
+		}
+		.sites {
+			button {
+				font-size: 0.6rem !important;
+			}
+		}
+	}
+	/* For large desktops*/
+	@include lg($breakpoint-lgdesktop) {
 	}
 }
