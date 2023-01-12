@@ -10,7 +10,7 @@ export const createAdmin = async (
 	try {
 		const response = await axios.post(
 			`
-			http://localhost:4000/register`,
+	${process.env.REACT_APP_BASE}`,
 			data.current,
 		);
 
