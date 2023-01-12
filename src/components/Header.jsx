@@ -6,7 +6,7 @@ import { useMainContext } from '../context/contexts_/MainContext';
 import { useNavigate, Link } from 'react-router-dom';
 const Header = () => {
 	const {
-		main_state: { istheme, user },
+		main_state: { istheme, aadmin },
 		main_dispatch,
 	} = useMainContext();
 	const navigate = useNavigate();
@@ -17,7 +17,7 @@ const Header = () => {
 					onClick={() => navigate('/')}
 					className="nav navbar navbar-brand"
 				>
-					{user?.company}
+					{user?.company} || Blue Tint Movies
 				</h3>
 			</Box>
 			<Box className="sites">
