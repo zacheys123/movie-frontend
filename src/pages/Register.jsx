@@ -13,7 +13,7 @@ import { useMainContext } from '../context/contexts_/MainContext';
 import { useNavigate } from 'react-router-dom';
 import { createAdmin } from '../context/features/admin';
 import { Person } from '@mui/icons-material';
-function Register() {
+function Register(props) {
 	const {
 		main_state: { ismodal, modalcontent, loading, success, error },
 		main_dispatch,
@@ -26,7 +26,6 @@ function Register() {
 		phone: '',
 		email: '',
 		password: '',
-		confirmpassword: '',
 	});
 
 	const handleInput = (ev) => {
@@ -43,10 +42,9 @@ function Register() {
 			adminData?.current.password &&
 			adminData?.current.email &&
 			adminData?.current.company &&
-			adminData?.current.phone &&
-			adminData?.current.confirmpassword
+			adminData?.current.phone
 		) {
-			if (adminData?.current.password.length > 6) {
+			if (adminData?.current?.password.length > 6) {
 				createAdmin(navigate, main_dispatch, loading, adminData);
 			} else {
 				main_dispatch({
@@ -56,6 +54,7 @@ function Register() {
 				});
 			}
 		} else {
+			console.log(adminData.current);
 			main_dispatch({
 				type: 'EMPTY',
 				modalcontent: 'Cannot submit empty inputs',
@@ -69,7 +68,10 @@ function Register() {
 		adminData.current = user;
 	}, [user]);
 	return (
-		<Card className="auth_page">
+		<Card
+			className="auth_page"
+			style={{ height: props.height || '' }}
+		>
 			<Container className="form">
 				{ismodal && (
 					<Modal

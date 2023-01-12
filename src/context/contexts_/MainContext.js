@@ -13,6 +13,8 @@ function MainContext({ children }) {
 		admin: {},
 		logged: false,
 		isgenre: false,
+		userInfo: '',
+		user: {},
 	};
 	const [main_state, main_dispatch] = useReducer(
 		main_reducer,

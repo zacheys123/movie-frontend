@@ -1,3 +1,4 @@
+import { JWT, GETUSER } from '../action_type';
 export const main_reducer = (state = {}, action) => {
 	switch (action.type) {
 		case 'THEME':
@@ -5,7 +6,12 @@ export const main_reducer = (state = {}, action) => {
 				...state,
 				istheme: !action.payload,
 			};
-
+		case GETUSER:
+			return {
+				...state,
+				user: action.payload.user,
+				userInfo: action.payload.userInfo,
+			};
 		case 'EMPTY':
 			return {
 				...state,
@@ -47,7 +53,7 @@ export const main_reducer = (state = {}, action) => {
 				admin: action.payload.admin,
 				logged: !state.logged,
 			};
-		case 'JWT':
+		case JWT:
 			return {
 				...state,
 				admin: action.payload.admin,

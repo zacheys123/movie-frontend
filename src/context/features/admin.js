@@ -1,5 +1,5 @@
 import axios from 'axios';
-const baseUrl = process.env.REACT_APP_HOST;
+const baseUrl = process.env.REACT_APP_BASE;
 
 export const createAdmin = async (
 	navigate,
@@ -10,13 +10,13 @@ export const createAdmin = async (
 	try {
 		const response = await axios.post(
 			`
-			${baseUrl}/register`,
+			http://localhost:4000/register`,
 			data.current,
 		);
 
 		setTimeout(() => {
 			setTimeout(() => {
-				navigate('/dashboard');
+				navigate('/');
 				window.location.reload();
 			}, 3000);
 			window.localStorage.setItem(
