@@ -1,1 +1,1 @@
-export const THEME = 'THEME';
+export const GENRE = 'GENRE';

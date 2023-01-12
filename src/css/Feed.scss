@@ -8,6 +8,85 @@
 	.feed__movies {
 		height: 90%;
 		width: 90%;
+		display: flex;
+		border: none;
+		flex-direction: row;
+		border-right: 1px sold lightgrey;
 		box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+		.formd {
+			flex: 6;
+			padding: 1rem !important;
+			border: none;
+			height: 90%;
+			position: relative;
+			margin: auto 0;
+			border-right: 1px solid lightgrey;
+			.form__input {
+				width: 28rem !important;
+			}
+			input,
+			button,
+			label {
+				margin: 2.5rem 0 0 0 !important;
+			}
+			.movie {
+				button {
+					background: rgb(11, 85, 92);
+					border-radius: 10px;
+					padding: 0.15rem;
+					width: 7rem;
+				}
+			}
+			.amount {
+				display: flex;
+				align-items: center;
+				.form__inputs {
+					width: 14rem !important;
+				}
+
+				label {
+					font-size: 0.9rem;
+					color: black;
+				}
+			}
+			.h4 {
+				margin: 1rem;
+				color: red;
+			}
+			.genre__list {
+				position: absolute;
+				background: black;
+				color: white;
+				height: 16rem !important;
+				width: 100%;
+				top: 28rem;
+				z-index: 999 !important;
+				padding: 0.6rem;
+				p {
+					margin-left: 0.6rem !important;
+					font-size: 0.7rem;
+					transition: all 0.5 ease-in-out;
+					cursor: pointer;
+				}
+				&:hover {
+					// text-decoration: underline;
+				}
+			}
+		}
+		.select {
+			width: 10rem;
+		}
+	}
+	.movie__list {
+		flex: 4;
+		h4 {
+			color: rgb(166, 164, 164);
+		}
+		input {
+			padding: 0.8rem;
+			width: 15rem;
+			margin: 0.5rem auto 0 1rem !important;
+			border-radius: 40px;
+		}
 	}
 }
