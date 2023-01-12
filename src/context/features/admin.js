@@ -10,7 +10,7 @@ export const createAdmin = async (
 	try {
 		const response = await axios.post(
 			`
-	${process.env.REACT_APP_BASE}`,
+	http://localhost:4000`,
 			data.current,
 		);
 
