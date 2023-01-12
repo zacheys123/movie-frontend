@@ -31,7 +31,7 @@ function App() {
 	const getUser = async () => {
 		try {
 			const response = await axios.get(
-				`${process.env.REACT_APP_BASE}/v2/${id}`,
+				`${process.env.REACT_APP_BASE}/user/v2/${id}`,
 			);
 			main_dispatch({
 				type: GETUSER,
