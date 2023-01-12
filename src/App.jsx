@@ -31,7 +31,7 @@ function App() {
 	const getUser = async () => {
 		try {
 			const response = await axios.get(
-				`http://localhost:4000/user/v2/${id}`,
+				`https://movie-backend-ygcx.onrender.com/user/v2/${id}`,
 			);
 			main_dispatch({
 				type: GETUSER,
