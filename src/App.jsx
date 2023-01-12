@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import { Stack } from '@mui/material';
 import { useMainContext } from './context/contexts_/MainContext';
 import Layout from './components/layout/Layout';
@@ -26,6 +26,12 @@ function App() {
 			},
 		});
 	}, [admin, main_dispatch]);
+	const navigate = useNavigate();
+	useEffect(() => {
+		if (!mydata) {
+			navigate('/login');
+		}
+	}, []);
 	return (
 		<Layout>
 			<Routes>

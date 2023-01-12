@@ -6,7 +6,7 @@ import { useMainContext } from '../context/contexts_/MainContext';
 import Modal from '../components/Modal';
 import '../css/auth.css';
 
-function Login() {
+function Login(props) {
 	const {
 		main_state: { ismodal, modalcontent, loading, success, error },
 		main_dispatch,
@@ -69,7 +69,10 @@ function Login() {
 		userdata.current = user;
 	}, [user]);
 	return (
-		<Card className="auth_page">
+		<Card
+			className="auth_page"
+			style={{ height: props.height || '' }}
+		>
 			<Container className="form">
 				{ismodal && (
 					<Modal

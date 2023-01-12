@@ -24,6 +24,9 @@
 			.form__input {
 				width: 28rem !important;
 			}
+			input .form__input :focus {
+				outline-width: 0 !important;
+			}
 			input,
 			button,
 			label {
@@ -58,7 +61,7 @@
 				background: black;
 				color: white;
 				height: 16rem !important;
-				width: 100%;
+				width: 90%;
 				top: 28rem;
 				z-index: 999 !important;
 				padding: 0.6rem;

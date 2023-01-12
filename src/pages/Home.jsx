@@ -113,7 +113,10 @@ const Feed = () => {
 									AmountPaid:{' '}
 								</Form.Label>
 								&nbsp;&nbsp;&nbsp;&nbsp;
-								<Form.Control className="form__inputs" type="text" />
+								<Form.Control
+									className="form__inputs"
+									type="number"
+								/>
 							</div>
 						</div>
 					</div>
