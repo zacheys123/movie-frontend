@@ -10,7 +10,7 @@ export const createAdmin = async (
 	try {
 		const response = await axios.post(
 			`
-			https://movie-backend-ygcx.onrender.com/register`,
+			https://moviebackendz.onrender.com/register`,
 			data.current,
 		);
 

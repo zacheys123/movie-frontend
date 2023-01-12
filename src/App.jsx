@@ -23,7 +23,7 @@ function App() {
 
 	const navigate = useNavigate();
 	useEffect(() => {
-		if (!mydata) {
+		if (mydata) {
 			navigate('/login');
 		}
 	}, []);
@@ -31,7 +31,7 @@ function App() {
 	const getUser = async () => {
 		try {
 			const response = await axios.get(
-				`https://movie-backend-ygcx.onrender.com/user/v2/${id}`,
+				`https://moviebackendz.onrender.com/user/v2/${id}`,
 			);
 			main_dispatch({
 				type: GETUSER,
