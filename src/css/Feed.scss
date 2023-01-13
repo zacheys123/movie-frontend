@@ -11,13 +11,13 @@
 		display: flex;
 		border: none;
 		flex-direction: row;
-		border-right: 1px sold lightgrey;
+		border-right: 1px solid lightgrey;
 		box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
 		.formd {
 			flex: 6;
 			padding: 1rem !important;
 			border: none;
-			height: 90%;
+			height: 80%;
 			position: relative;
 			margin: auto 0;
 			border-right: 1px solid lightgrey;
@@ -53,8 +53,10 @@
 				}
 			}
 			.h4 {
-				margin: 1rem;
+				margin-top: -3rem;
+				margin-bottom: 4rem;
 				color: red;
+				text-align: center;
 			}
 			.genre__list {
 				position: absolute;
@@ -75,6 +77,9 @@
 					// text-decoration: underline;
 				}
 			}
+			.submit {
+				margin: 3rem 40% 1rem 40% !important;
+			}
 		}
 		.select {
 			width: 10rem;
@@ -90,6 +95,16 @@
 			width: 15rem;
 			margin: 0.5rem auto 0 1rem !important;
 			border-radius: 40px;
+		}
+		listing {
+			width: 56% !important;
+			margin: 0.5rem 0.5rem !important;
+		}
+		th {
+			font-size: 0.7rem;
+		}
+		td {
+			font-size: 0.7rem;
 		}
 	}
 }

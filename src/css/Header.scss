@@ -55,6 +55,7 @@ $breakpoint-lgdesktop: 1480px;
 			font-weight: bolder;
 			color: rgba(132, 12, 145, 0.61);
 			text-align: center;
+			cursor: pointer;
 			letter-spacing: 5px;
 			text-shadow: 6px 3px 20px #ff99cc, -4px 4px 30px #7fa710;
 		}
@@ -71,7 +72,14 @@ $breakpoint-lgdesktop: 1480px;
 		justify-content: space-evenly;
 		margin-right: 1rem;
 		align-items: center;
+		.theme {
+			margin-right: 0.9rem !important;
+		}
 	}
+	.disabled {
+		pointer-events: none;
+	}
+
 	/* For Mobile phones */
 	@include phone($breakpoint-phone) {
 		.title {
@@ -83,6 +91,9 @@ $breakpoint-lgdesktop: 1480px;
 			button {
 				font-size: 0.6rem !important;
 			}
+		}
+		.menu {
+			display: block !important;
 		}
 	}
 	/* For tablets and large phones */
@@ -97,6 +108,9 @@ $breakpoint-lgdesktop: 1480px;
 				font-size: 0.6rem !important;
 			}
 		}
+		.menu {
+			display: none !important;
+		}
 	}
 	/* For tablets and large phones */
 	@include laptop($breakpoint-tablet) {
@@ -109,6 +123,9 @@ $breakpoint-lgdesktop: 1480px;
 			button {
 				font-size: 0.6rem !important;
 			}
+		}
+		.menu {
+			display: none !important;
 		}
 	}
 	/* For desktops */
@@ -123,6 +140,9 @@ $breakpoint-lgdesktop: 1480px;
 				font-size: 0.6rem !important;
 			}
 		}
+		.menu {
+			display: none !important;
+		}
 	}
 	/* For large desktops*/
 	@include lgdesktop($breakpoint-lgdesktop) {
@@ -135,6 +155,9 @@ $breakpoint-lgdesktop: 1480px;
 			button {
 				font-size: 0.6rem !important;
 			}
+		}
+		.menu {
+			display: none !important;
 		}
 	}
 	/* For large desktops*/

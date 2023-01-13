@@ -16,7 +16,7 @@ import Profile from './pages/profile/Profile';
 import { JWT, GETUSER } from './context/action_type';
 function App() {
 	const {
-		main_state: { istheme, admin },
+		main_state: { istheme, admin, user },
 		main_dispatch,
 	} = useMainContext();
 	const mydata = JSON.parse(localStorage.getItem('profile'));
@@ -29,6 +29,7 @@ function App() {
 	}, []);
 	const id = admin?.result?._id;
 	const getUser = async () => {
+		console.log(id);
 		try {
 			const response = await axios.get(
 				`http://localhost:4000/user/v2/${id}`,
@@ -50,6 +51,7 @@ function App() {
 	};
 	useEffect(() => {
 		getUser();
+
 		main_dispatch({
 			type: JWT,
 			payload: {

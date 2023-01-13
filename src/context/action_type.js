@@ -1,3 +1,13 @@
 export const GENRE = 'GENRE';
 export const JWT = 'JWT';
 export const GETUSER = 'GETUSER';
+export const ERROR = 'ERROR';
+export const SIGNUP = 'SIGNUP';
+export const LOADING = 'LOADING';
+export const WRONGPASSWORD = 'WRONGPASSWORD';
+export const EMPTY = 'EMPTY';
+export const PASSWORDLENGTH = 'PASSWORDLENGTH';
+export const CLOSEMODAL = 'CLOSEMODAL';
+export const CREATEMOVIE = 'CREATEMOVIE';
+export const SUCCESS = 'SUCCESS';
+export const MOVIES = 'MOVIES';

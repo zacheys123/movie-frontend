@@ -1,6 +1,7 @@
 import axios from 'axios';
-const baseUrl = process.env.REACT_APP_BASE;
 
+import { ERROR, SIGNUP, LOADING } from '../action_type';
+const baseUrl = process.env.REACT_APP_BASE;
 export const createAdmin = async (
 	navigate,
 	dispatch,
@@ -10,7 +11,7 @@ export const createAdmin = async (
 	try {
 		const response = await axios.post(
 			`
-	http://localhost:4000`,
+	http://localhost:4000/register`,
 			data.current,
 		);
 
@@ -25,7 +26,7 @@ export const createAdmin = async (
 			);
 
 			dispatch({
-				type: 'SIGNUP',
+				type: SIGNUP,
 				payload: {
 					modalcontent: response?.data?.message,
 					loading,
@@ -33,9 +34,12 @@ export const createAdmin = async (
 			});
 		}, 2000);
 		console.log(response?.data);
-		dispatch({ type: 'LOADING', loading });
+		dispatch({ type: LOADING, loading });
 	} catch (error) {
-		console.log(error.message);
+		dispatch({
+			type: ERROR,
+			payload: { modalcontent: error?.response?.data?.message },
+		});
 	}
 };
 
@@ -48,13 +52,13 @@ export const adminLogin = async (
 	try {
 		const response = await axios.post(
 			`
-			${baseUrl}/login`,
+			http://localhost:4000/login`,
 			data.current,
 		);
 
 		setTimeout(() => {
 			setTimeout(() => {
-				navigate('/dashboard');
+				navigate('/');
 				window.location.reload();
 			}, 3000);
 			window.localStorage.setItem(
@@ -63,7 +67,7 @@ export const adminLogin = async (
 			);
 
 			dispatch({
-				type: 'SIGNUP',
+				type: SIGNUP,
 				payload: {
 					modalcontent: response?.data?.message,
 					loading,
@@ -73,6 +77,9 @@ export const adminLogin = async (
 		console.log(response?.data);
 		dispatch({ type: 'LOADING', loading });
 	} catch (error) {
-		console.log(error.message);
+		dispatch({
+			type: ERROR,
+			payload: { modalcontent: error?.response?.data?.message },
+		});
 	}
 };

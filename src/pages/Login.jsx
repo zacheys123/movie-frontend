@@ -12,7 +12,7 @@ function Login(props) {
 		main_dispatch,
 	} = useMainContext();
 	const [user, setUser] = useState({
-		username: '',
+		email: '',
 		password: '',
 		confirmpassword: '',
 	});
@@ -27,7 +27,7 @@ function Login(props) {
 		(ev) => {
 			ev.preventDefault();
 			if (
-				userdata?.current?.username &&
+				userdata?.current?.email &&
 				userdata?.current?.password &&
 				userdata?.current?.confirmpassword
 			) {
@@ -36,7 +36,7 @@ function Login(props) {
 					userdata?.current?.confirmpassword
 				) {
 					if (
-						userdata?.current?.username.length > 6 &&
+						userdata?.current?.email.length > 6 &&
 						userdata?.current?.password.length > 6
 					) {
 						adminLogin(navigate, main_dispatch, loading, userdata);
@@ -44,7 +44,7 @@ function Login(props) {
 						main_dispatch({
 							type: 'PASSWORDLENGTH',
 							modalcontent:
-								'Username or Password should be at least 6 characters long',
+								' Password should be at least 6 characters long',
 						});
 					}
 				} else {
@@ -60,7 +60,7 @@ function Login(props) {
 				});
 			}
 		},
-		[userdata?.current?.username, userdata?.current?.password],
+		[userdata?.current?.email, userdata?.current?.password],
 	);
 	const closemodal = () => {
 		main_dispatch({ type: 'CLOSEMODAL' });
@@ -90,8 +90,8 @@ function Login(props) {
 					<div className="form-group">
 						<label htmlFor="email">Email</label>
 						<input
-							name="username"
-							value={user.username}
+							name="email"
+							value={user.email}
 							onChange={handleInput}
 							type="text"
 							className="form-control"

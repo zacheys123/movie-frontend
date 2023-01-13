@@ -12,7 +12,12 @@ import {
 import { useMainContext } from '../context/contexts_/MainContext';
 import { useNavigate } from 'react-router-dom';
 import { createAdmin } from '../context/features/admin';
-import { Person } from '@mui/icons-material';
+import {
+	WRONGPASSWORD,
+	EMPTY,
+	PASSWORDLENGTH,
+	CLOSEMODAL,
+} from '../context/action_type';
 function Register(props) {
 	const {
 		main_state: { ismodal, modalcontent, loading, success, error },
@@ -45,10 +50,11 @@ function Register(props) {
 			adminData?.current.phone
 		) {
 			if (adminData?.current?.password.length > 6) {
+				console.log(adminData.current);
 				createAdmin(navigate, main_dispatch, loading, adminData);
 			} else {
 				main_dispatch({
-					type: 'PASSWORDLENGTH',
+					type: PASSWORDLENGTH,
 					modalcontent:
 						'Username or Password should be at least 6 characters long',
 				});
@@ -56,13 +62,13 @@ function Register(props) {
 		} else {
 			console.log(adminData.current);
 			main_dispatch({
-				type: 'EMPTY',
+				type: EMPTY,
 				modalcontent: 'Cannot submit empty inputs',
 			});
 		}
 	}, []);
 	const closemodal = () => {
-		main_dispatch({ type: 'CLOSEMODAL' });
+		main_dispatch({ type: CLOSEMODAL });
 	};
 	useEffect(() => {
 		adminData.current = user;

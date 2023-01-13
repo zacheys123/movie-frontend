@@ -1,7 +1,7 @@
 import { useContext, useReducer } from 'react';
-import { moviereducer } from '../reducers/movie';
+import { moviereducer } from '../reducers/movie_reducer';
 import { MovieProvider } from '../config';
-import { initialState } from '../reducers/movie';
+import { initialState } from '../reducers/movie_reducer';
 const MovieContext = ({ children }) => {
 	const [movie_state, movie_dispatch] = useReducer(
 		moviereducer,

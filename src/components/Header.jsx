@@ -6,25 +6,33 @@ import { useMainContext } from '../context/contexts_/MainContext';
 import { useNavigate, Link } from 'react-router-dom';
 const Header = () => {
 	const {
-		main_state: { istheme, user },
+		main_state: { istheme, user, admin },
 		main_dispatch,
 	} = useMainContext();
 	const navigate = useNavigate();
+	const adm = admin?.result?._id;
 	return (
 		<div className="header">
 			<Box className="title">
 				<h3
 					onClick={() => navigate('/')}
-					className="nav navbar navbar-brand"
+					className={adm ? 'nav navbar navbar-brand' : 'disabled'}
 				>
-					{user?.company || ' Blue Tint Movies'}
+					{user?.data?.company
+						? user?.data?.company
+						: ' MovieHubz co'}
 				</h3>
 			</Box>
 			<Box className="sites">
-				<Button variant="outlined" size="small">
+				<Button
+					className={adm ? 'header' : 'disabled'}
+					variant="outlined"
+					size="small"
+				>
 					Add New User
 				</Button>
 				<Button
+					className={adm ? 'header' : 'disabled'}
 					variant="outlined"
 					size="small"
 					onClick={() => navigate('/popular')}
@@ -32,6 +40,7 @@ const Header = () => {
 					popular movies
 				</Button>
 				<Button
+					className={adm ? 'header' : 'disabled'}
 					variant="outlined"
 					size="small"
 					onClick={() => navigate('/suggested')}
@@ -39,6 +48,7 @@ const Header = () => {
 					Suggested Movies
 				</Button>
 				<Button
+					className={adm ? 'header' : 'disabled'}
 					variant="outlined"
 					size="small"
 					onClick={() => navigate('/latest')}
@@ -49,6 +59,7 @@ const Header = () => {
 			<Box className="toggle__button">
 				{istheme ? (
 					<IconButton
+						className="theme"
 						onClick={() =>
 							main_dispatch({ type: 'THEME', payload: istheme })
 						}
