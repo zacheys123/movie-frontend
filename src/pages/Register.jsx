@@ -1,6 +1,6 @@
 import { useState, useCallback, useRef, useEffect } from 'react';
 
-import '../css/auth.css';
+import '../css/auth.scss';
 import Modal from '../components/Modal';
 import {
 	Stack,

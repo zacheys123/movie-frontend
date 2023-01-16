@@ -4,9 +4,16 @@ import { Form, Label } from 'react-bootstrap';
 import { Box, Button } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import { GENRE, EMPTY, CLOSEMODAL } from '../context/action_type';
+import {
+	GENRE,
+	EMPTY,
+	CLOSEMODAL,
+	EMPTYHOME,
+	LOGGED,
+} from '../context/action_type';
 import { useMainContext } from '../context/contexts_/MainContext';
 import { useMovieContext } from '../context/contexts_/MovieContext';
+import { useParams } from 'react-router-dom';
 import Modal from '../components/Modal';
 import axios from 'axios';
 import { createMovie } from '../context/features/movieSlice';
@@ -14,8 +21,9 @@ import { MOVIES } from '../context/action_type';
 import { motion } from 'framer-motion';
 const Feed = () => {
 	const [admin_id, setId] = useState(null);
+	const movieref = useRef();
 	const [movie, setMovie] = useState({
-		user: '',
+		user: 'Admin',
 		movie_name: '',
 		season: '',
 		episodes: '',
@@ -25,20 +33,20 @@ const Feed = () => {
 		paid: '',
 	});
 
-	const movieref = useRef();
 	const {
-		main_state: { istheme, admin },
+		main_state: { istheme, admin, user },
 		main_dispatch,
 	} = useMainContext();
 	const {
 		movie_state: {
 			isgenre,
 			movies,
-			ismodal,
+			ismodalhome,
+			loading,
 			success,
 			error,
 			modalcontent,
-			loading,
+			logged,
 		},
 		movie_dispatch,
 	} = useMovieContext();
@@ -47,56 +55,61 @@ const Feed = () => {
 		const { name, value } = ev.target;
 		setMovie({ ...movie, [name]: value });
 	};
-	useEffect(() => {
-		movieref.current = movie;
-	}, [movieref]);
 
 	//* create movies for this user function
-	const id = admin_id?.result?._id;
-	const createMovies = useCallback((ev) => {
-		ev.preventDefault();
 
-		const mymovie = { userId: id, movieref };
-		console.log(mymovie);
+	const users = user?.result?.users;
 
-		createMovie(mymovie, movie_dispatch, success, setMovie);
-	}, []);
+	const createMovies = useCallback(
+		(ev) => {
+			ev.preventDefault();
+
+			if (
+				movie.movie_name &&
+				movie.paid &&
+				movie.genre &&
+				movie.amount
+			) {
+				const mymovie = { userId: admin?.result?._id, movie };
+				console.log(movie);
+
+				createMovie(mymovie, movie_dispatch, success);
+				movie_dispatch({ type: LOGGED, logged });
+			} else {
+				console.log(movie);
+				movie_dispatch({
+					type: EMPTYHOME,
+					modalcontent: 'Cannot submit empty inputs',
+				});
+			}
+		},
+		[movie],
+	);
+
 	const closemodal = () => {
 		movie_dispatch({ type: CLOSEMODAL });
 	};
 
-	// getting all games for this user
+	// getting all movies for this user
 	const getMovie = async (source) => {
 		try {
-			let response = await axios.get(
-				`http://localhost:4000/movie/${id}`,
-				{
-					cancelToken: source.token,
-				},
-			);
-
 			movie_dispatch({
 				type: MOVIES,
-				payload: { movies: response?.data?.result?.movies },
+				payload: { movies: user?.result?.movies },
 			});
-			console.log(movies);
 		} catch (error) {
 			console.log(error.message);
 		}
 	};
+
 	useEffect(() => {
-		const source = axios.CancelToken.source();
-		getMovie(source);
-		setId(() => JSON.parse(window.localStorage.getItem('profile')));
-		return () => {
-			source.cancel();
-		};
-	}, []);
+		getMovie();
+	}, [ismodalhome, logged, movieref]);
 	return (
 		<div className="feed">
 			<Box className="feed__movies">
 				<Form onSubmit={createMovies} className="formd">
-					{ismodal ? (
+					{ismodalhome ? (
 						<Modal
 							modalcontent={modalcontent}
 							closemodal={closemodal}
@@ -115,7 +128,17 @@ const Feed = () => {
 								value={movie.user}
 								onChange={handleChange}
 							>
-								<option value="admin">admin</option>
+								{users &&
+									users.map((data) => {
+										return (
+											<option
+												key={data._id}
+												value={data.username || 'New User'}
+											>
+												{data.username}
+											</option>
+										);
+									})}
 							</Form.Select>
 						</div>
 						<Form.Group className="row movie">
@@ -154,7 +177,7 @@ const Feed = () => {
 							<div className="col">
 								<Form.Control
 									className="form__inputs mx-2"
-									value={movie.customer}
+									value={movie.customer_name}
 									onChange={handleChange}
 									type="text"
 									name="customer_name"
@@ -232,7 +255,7 @@ const Feed = () => {
 						className="submit"
 						color="secondary"
 					>
-						Entry Movie
+						{loading ? 'Adding Movie...' : 'Entry Movie'}
 					</Button>
 					{isgenre && (
 						<Box className="genre__list">
@@ -240,56 +263,62 @@ const Feed = () => {
 								<div className="col">
 									<p></p>
 									<p
-										onClick={() =>
+										onClick={() => {
+											movie_dispatch({ type: GENRE, isgenre });
 											setMovie((prev) => {
 												return { ...prev, genre: 'Action' };
-											})
-										}
+											});
+										}}
 									>
 										Action
 									</p>
 									<p
-										onClick={() =>
+										onClick={() => {
+											movie_dispatch({ type: GENRE, isgenre });
 											setMovie((prev) => {
 												return { ...prev, genre: 'Anime' };
-											})
-										}
+											});
+										}}
 									>
 										Anime
 									</p>
 									<p
-										onClick={() =>
+										onClick={() => {
+											movie_dispatch({ type: GENRE, isgenre });
 											setMovie((prev) => {
 												return { ...prev, genre: 'Children' };
-											})
-										}
+											});
+										}}
 									>
 										Children & Family
 									</p>
 									<p
-										onClick={() =>
+										onClick={() => {
+											movie_dispatch({ type: GENRE, isgenre });
 											setMovie((prev) => {
 												return { ...prev, genre: 'Classic' };
-											})
-										}
+											});
+										}}
 									>
 										Classics
 									</p>
 									<p
-										onClick={() =>
+										onClick={() => {
+											movie_dispatch({ type: GENRE, isgenre });
 											setMovie((prev) => {
 												return { ...prev, genre: 'Comedies' };
-											})
-										}
+											});
+										}}
 									>
 										Comedies
 									</p>
 									<p
-										onClick={() =>
+										onClick={() => {
+											movie_dispatch({ type: GENRE, isgenre });
 											setMovie((prev) => {
 												return { ...prev, genre: 'Drama' };
-											})
-										}
+											});
+										}}
 									>
 										Drama
 									</p>
@@ -297,56 +326,62 @@ const Feed = () => {
 								<div className="col">
 									<p></p>
 									<p
-										onClick={() =>
+										onClick={() => {
+											movie_dispatch({ type: GENRE, isgenre });
 											setMovie((prev) => {
 												return { ...prev, genre: 'Hollywood' };
-											})
-										}
+											});
+										}}
 									>
 										HollyWood
 									</p>
 									<p
-										onClick={() =>
+										onClick={() => {
+											movie_dispatch({ type: GENRE, isgenre });
 											setMovie((prev) => {
 												return { ...prev, genre: 'Horror' };
-											})
-										}
+											});
+										}}
 									>
 										Horror
 									</p>
 									<p
-										onClick={() =>
+										onClick={() => {
+											movie_dispatch({ type: GENRE, isgenre });
 											setMovie((prev) => {
 												return { ...prev, genre: 'Independent' };
-											})
-										}
+											});
+										}}
 									>
 										Independent
 									</p>
 									<p
-										onClick={() =>
+										onClick={() => {
+											movie_dispatch({ type: GENRE, isgenre });
 											setMovie((prev) => {
 												return { ...prev, genre: 'Indian' };
-											})
-										}
+											});
+										}}
 									>
 										Indian
 									</p>
 									<p
-										onClick={() =>
+										onClick={() => {
+											movie_dispatch({ type: GENRE, isgenre });
 											setMovie((prev) => {
 												return { ...prev, genre: 'Kenyan' };
-											})
-										}
+											});
+										}}
 									>
 										Kenyan
 									</p>
 									<p
-										onClick={() =>
+										onClick={() => {
+											movie_dispatch({ type: GENRE, isgenre });
 											setMovie((prev) => {
 												return { ...prev, genre: 'Nollywood' };
-											})
-										}
+											});
+										}}
 									>
 										NollyWood
 									</p>
@@ -354,59 +389,75 @@ const Feed = () => {
 								<div className="col">
 									<p></p>
 									<p
-										onClick={() =>
+										onClick={() => {
+											movie_dispatch({ type: GENRE, isgenre });
 											setMovie((prev) => {
 												return { ...prev, genre: 'Romance' };
-											})
-										}
+											});
+										}}
 									>
 										Romance
 									</p>
 									<p
-										onClick={() =>
+										onClick={() => {
+											movie_dispatch({ type: GENRE, isgenre });
 											setMovie((prev) => {
 												return { ...prev, genre: 'Scifi' };
-											})
-										}
+											});
+										}}
 									>
 										Scifi
 									</p>
 
 									<p
-										onClick={() =>
+										onClick={() => {
+											movie_dispatch({ type: GENRE, isgenre });
 											setMovie((prev) => {
 												return { ...prev, genre: 'Sports' };
-											})
-										}
+											});
+										}}
 									>
 										Sporty
 									</p>
 									<p
-										onClick={() =>
+										onClick={() => {
+											movie_dispatch({ type: GENRE, isgenre });
 											setMovie((prev) => {
 												return { ...prev, genre: 'Fantasy' };
-											})
-										}
+											});
+										}}
 									>
 										Fantasy
 									</p>
 									<p
-										onClick={() =>
+										onClick={() => {
+											movie_dispatch({ type: GENRE, isgenre });
 											setMovie((prev) => {
 												return { ...prev, genre: 'Thriller' };
-											})
-										}
+											});
+										}}
 									>
 										Thriller
 									</p>
 									<p
-										onClick={() =>
+										onClick={() => {
+											movie_dispatch({ type: GENRE, isgenre });
 											setMovie((prev) => {
 												return { ...prev, genre: 'Dramedy' };
-											})
-										}
+											});
+										}}
 									>
 										Dramedy
+									</p>
+									<p
+										onClick={() => {
+											movie_dispatch({ type: GENRE, isgenre });
+											setMovie((prev) => {
+												return { ...prev, genre: 'Dramedy' };
+											});
+										}}
+									>
+										Medical
 									</p>
 								</div>
 							</div>
@@ -417,7 +468,7 @@ const Feed = () => {
 					<h4 className="h4">All Movies (Today)</h4>
 					<input type="text" placeholder="Search movie.." />
 					<Box className="listing">
-						<table className="table table-bordered table-striped my-2 ">
+						<table className="table table-bordered table-striped my-2 bg-dark">
 							<thead>
 								<tr>
 									<th>User</th>
@@ -447,7 +498,14 @@ const Feed = () => {
 										}) => {
 											return (
 												<tr key={_id}>
-													<td>{user}</td>
+													<td
+														style={{
+															color: 'cyan',
+															fontWeight: '400',
+														}}
+													>
+														{user}
+													</td>
 													<td>{movie_name}</td>
 													<td>{season}</td>
 													<td>{episodes}</td>

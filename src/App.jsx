@@ -34,6 +34,7 @@ function App() {
 			const response = await axios.get(
 				`http://localhost:4000/user/v2/${id}`,
 			);
+
 			main_dispatch({
 				type: GETUSER,
 				payload: {
@@ -46,7 +47,7 @@ function App() {
 				JSON.stringify(response?.data?.package),
 			);
 		} catch (error) {
-			console.log(error.message);
+			console.log(error.response.data.message);
 		}
 	};
 	useEffect(() => {

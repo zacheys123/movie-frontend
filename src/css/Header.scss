@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Ubuntu');
+@import url('https://fonts.googleapis.com/css2?family=Sofia+Sans:wght@200&display=swap');
 $breakpoint-phone: 480px;
 $breakpoint-tablet: 768px;
 $breakpoint-laptop: 992px;
@@ -46,7 +47,41 @@ $breakpoint-lgdesktop: 1480px;
 	justify-content: space-between;
 	align-items: center;
 	margin: 0.2rem 4rem;
+	position: relative;
+	.add {
+		font-family: 'Sofia Sans', sans-serif !important;
+		position: absolute;
+		width: 20rem !important;
+		background: rgb(23, 21, 21);
 
+		z-index: 999;
+		border-radius: 20px;
+		box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px,
+			rgba(0, 0, 0, 0.07) 0px 2px 2px, rgba(0, 0, 0, 0.07) 0px 4px 4px;
+
+		margin: 25% -55% -5% 30% !important;
+		.add__form {
+			display: flex;
+			flex-direction: column;
+		}
+		button {
+			font-size: 0.7rem !important;
+			width: 50%;
+			text-transform: none;
+			margin: 2rem auto;
+			&:hover {
+				background: cyan;
+				color: red;
+				font-weight: bold !important;
+			}
+		}
+		input {
+			width: 70%;
+			padding: 0.3rem;
+			outline: none;
+			margin: 1.5rem auto -1rem;
+		}
+	}
 	.title {
 		margin-left: 1rem;
 		.nav {
@@ -55,7 +90,6 @@ $breakpoint-lgdesktop: 1480px;
 			font-weight: bolder;
 			color: rgba(132, 12, 145, 0.61);
 			text-align: center;
-			cursor: pointer;
 			letter-spacing: 5px;
 			text-shadow: 6px 3px 20px #ff99cc, -4px 4px 30px #7fa710;
 		}
@@ -73,13 +107,31 @@ $breakpoint-lgdesktop: 1480px;
 		margin-right: 1rem;
 		align-items: center;
 		.theme {
-			margin-right: 0.9rem !important;
+			margin-right: 0.6rem;
 		}
 	}
 	.disabled {
 		pointer-events: none;
 	}
-
+	.main__prof {
+		position: relative;
+		.prof {
+			margin-left: -3.54rem !important;
+			button {
+				font-size: 0.5rem !important;
+				color: white;
+				margin: 0.9rem;
+				&:last-child {
+					margin-bottom: 1.3rem;
+				}
+			}
+			span {
+				font-size: 0.4rem !important;
+				color: greenyellow !important;
+				margin-right: 0.9rem;
+			}
+		}
+	}
 	/* For Mobile phones */
 	@include phone($breakpoint-phone) {
 		.title {

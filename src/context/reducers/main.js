@@ -9,6 +9,7 @@ import {
 	PASSWORDLENGTH,
 	CLOSEMODAL,
 	SUCCESS,
+	PROFILE,
 } from '../action_type';
 export const main_reducer = (state = {}, action) => {
 	switch (action.type) {
@@ -103,6 +104,11 @@ export const main_reducer = (state = {}, action) => {
 			return {
 				...state,
 				loading: !action.loading,
+			};
+		case PROFILE:
+			return {
+				...state,
+				profile: !action.profile,
 			};
 
 		default:

@@ -1,10 +1,17 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
-import { Stack, Card, Button, Container } from '@mui/material';
+import {
+	Stack,
+	Card,
+	Button,
+	Container,
+	CircularProgress,
+} from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { adminLogin } from '../context/features/admin';
 import { useMainContext } from '../context/contexts_/MainContext';
 import Modal from '../components/Modal';
-import '../css/auth.css';
+import '../css/auth.scss';
+import profile from '../assests/profile.png';
 
 function Login(props) {
 	const {
@@ -118,7 +125,14 @@ function Login(props) {
 						/>
 					</div>
 					<Button variant="outlined" color="secondary" type="submit">
-						Login
+						{!loading ? (
+							'Login'
+						) : (
+							<CircularProgress
+								size="20px"
+								sx={{ color: 'purple' }}
+							/>
+						)}{' '}
 					</Button>
 					<br />
 					<small

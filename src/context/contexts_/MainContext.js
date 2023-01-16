@@ -14,6 +14,7 @@ function MainContext({ children }) {
 		logged: false,
 		isgenre: false,
 		userInfo: '',
+		profile: false,
 		user: {},
 	};
 	const [main_state, main_dispatch] = useReducer(

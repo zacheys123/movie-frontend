@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Sofia+Sans:wght@200&display=swap');
+
+.auth_page {
+	flex: 9;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-image: url('../assets/register.jpg');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	font-family: 'Sofia Sans', sans-serif !important;
+
+	.form {
+		box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px,
+			rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px,
+			rgba(0, 0, 0, 0.07) 0px 8px 16px,
+			rgba(0, 0, 0, 0.07) 0px 16px 32px,
+			rgba(0, 0, 0, 0.07) 0px 32px 64px !important;
+		max-width: 27rem !important;
+		padding: 2rem;
+	}
+	input {
+		width: 90% !important;
+		margin: 0.6rem 0 0.6rem 0 !important;
+		outline: none;
+		border: none !important;
+		border-bottom: 1px solid lightgrey !important;
+		border-left: 1px solid lightgrey !important;
+	}
+	button {
+		text-transform: none !important;
+		margin: 2rem 10% 1rem 10% !important;
+		width: 70%;
+		transition: all 0.3s ease-in;
+		&:hover {
+			background: rgb(48, 162, 200);
+			color: white;
+			border: none;
+		}
+	}
+
+	input:focus {
+		outline-width: 0 !important;
+	}
+}

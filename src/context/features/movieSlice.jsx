@@ -1,30 +1,36 @@
 import axios from 'axios';
 
-import { CREATEMOVIE, ERROR, LOADING } from '../action_type';
-export const createMovie = async (
-	data,
-	dispatch,
-	success,
-	setMovie,
-) => {
-	const { userId, movieref } = data;
+import {
+	CREATEMOVIE,
+	ERRORADD,
+	ERROR,
+	LOADING,
+	NEWUSER,
+} from '../action_type';
+const baseUrl = 'http://localhost:4000';
+export const createMovie = async (datah, dispatch, success) => {
+	const { userId, movie } = datah;
+
 	try {
 		let response = await axios.put(
-			`http://localhost:4000/movie/create/${userId}`,
-			movieref.current,
+			`${baseUrl}/movie/create/${userId}`,
+			movie,
 		);
+		console.log(response.data);
 		setTimeout(() => {
+			setTimeout(() => {
+				window.location.reload();
+			}, 2000);
 			dispatch({
 				type: CREATEMOVIE,
 				payload: {
-					modalcontent: response?.data?.message,
-					success,
+					modalcontent: response?.data,
 				},
 			});
+
 			dispatch({
 				type: LOADING,
 			});
-			setMovie({});
 		}, 2000);
 		dispatch({
 			type: LOADING,
@@ -33,6 +39,66 @@ export const createMovie = async (
 		console.log(error.message);
 		dispatch({
 			type: LOADING,
+		});
+		dispatch({
+			type: ERROR,
+			payload: {
+				modalcontent: error?.response?.data?.message,
+			},
+		});
+	}
+};
+
+// adding new user for movies
+export const addUser = async (
+	user,
+	dispatch,
+	success,
+	setForm,
+	setUser,
+	ismodal,
+	newuser,
+) => {
+	const { userId, newref } = user;
+	console.log(user);
+	try {
+		let response = await axios.put(
+			`${baseUrl}/movie/newuser/${userId}`,
+			newref?.current || newuser,
+		);
+
+		setTimeout(() => {
+			setTimeout(() => {
+				dispatch({
+					type: NEWUSER,
+					payload: {
+						newuser: response?.data,
+						modalcontent: response?.data?.message,
+						success,
+						ismodal,
+					},
+				});
+			}, 2000);
+			setTimeout(() => {
+				setForm((prev) => !prev);
+				window.location.reload();
+			}, 1000);
+
+			console.log(response);
+			dispatch({
+				type: LOADING,
+			});
+		}, 4000);
+		dispatch({
+			type: LOADING,
+		});
+	} catch (error) {
+		console.log(userId);
+		dispatch({
+			type: ERRORADD,
+			payload: {
+				modalcontent: error?.response?.data?.message,
+			},
 		});
 	}
 };

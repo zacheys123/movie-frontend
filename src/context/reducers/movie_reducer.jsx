@@ -7,9 +7,14 @@ import {
 	CLOSEMODAL,
 	EMPTY,
 	MOVIES,
+	ERRORADD,
+	NEWUSER,
+	LOGGED,
+	EMPTYHOME,
 } from '../action_type';
 export const initialState = {
 	isgenre: false,
+	ismodalhome: false,
 	ismodal: false,
 	modalcontent: '',
 	loading: false,
@@ -17,6 +22,9 @@ export const initialState = {
 	error: false,
 	movies: [],
 	movie_added: false,
+	errorm: false,
+	newuser: [],
+	logged: false,
 };
 export const moviereducer = (state = initialState, action) => {
 	switch (action.type) {
@@ -28,7 +36,7 @@ export const moviereducer = (state = initialState, action) => {
 		case CREATEMOVIE:
 			return {
 				...state,
-				ismodal: true,
+				ismodalhome: true,
 				modalcontent: action.payload.modalcontent,
 				added: !action.movie_added,
 				loading: false,
@@ -44,7 +52,7 @@ export const moviereducer = (state = initialState, action) => {
 		case ERROR:
 			return {
 				...state,
-				ismodal: true,
+				ismodalhome: true,
 				modalcontent: action.payload.modalcontent,
 				error: true,
 				success: false,
@@ -52,7 +60,7 @@ export const moviereducer = (state = initialState, action) => {
 		case SUCCESS:
 			return {
 				...state,
-				ismodal: true,
+				ismodalhome: true,
 				modalcontent: action.payload.modalcontent,
 				error: false,
 				success: true,
@@ -60,7 +68,15 @@ export const moviereducer = (state = initialState, action) => {
 		case EMPTY:
 			return {
 				...state,
-				ismodal: !state.ismodal,
+				ismodalhome: !state.ismodalhome,
+				modalcontent: action.modalcontent,
+				error: true,
+				success: false,
+			};
+		case EMPTYHOME:
+			return {
+				...state,
+				ismodalhome: !state.ismodalhome,
 				modalcontent: action.modalcontent,
 				error: true,
 				success: false,
@@ -68,12 +84,35 @@ export const moviereducer = (state = initialState, action) => {
 		case CLOSEMODAL:
 			return {
 				...state,
-				ismodal: false,
+				ismodalhome: false,
 			};
 		case LOADING:
 			return {
 				...state,
-				loading: !action.loading,
+				loading: !state.loading,
+			};
+		case NEWUSER:
+			return {
+				...state,
+				newuser: action.payload.newuser,
+				ismodal: !action.payload.ismodal,
+				ismodalhome: false,
+				success: true,
+				modalcontent: action.payload.modalcontent,
+			};
+		case ERRORADD:
+			return {
+				...state,
+
+				ismodal: true,
+				modalcontent: action.payload.modalcontent,
+				error: true,
+				success: false,
+			};
+		case LOGGED:
+			return {
+				...state,
+				logged: !action.logged,
 			};
 	}
 };
