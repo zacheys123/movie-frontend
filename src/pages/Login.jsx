@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import {
 	Stack,
+	Box,
 	Card,
 	Button,
 	Container,
@@ -11,7 +12,7 @@ import { adminLogin } from '../context/features/admin';
 import { useMainContext } from '../context/contexts_/MainContext';
 import Modal from '../components/Modal';
 import '../css/auth.scss';
-import profile from '../assests/profile.png';
+import profile from '../assets/profile.png';
 
 function Login(props) {
 	const {
@@ -93,6 +94,9 @@ function Login(props) {
 					{' '}
 					Sign In
 				</h2>
+				<Box className="profile__pic">
+					<img src={profile} alt="" />
+				</Box>
 				<form onSubmit={handleLogin}>
 					<div className="form-group">
 						<label htmlFor="email">Email</label>
