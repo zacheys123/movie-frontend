@@ -109,6 +109,26 @@ const Feed = () => {
 	useEffect(() => {
 		getMovie();
 	}, [ismodalhome, logged, movieref]);
+	const [searchquery, setQuery] = useState('');
+
+	const moviefunc = () => {
+		let sortedvalue = movies;
+		if (searchquery) {
+			sortedvalue = sortedvalue.filter((movie) => {
+				if (
+					movie.user.toLowerCase().includes(searchquery) ||
+					movie.movie_name.toLowerCase().includes(searchquery) ||
+					movie.customer_name.toLowerCase().includes(searchquery) ||
+					movie.genre.toLowerCase().includes(searchquery)
+					// movie.created_at.toLowerCase().includes(searchquery)
+				) {
+					return sortedvalue;
+				}
+			});
+		}
+		return sortedvalue;
+	};
+
 	return (
 		<div className="feed">
 			<Box className="feed__movies">
@@ -487,7 +507,10 @@ const Feed = () => {
 				<Box
 					className={!showtable ? 'movie__list' : 'movie__listphone'}
 				>
-					<Box className="d-flex justify-content-around movie__head">
+					<Box
+						className="d-flex justify-content-around movie__head"
+						style={{ borderBottom: '1px solid lightgrey' }}
+					>
 						{' '}
 						<h4 className="h4">All Movies </h4>
 						{showtable && (
@@ -503,7 +526,12 @@ const Feed = () => {
 								</span>
 							</Box>
 						)}
-						<Box sx={{ cursor: 'pointer' }} className="span">
+						<Box
+							sx={{
+								cursor: 'pointer',
+							}}
+							className="span"
+						>
 							<Refresh
 								sx={{
 									fontSize: '1.4rem !important',
@@ -525,7 +553,12 @@ const Feed = () => {
 						</Box>
 					</Box>
 
-					<input type="text" placeholder="Search movie.." />
+					<input
+						type="text"
+						placeholder="Search movie.."
+						value={searchquery}
+						onChange={(ev) => setQuery(ev.target.value)}
+					/>
 
 					<Box className="listing">
 						<table className="table table-bordered table-striped my-2 bg-dark">
@@ -544,7 +577,7 @@ const Feed = () => {
 							</thead>
 							<tbody>
 								{movies &&
-									movies.map(
+									moviefunc().map(
 										({
 											_id,
 											user,

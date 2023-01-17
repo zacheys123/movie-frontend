@@ -38,7 +38,7 @@ const Header = () => {
 	const logout = (ev) => {
 		ev.preventDefault();
 		window.localStorage.removeItem('profile');
-		navigate('/login');
+		navigate('/');
 		window.location.reload();
 	};
 	//
@@ -47,47 +47,34 @@ const Header = () => {
 	const [suggested, setSuggested] = useState(false);
 	const [allsuggested, setallsuggested] = useState(false);
 	const [showmenu, setShowMenu] = useState(false);
-	const [newuser, setUser] = useState({ username: '', phone: '' });
-	const [newsuggested, setNewSuggested] = useState({ suggested: '' });
-	const handleChange = (ev) => {
-		setUser({ ...newuser, [ev.target.name]: ev.target.value });
-		setNewSuggested({
-			...newuser,
-			[ev.target.name]: ev.target.value,
-		});
-	};
+
+	const usernameref = useRef(null);
+	const phoneref = useRef(null);
+	const suggestedref = useRef(null);
+
+	// add a new user to add movies
 	const addNewUser = useCallback((ev) => {
 		ev.preventDefault();
+		const newuser = {
+			username: usernameref?.current?.value,
+			phone: phoneref.current?.value,
+		};
 		const myuser = { userId: adm?.result?._id, newuser };
-		addUser(
-			myuser,
-			movie_dispatch,
-			success,
-			setForm,
-
-			ismodal,
-		);
+		addUser(myuser, movie_dispatch, success, setForm, ismodal);
 		console.log(adm?.result?._id);
 	}, []);
 
+	// add a suggested movie
 	const addSuggested = useCallback((ev) => {
 		ev.preventDefault();
-		const mysuggested = { userId: adm?.result?._id, newsug };
-		console.log(newsuggested);
-		createSuggested(
-			mysuggested,
-			movie_dispatch,
-			newsuggested,
-			success,
-		);
+		const mysuggested = {
+			userId: adm?.result?._id,
+			suggest: suggestedref?.current?.value,
+		};
+		console.log(mysuggested);
+		createSuggested(mysuggested, movie_dispatch, success);
 	}, []);
-	const closemodal = () => {
-		movie_dispatch({ type: CLOSEMODAL });
-	};
-	useEffect(() => {
-		// newref.current = newuser;
-		// newsug.current = newsuggested;
-	}, []);
+
 	return (
 		<div className="header">
 			{showform && (
@@ -107,16 +94,14 @@ const Header = () => {
 						<input
 							type="text"
 							name="username"
-							value={newuser.username}
+							ref={usernameref}
 							placeholder="Enter Name"
-							onChange={handleChange}
 						/>
 						<input
 							type="text"
 							name="phone"
-							value={newuser.phone}
+							ref={phoneref}
 							placeholder="Enter Phone Number"
-							onChange={handleChange}
 						/>
 						<>
 							{ismodal && (
@@ -234,9 +219,8 @@ const Header = () => {
 										<input
 											type="text"
 											name="suggested"
-											value={newsuggested.suggested}
+											ref={suggestedref}
 											placeholder="Enter Name"
-											onChange={handleChange}
 										/>
 
 										<Button
@@ -298,7 +282,7 @@ const Header = () => {
 							{user?.result?.suggested.map((data) => {
 								return (
 									<li key={data._id}>
-										<p>{data.suggested}</p>
+										<p>{data.suggest}</p>
 									</li>
 								);
 							})}

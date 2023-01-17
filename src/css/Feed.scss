@@ -190,6 +190,7 @@ $breakpoint-lgdesktop: 1480px;
 				}
 			}
 			.submit {
+				margin-top: 1.7rem !important;
 				text-transform: none;
 				color: red;
 				font-weight: bold;
@@ -266,9 +267,10 @@ $breakpoint-lgdesktop: 1480px;
 				}
 			}
 			.submit {
+				margin-top: 0.6rem;
 				font-size: 0.7rem;
 				position: absolute;
-				width: 90% !important;
+				width: 92% !important;
 			}
 
 			.tabular,

@@ -8,6 +8,7 @@ import {
 	Button,
 	Container,
 	CircularProgress,
+	Box,
 } from '@mui/material';
 import { useMainContext } from '../context/contexts_/MainContext';
 import { useNavigate } from 'react-router-dom';
@@ -18,6 +19,8 @@ import {
 	PASSWORDLENGTH,
 	CLOSEMODAL,
 } from '../context/action_type';
+import VisibilityOn from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 function Register(props) {
 	const {
 		main_state: { ismodal, modalcontent, loading, success, error },
@@ -32,7 +35,7 @@ function Register(props) {
 		email: '',
 		password: '',
 	});
-
+	const [passw, setPassw] = useState(false);
 	const handleInput = (ev) => {
 		const { value, name } = ev.target;
 		setUser({ ...user, [name]: value });
@@ -148,14 +151,28 @@ function Register(props) {
 					</div>
 					<div className="form-group">
 						<label htmlFor="email">Password</label>
-						<input
-							autoComplete="off"
-							name="password"
-							value={user.password}
-							onChange={handleInput}
-							type="password"
-							className="form-control"
-						/>
+						<Box className="d-flex align-items-center">
+							{' '}
+							<input
+								autoComplete="off"
+								name="password"
+								value={user.password}
+								onChange={handleInput}
+								type={!passw ? 'password' : 'text'}
+								className="form-control"
+							/>
+							{!passw ? (
+								<VisibilityOn
+									sx={{ cursor: 'pointer', marginLeft: '.3rem' }}
+									onClick={() => setPassw((prev) => !prev)}
+								/>
+							) : (
+								<VisibilityOff
+									sx={{ cursor: 'pointer', marginLeft: '.3rem' }}
+									onClick={() => setPassw((prev) => !prev)}
+								/>
+							)}
+						</Box>
 					</div>
 
 					<Button
@@ -173,12 +190,20 @@ function Register(props) {
 						)}{' '}
 					</Button>
 					<br />
-					<small
-						onClick={() => navigate('/login')}
-						style={{ cursor: 'pointer', color: 'blue' }}
-					>
-						Already have Account?Sign in
-					</small>
+					<Box className="d-flex flex-column ">
+						<small
+							onClick={() => navigate('/login')}
+							style={{ cursor: 'pointer', color: 'blue' }}
+						>
+							Already have Account?Sign in
+						</small>
+						<small
+							onClick={() => navigate('/')}
+							style={{ cursor: 'pointer', color: 'purple' }}
+						>
+							Get Started-Moviehubz
+						</small>
+					</Box>
 				</form>
 			</Container>
 		</Card>

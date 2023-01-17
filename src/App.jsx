@@ -27,7 +27,9 @@ function App() {
 		if (!mydata) {
 			navigate('/');
 		}
-		navigate('/');
+		return () => {
+			return admin?.result?._id;
+		};
 	}, []);
 	const id = admin?.result?._id;
 	const getUser = async () => {
@@ -67,12 +69,12 @@ function App() {
 			<Routes>
 				<Route path="/">
 					<Route index element={<LandingPage />} />
-					<Route path="movie/feed" element={<Home />} />
+					<Route path="/movie/feed" element={<Home />} />
 					<Route path="dashboard" element={<Dashboard />} />
 					<Route path="login" element={<Login />} />
 					<Route exact path="/movie-list" element={<List />} />
 					<Route path="register" element={<Register />} />
-					<Route path="profile/:adminId" element={<Profile />} />
+					<Route path="/profile/:adminId" element={<Profile />} />
 				</Route>
 				<Route path="*" element={<NoPage />} />
 			</Routes>

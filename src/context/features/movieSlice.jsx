@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Navigate } from 'react-router-dom';
 
 import {
 	CREATEMOVIE,
@@ -19,6 +20,7 @@ export const createMovie = async (datah, dispatch, success) => {
 		console.log(response.data);
 		setTimeout(() => {
 			setTimeout(() => {
+				Navigate('/movie/feed');
 				window.location.reload();
 			}, 2000);
 			dispatch({
@@ -102,17 +104,16 @@ export const addUser = async (
 };
 
 export const createSuggested = async (
-	suggested,
+	mysuggested,
 	dispatch,
-	newsuggested,
 	success,
 ) => {
-	const { userId, newsug } = suggested;
-	console.log(newsuggested);
+	const { userId, suggest } = mysuggested;
+	console.log(suggest);
 	try {
 		let response = await axios.put(
 			`${baseUrl}/movie/newsuggested/${userId}`,
-			newsug.current || newsuggested,
+			mysuggested,
 		);
 
 		setTimeout(() => {
@@ -125,6 +126,7 @@ export const createSuggested = async (
 						success,
 					},
 				});
+				window.location.reload();
 			}, 2000);
 			dispatch({
 				type: LOADING,

@@ -197,8 +197,13 @@ $breakpoint-lgdesktop: 1480px;
 	}
 	/* For Mobile phones */
 	@include phone($breakpoint-phone) {
+		.header {
+			margin: 0.2rem -1rem 0.2rem -0.9rem !important;
+		}
 		.main__prof {
-			margin-right: 2rem !important;
+			.prof {
+				margin-left: -4.6rem !important;
+			}
 		}
 		.title {
 			.nav {
@@ -220,7 +225,7 @@ $breakpoint-lgdesktop: 1480px;
 			display: block !important;
 			width: 6rem;
 			z-index: 999 !important;
-			margin-right: 4rem !important;
+			margin-left: -4rem !important;
 			height: fit-content;
 			padding: 0.4rem;
 			text-align: center !important;
