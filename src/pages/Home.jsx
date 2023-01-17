@@ -469,7 +469,7 @@ const Feed = () => {
 					<Box className="d-flex justify-content-between">
 						{' '}
 						<h4 className="h4">All Movies (Today)</h4>
-						<Box>
+						<Box sx={{ currsor: 'pointer' }}>
 							<Refresh
 								sx={{
 									fontSize: '1.4rem !important',
