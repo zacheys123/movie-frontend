@@ -168,12 +168,9 @@ $breakpoint-lgdesktop: 1480px;
 	}
 	.toggle__button {
 		display: flex;
-		justify-content: space-evenly;
-		margin-right: 1rem;
+		justify-content: space-around;
+		margin-right: 0.6rem;
 		align-items: center;
-		.theme {
-			margin-right: 0.6rem;
-		}
 	}
 	.disabled {
 		pointer-events: none;
@@ -200,6 +197,9 @@ $breakpoint-lgdesktop: 1480px;
 	}
 	/* For Mobile phones */
 	@include phone($breakpoint-phone) {
+		.main__prof {
+			margin-right: 2rem !important;
+		}
 		.title {
 			.nav {
 				font-size: 0.9rem !important;
@@ -219,8 +219,8 @@ $breakpoint-lgdesktop: 1480px;
 		.menu__nav {
 			display: block !important;
 			width: 6rem;
-			z-index: 999;
-			margin-right: 2rem !important;
+			z-index: 999 !important;
+			margin-right: 4rem !important;
 			height: fit-content;
 			padding: 0.4rem;
 			text-align: center !important;

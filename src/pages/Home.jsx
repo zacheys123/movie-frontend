@@ -13,6 +13,7 @@ import {
 	EMPTYHOME,
 	LOGGED,
 } from '../context/action_type';
+import NoCellIcon from '@mui/icons-material/NoCell';
 import { useMainContext } from '../context/contexts_/MainContext';
 import { useMovieContext } from '../context/contexts_/MovieContext';
 import { useParams } from 'react-router-dom';
@@ -67,6 +68,7 @@ const Feed = () => {
 			ev.preventDefault();
 
 			if (
+				movie.user &&
 				movie.movie_name &&
 				movie.paid &&
 				movie.genre &&
@@ -493,11 +495,11 @@ const Feed = () => {
 								className="tabular text-secondary"
 								sx={{ fontSize: '.7rem', cursor: 'pointer' }}
 							>
-								<Table
+								<NoCellIcon
 									onClick={() => setShowtable((prev) => !prev)}
 								/>
 								<span onClick={() => setShowtable((prev) => !prev)}>
-									Exit View
+									&nbsp;&nbsp;Exit View
 								</span>
 							</Box>
 						)}

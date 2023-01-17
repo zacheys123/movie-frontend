@@ -14,6 +14,7 @@ import {
 } from './pages';
 import Profile from './pages/profile/Profile';
 import { JWT, GETUSER } from './context/action_type';
+import LandingPage from './pages/LandingPage';
 function App() {
 	const {
 		main_state: { istheme, admin, user },
@@ -24,8 +25,9 @@ function App() {
 	const navigate = useNavigate();
 	useEffect(() => {
 		if (!mydata) {
-			navigate('/login');
+			navigate('/');
 		}
+		navigate('/');
 	}, []);
 	const id = admin?.result?._id;
 	const getUser = async () => {
@@ -64,7 +66,8 @@ function App() {
 		<Layout>
 			<Routes>
 				<Route path="/">
-					<Route index element={<Home />} />
+					<Route index element={<LandingPage />} />
+					<Route path="movie/feed" element={<Home />} />
 					<Route path="dashboard" element={<Dashboard />} />
 					<Route path="login" element={<Login />} />
 					<Route exact path="/movie-list" element={<List />} />

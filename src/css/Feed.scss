@@ -190,7 +190,10 @@ $breakpoint-lgdesktop: 1480px;
 				}
 			}
 			.submit {
-				margin: 3rem 40% 1rem 40% !important;
+				text-transform: none;
+				color: red;
+				font-weight: bold;
+				width: 100%;
 			}
 		}
 		.select {
@@ -265,8 +268,7 @@ $breakpoint-lgdesktop: 1480px;
 			.submit {
 				font-size: 0.7rem;
 				position: absolute;
-				width: 10% !important;
-				margin-right: 1rem !important;
+				width: 90% !important;
 			}
 
 			.tabular,
@@ -286,10 +288,10 @@ $breakpoint-lgdesktop: 1480px;
 			min-height: 85vh;
 			overflow-x: scroll;
 			background: white;
-			padding: 0.7rem !important;
+			padding: 0.8rem !important;
 			z-index: 999;
 
-			margin-left: -2.8rem !important;
+			margin-left: -3.2rem !important;
 			.movie__head {
 				border-bottom: 1px solid lightgrey;
 				h4,

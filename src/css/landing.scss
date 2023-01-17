@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Sofia+Sans:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+.landing {
+	background-image: url('../assets/landing.jpg');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	width: 100%;
+	font-family: 'Sofia Sans', sans-serif !important;
+	min-height: 80vh;
+	display: flex;
+	flex-direction: column;
+	.head__landing {
+		flex: 0.7;
+		background: white;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-top: 1rem;
+		.formd {
+			display: flex;
+			align-items: center;
+			button {
+				text-transform: none;
+			}
+			input {
+				margin-right: 0.5rem;
+			}
+		}
+	}
+	.center__landing {
+		flex: 8;
+
+		display: flex;
+		align-items: center;
+		.center {
+			width: 50%;
+			height: 55%;
+			background: linear-gradient(
+				rgba(244, 244, 244, 0.6),
+				hsl(233, 34%, 45%)
+			);
+			padding: 1rem;
+			margin-left: 2rem;
+			button {
+				margin-top: 3rem;
+				background: hsl(15, 83%, 48%) !important;
+				font-family: helvetica sans-serif !important;
+				color: rgb(30, 242, 221);
+				font-weight: bold;
+			}
+		}
+	}
+	.bottom__landing {
+		display: block;
+		flex: 2;
+		background: rgb(122, 22, 22);
+		.follow {
+			.icon {
+				padding: 0.6rem;
+			}
+		}
+		.bottom__data {
+			display: flex;
+			flex-direction: column;
+			padding: 0.6rem;
+		}
+	}
+}
