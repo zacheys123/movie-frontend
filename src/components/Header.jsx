@@ -1,4 +1,9 @@
-import { useCallback, useState, useEffect, useRef } from 'react';
+import React, {
+	useCallback,
+	useState,
+	useEffect,
+	useRef,
+} from 'react';
 import '../css/Header.scss';
 import { Box, IconButton, Avatar, Button } from '@mui/material';
 import { Menu, DarkMode, WbSunny } from '@mui/icons-material';
@@ -7,7 +12,7 @@ import { useMovieContext } from '../context/contexts_/MovieContext';
 import { Refresh, Settings, Logout } from '@mui/icons-material';
 import { useNavigate, Link } from 'react-router-dom';
 import { PROFILE, CLOSEMODAL } from '../context/action_type';
-import Modal from './Modal';
+import { motion } from 'framer-motion';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import FullscreenIcon from '@mui/icons-material/Fullscreen';
 import {
@@ -40,6 +45,7 @@ const Header = () => {
 	const [showform, setForm] = useState();
 	const [addsuggested, setAddSuggested] = useState(false);
 	const [suggested, setSuggested] = useState(false);
+	const [allsuggested, setallsuggested] = useState(false);
 	const [newuser, setUser] = useState({ username: '', phone: '' });
 	const [newsuggested, setNewSuggested] = useState({ suggested: '' });
 	const handleChange = (ev) => {
@@ -51,21 +57,16 @@ const Header = () => {
 	};
 	const addNewUser = useCallback((ev) => {
 		ev.preventDefault();
-		const myuser = { userId: adm?.result?._id, newref };
+		const myuser = { userId: adm?.result?._id, newuser };
 		addUser(
 			myuser,
 			movie_dispatch,
 			success,
 			setForm,
-			setUser,
+
 			ismodal,
-			newuser,
 		);
 		console.log(adm?.result?._id);
-	}, []);
-	useEffect(() => {
-		newref.current = newuser;
-		newsug.current = newsuggested;
 	}, []);
 
 	const addSuggested = useCallback((ev) => {
@@ -82,6 +83,10 @@ const Header = () => {
 	const closemodal = () => {
 		movie_dispatch({ type: CLOSEMODAL });
 	};
+	useEffect(() => {
+		// newref.current = newuser;
+		// newsug.current = newsuggested;
+	}, []);
 	return (
 		<div className="header">
 			{showform && (
@@ -149,7 +154,6 @@ const Header = () => {
 					size="small"
 					onClick={() => {
 						setForm((prev) => !prev);
-						setUser({ username: '', phone: '' });
 					}}
 				>
 					Add New User
@@ -176,7 +180,7 @@ const Header = () => {
 				{suggested && (
 					<Box className="suggested">
 						{addsuggested ? (
-							<>
+							<div>
 								<Box>
 									<Button
 										variant="outlined"
@@ -192,10 +196,17 @@ const Header = () => {
 										<span>
 											<AddCircleOutlineIcon
 												sx={{ marginLeft: '.7rem' }}
+												onClick={() => {
+													setAddSuggested((prev) => !prev);
+												}}
 											/>
 										</span>
 									</Button>{' '}
 									<Button
+										onClick={() => {
+											setallsuggested((prev) => !prev);
+											setSuggested((prev) => !prev);
+										}}
 										variant="outlined"
 										sx={{
 											display: 'flex',
@@ -204,11 +215,17 @@ const Header = () => {
 									>
 										View Suggested Movies{' '}
 										<span>
-											<FullscreenIcon sx={{ marginLeft: '.7rem' }} />
+											<FullscreenIcon
+												sx={{ marginLeft: '.7rem' }}
+												onClick={() => {
+													setallsuggested((prev) => !prev);
+													setSuggested((prev) => !prev);
+												}}
+											/>
 										</span>
 									</Button>{' '}
 								</Box>
-							</>
+							</div>
 						) : (
 							<Box className="addsuggested">
 								<form onSubmit={addSuggested} className="add__form">
@@ -229,7 +246,7 @@ const Header = () => {
 											{!loading ? 'ADD' : 'Adding suggested movie...'}
 										</Button>
 									</div>
-									<>
+									<div>
 										{ismodal && (
 											<h6
 												style={{
@@ -239,11 +256,53 @@ const Header = () => {
 												All fields must be entered
 											</h6>
 										)}
-									</>
+									</div>
 								</form>
 							</Box>
 						)}
 					</Box>
+				)}
+				{allsuggested && (
+					<motion.div
+						initial={{ y: '-200px', opacity: 0 }}
+						animate={{
+							y: '45px',
+							opacity: 1,
+
+							transition: { duration: 0.6 },
+						}}
+						className="allsuggested"
+					>
+						<Box className="d-flex justify-content-evenly align-items-center">
+							{' '}
+							<h6>Suggested list of movies</h6>
+							<span>
+								<IconButton
+									onClick={() => {
+										setSuggested(true);
+										setallsuggested((prev) => !prev);
+									}}
+								>
+									<AddCircleOutlineIcon
+										sx={{
+											cursor: 'pointer',
+											color: 'white !important',
+										}}
+									/>
+								</IconButton>
+							</span>
+						</Box>
+
+						<ol start="1">
+							{user?.result?.suggested.map((data) => {
+								return (
+									<li key={data._id}>
+										<p>{data.suggested}</p>
+									</li>
+								);
+							})}
+						</ol>
+					</motion.div>
 				)}
 				<Button
 					className={adm ? 'header' : 'disabled'}
@@ -298,7 +357,7 @@ const Header = () => {
 								View profile
 							</Button>
 							<Button variant="outlined">
-								<span>
+								<span onClick={() => window.location.reload()}>
 									<Refresh sx={{ fontSize: '.8rem' }} />
 								</span>
 								Refresh

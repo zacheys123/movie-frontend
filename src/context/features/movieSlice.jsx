@@ -7,7 +7,9 @@ import {
 	LOADING,
 	NEWUSER,
 } from '../action_type';
-const baseUrl = 'https://moviebackendz.onrender.com';
+const baseUrl = 'http://localhost:4000';
+
+// 'https://moviebackendz.onrender.com';
 export const createMovie = async (datah, dispatch, success) => {
 	const { userId, movie } = datah;
 
@@ -55,16 +57,14 @@ export const addUser = async (
 	dispatch,
 	success,
 	setForm,
-	setUser,
 	ismodal,
-	newuser,
 ) => {
-	const { userId, newref } = user;
+	const { userId, newuser } = user;
 	console.log(user);
 	try {
 		let response = await axios.put(
 			`${baseUrl}/movie/newuser/${userId}`,
-			newref?.current || newuser,
+			newuser,
 		);
 
 		setTimeout(() => {
