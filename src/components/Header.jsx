@@ -46,6 +46,7 @@ const Header = () => {
 	const [addsuggested, setAddSuggested] = useState(false);
 	const [suggested, setSuggested] = useState(false);
 	const [allsuggested, setallsuggested] = useState(false);
+	const [showmenu, setShowMenu] = useState(false);
 	const [newuser, setUser] = useState({ username: '', phone: '' });
 	const [newsuggested, setNewSuggested] = useState({ suggested: '' });
 	const handleChange = (ev) => {
@@ -332,15 +333,47 @@ const Header = () => {
 						<WbSunny />
 					</IconButton>
 				)}
-				<IconButton className="menu">
-					<Menu />
-				</IconButton>
+				<Box style={{ position: 'relative' }}>
+					<IconButton
+						className="menu"
+						onClick={() => setShowMenu((prev) => !prev)}
+					>
+						<Menu />
+					</IconButton>
+					{showmenu && (
+						<Box style={{ display: 'none' }} className="menu__nav">
+							<p
+								onClick={() => {
+									setForm((prev) => !prev);
+								}}
+							>
+								Add New User
+							</p>
+							<p onClick={() => navigate('/popular')}>
+								Popular Movies
+							</p>
+							<p
+								onClick={() => {
+									setAddSuggested(true);
+									setShowMenu((prev) => !prev);
+								}}
+							>
+								Suggested Movies
+							</p>
+							<p onClick={() => navigate('/latest')}>Latest Movies</p>
+						</Box>
+					)}
+				</Box>
 				<Box className="main__prof">
 					{' '}
-					<Avatar
-						onClick={() => main_dispatch({ type: PROFILE, profile })}
-						sx={{ cursor: 'pointer' }}
-					/>
+					{adm?.result?._id && (
+						<Avatar
+							onClick={() =>
+								main_dispatch({ type: PROFILE, profile })
+							}
+							sx={{ cursor: 'pointer' }}
+						/>
+					)}
 					{profile && (
 						<Box className="d-flex flex-column position-absolute bg-dark prof">
 							<Button

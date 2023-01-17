@@ -206,12 +206,38 @@ $breakpoint-lgdesktop: 1480px;
 		}
 		.sites {
 			position: absolute !important;
+			display: none;
+
 			button {
 				font-size: 0.6rem !important;
 			}
 		}
 		.menu {
 			display: block !important;
+		}
+		.menu__nav {
+			display: block !important;
+			width: 6rem;
+			z-index: 999;
+			margin-right: 2rem !important;
+			height: fit-content;
+			padding: 0.4rem;
+			text-align: center !important;
+			position: absolute !important;
+			background: black;
+
+			p {
+				color: white;
+				transition: all 0.2s ease-in-out;
+				font-size: 0.6rem;
+				cursor: pointer;
+				&:first-child {
+					margin-top: 0.7rem;
+				}
+				&:hover {
+					color: violet;
+				}
+			}
 		}
 	}
 	/* For tablets and large phones */
@@ -280,5 +306,8 @@ $breakpoint-lgdesktop: 1480px;
 	}
 	/* For large desktops*/
 	@include lg($breakpoint-lgdesktop) {
+		.menu {
+			display: none !important;
+		}
 	}
 }
