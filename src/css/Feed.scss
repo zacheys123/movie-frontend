@@ -1,3 +1,47 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+@import url('https://fonts.googleapis.com/css2?family=Sofia+Sans:wght@200&display=swap');
+$breakpoint-phone: 480px;
+$breakpoint-tablet: 768px;
+$breakpoint-laptop: 992px;
+$breakpoint-desktop: 1200px;
+$breakpoint-lgdesktop: 1480px;
+@mixin phone($breakpoint-phone) {
+	@media (max-width: $breakpoint-phone) {
+		@content;
+	}
+}
+
+// tablet mixin
+@mixin tablet($breakpoint-phone) {
+	@media (min-width: $breakpoint-phone) and (max-width: $breakpoint-tablet) {
+		@content;
+	}
+}
+// laptop mixin
+@mixin laptop($breakpoint-tablet) {
+	@media (min-width: $breakpoint-tablet) and (max-width: $breakpoint-laptop) {
+		@content;
+	}
+}
+// laptop mixin
+@mixin desktop($breakpoint-laptop) {
+	@media (min-width: $breakpoint-tablet) and (max-width: $breakpoint-laptop) {
+		@content;
+	}
+}
+// laptop mixin
+@mixin lgdesktop($breakpoint-desktop) {
+	@media (min-width: $breakpoint-tablet) and (max-width: $breakpoint-laptop) {
+		@content;
+	}
+}
+// laptop mixin
+@mixin lg($breakpoint-lgdesktop) {
+	@media (min-width: $breakpoint-lgdesktop) {
+		@content;
+	}
+}
+
 .feed {
 	flex: 9;
 	background-image: url('../assets/tabular.jpg');
@@ -8,6 +52,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+
 	.feed__movies {
 		height: 90%;
 		width: 90%;
@@ -16,7 +61,41 @@
 		flex-direction: row;
 		border-right: 1px solid lightgrey;
 		box-shadow: rgba(0, 0, 0, 0.08) -3px 4px 12px;
+		.movie__listphone {
+			flex: 4;
+			box-shadow: rgba(100, 20, 10, 0.08) -3px 4px 12px !important;
+			padding: 0.5rem;
 
+			h4 {
+				color: rgb(188, 29, 213);
+			}
+			input {
+				padding: 0.5rem;
+				width: 4.4rem;
+				outline: none;
+				color: white;
+				margin: 0.5rem auto 0 1rem !important;
+				border-radius: 40px;
+				background: rgb(60, 60, 80);
+				transition: all 0.5s ease-in-out;
+				&:focus-within {
+					width: 95%;
+				}
+			}
+			.listing {
+				width: 56% !important;
+				margin: 0.5rem 0.5rem !important;
+			}
+			th {
+				font-size: 0.7rem;
+				color: yellow;
+			}
+			td:not(:first-child) {
+				font-size: 0.7rem;
+				color: rgb(60, 194, 11) !important;
+				font-weight: bold !important;
+			}
+		}
 		.formd {
 			flex: 6;
 			padding: 1rem !important;
@@ -29,7 +108,17 @@
 				hsla(44, 77%, 8%, 0.7)
 			) !important;
 			margin: auto 0;
-
+			.tabular {
+				margin-top: -3rem;
+				cursor: pointer;
+				margin-bottom: 4rem;
+				color: rgb(206, 13, 148);
+				text-align: center;
+				&:hover {
+					color: rgb(31, 64, 45);
+				}
+				display: none;
+			}
 			.form__input {
 				width: 28rem !important;
 			}
@@ -109,7 +198,7 @@
 		}
 	}
 	.movie__list {
-		flex: 4;
+		flex: 4 !important;
 		box-shadow: rgba(100, 20, 10, 0.08) -3px 4px 12px !important;
 		padding: 0.5rem;
 
@@ -129,8 +218,8 @@
 				width: 95%;
 			}
 		}
-		listing {
-			width: 56% !important;
+		.listing {
+			width: 98% !important;
 			margin: 0.5rem 0.5rem !important;
 		}
 		th {
@@ -141,6 +230,99 @@
 			font-size: 0.7rem;
 			color: rgb(60, 194, 11) !important;
 			font-weight: bold !important;
+		}
+	}
+}
+
+/* For Mobile phones */
+@include phone($breakpoint-phone) {
+	.feed {
+		min-height: 75vh !important;
+		overflow-y: hidden !important;
+	}
+	.feed__movies {
+		min-height: 76vh !important;
+		background: linear-gradient(
+			hsl(306, 8%, 43%),
+			hsl(300, 60%, 22%)
+		) !important;
+		width: 80% !important;
+		position: relative;
+		display: flex !important;
+		flex-direction: column !important;
+		.formd {
+			flex: 1;
+			position: relative;
+			.amount {
+				display: block !important;
+				label {
+					margin-top: 1rem !important;
+				}
+				input {
+					margin-top: 0.6rem !important;
+				}
+			}
+			.submit {
+				font-size: 0.7rem;
+				position: absolute;
+				width: 10% !important;
+				margin-right: 1rem !important;
+			}
+
+			.tabular,
+			.h4 {
+				display: block !important;
+				font-size: 0.7rem;
+			}
+		}
+		.movie__list {
+			display: none !important;
+		}
+		.movie__listphone {
+			flex: 4;
+			position: absolute;
+			box-shadow: rgba(100, 20, 10, 0.08) -3px 4px 12px !important;
+			width: 130%;
+			min-height: 85vh;
+			overflow-x: scroll;
+			background: white;
+			padding: 0.7rem !important;
+			z-index: 999;
+
+			margin-left: -2.8rem !important;
+			.movie__head {
+				border-bottom: 1px solid lightgrey;
+				h4,
+				.span {
+					font-size: 0.7rem;
+				}
+			}
+			h4 {
+				color: rgb(188, 29, 213);
+			}
+			input {
+				padding: 0.5rem;
+				width: 4.4rem;
+				outline: none;
+				color: white;
+				margin: 0.5rem auto 0 1rem !important;
+				border-radius: 40px;
+				background: rgb(60, 60, 80);
+				transition: all 0.5s ease-in-out;
+				&:focus-within {
+					width: 95%;
+				}
+			}
+			.listing table {
+				width: fit-content !important;
+				height: 100%;
+				margin-right: 1rem !important;
+			}
+			th,
+			td {
+				font-size: 0.5rem !important;
+				color: yellow;
+			}
 		}
 	}
 }

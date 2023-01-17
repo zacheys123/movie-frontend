@@ -4,6 +4,7 @@ import { Form, Label } from 'react-bootstrap';
 import { Box, Button } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import Table from '@mui/icons-material/TableView';
 import Refresh from '@mui/icons-material/Refresh';
 import {
 	GENRE,
@@ -21,7 +22,7 @@ import { createMovie } from '../context/features/movieSlice';
 import { MOVIES } from '../context/action_type';
 import { motion } from 'framer-motion';
 const Feed = () => {
-	const [admin_id, setId] = useState(null);
+	const [showtable, setShowtable] = useState(false);
 	const movieref = useRef();
 	const [movie, setMovie] = useState({
 		user: 'Admin',
@@ -118,7 +119,23 @@ const Feed = () => {
 							success={success}
 						/>
 					) : (
-						<h4 className="h4">New Movie Entry!!</h4>
+						<Box className="d-flex justify-content-between align-items-center">
+							{!showtable ? (
+								<h4 className="h4">New Movie Entry!!</h4>
+							) : (
+								''
+							)}
+							{!showtable && (
+								<Box className="tabular">
+									<Table
+										onClick={() => setShowtable((prev) => !prev)}
+									/>
+									<span onClick={() => setShowtable((prev) => !prev)}>
+										View Movies
+									</span>
+								</Box>
+							)}
+						</Box>
 					)}
 
 					<div className="row">
@@ -465,11 +482,26 @@ const Feed = () => {
 						</Box>
 					)}
 				</Form>
-				<Box className="movie__list">
-					<Box className="d-flex justify-content-between">
+				<Box
+					className={!showtable ? 'movie__list' : 'movie__listphone'}
+				>
+					<Box className="d-flex justify-content-around movie__head">
 						{' '}
-						<h4 className="h4">All Movies (Today)</h4>
-						<Box sx={{ cursor: 'pointer' }}>
+						<h4 className="h4">All Movies </h4>
+						{showtable && (
+							<Box
+								className="tabular text-secondary"
+								sx={{ fontSize: '.7rem', cursor: 'pointer' }}
+							>
+								<Table
+									onClick={() => setShowtable((prev) => !prev)}
+								/>
+								<span onClick={() => setShowtable((prev) => !prev)}>
+									Exit View
+								</span>
+							</Box>
+						)}
+						<Box sx={{ cursor: 'pointer' }} className="span">
 							<Refresh
 								sx={{
 									fontSize: '1.4rem !important',
@@ -492,6 +524,7 @@ const Feed = () => {
 					</Box>
 
 					<input type="text" placeholder="Search movie.." />
+
 					<Box className="listing">
 						<table className="table table-bordered table-striped my-2 bg-dark">
 							<thead>
@@ -501,10 +534,10 @@ const Feed = () => {
 									<th>Ssn</th>
 									<th>Eps</th>
 									<th>Genre</th>
-									<th>Customer</th>
-									<th>Amount</th>
+									<th>Cust</th>
+									<th>Amt</th>
 									<th>Paid</th>
-									<th>Balance</th>
+									<th>Bal</th>
 								</tr>
 							</thead>
 							<tbody>

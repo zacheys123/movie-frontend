@@ -46,7 +46,7 @@ $breakpoint-lgdesktop: 1480px;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	margin: 0.2rem 4rem;
+	margin: 0.2rem 1rem;
 	position: relative;
 	.add {
 		font-family: 'Sofia Sans', sans-serif !important;
@@ -180,6 +180,7 @@ $breakpoint-lgdesktop: 1480px;
 	}
 	.main__prof {
 		position: relative;
+		z-index: 999;
 		.prof {
 			margin-left: -3.54rem !important;
 			button {
@@ -237,6 +238,13 @@ $breakpoint-lgdesktop: 1480px;
 				&:hover {
 					color: violet;
 				}
+			}
+		}
+		.add {
+			margin: 25rem 5rem 0 auto !important;
+			padding: 0.3rem;
+			input {
+				padding: -2.9rem !important;
 			}
 		}
 	}

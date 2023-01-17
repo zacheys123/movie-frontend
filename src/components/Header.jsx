@@ -334,16 +334,19 @@ const Header = () => {
 					</IconButton>
 				)}
 				<Box style={{ position: 'relative' }}>
-					<IconButton
-						className="menu"
-						onClick={() => setShowMenu((prev) => !prev)}
-					>
-						<Menu />
-					</IconButton>
+					{adm?.result?._id && (
+						<IconButton
+							className="menu"
+							onClick={() => setShowMenu((prev) => !prev)}
+						>
+							<Menu />
+						</IconButton>
+					)}
 					{showmenu && (
 						<Box style={{ display: 'none' }} className="menu__nav">
 							<p
 								onClick={() => {
+									setShowMenu(false);
 									setForm((prev) => !prev);
 								}}
 							>
@@ -389,7 +392,11 @@ const Header = () => {
 								</span>
 								View profile
 							</Button>
-							<Button variant="outlined">
+							<Button
+								variant="outlined"
+								span
+								onClick={() => window.location.reload()}
+							>
 								<span onClick={() => window.location.reload()}>
 									<Refresh sx={{ fontSize: '.8rem' }} />
 								</span>
