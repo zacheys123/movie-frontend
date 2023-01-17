@@ -10,6 +10,7 @@ import {
 	ERRORADD,
 	NEWUSER,
 	LOGGED,
+	REFRESH,
 	EMPTYHOME,
 } from '../action_type';
 export const initialState = {
@@ -114,6 +115,12 @@ export const moviereducer = (state = initialState, action) => {
 			return {
 				...state,
 				logged: !action.logged,
+			};
+		case REFRESH:
+			return {
+				...state,
+				logged: !action.logged,
+				ismodalhome: !action.ismodalhome,
 			};
 	}
 };

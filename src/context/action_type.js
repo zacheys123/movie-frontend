@@ -16,3 +16,4 @@ export const PROFILE = 'PROFILE';
 export const ERRORADD = 'ERRORADD';
 export const EMPTYHOME = 'EMPTYHOME';
 export const LOGGED = 'LOGGED';
+export const REFRESH = 'REFRESH';
