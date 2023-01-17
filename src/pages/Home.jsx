@@ -469,7 +469,20 @@ const Feed = () => {
 					<Box className="d-flex justify-content-between">
 						{' '}
 						<h4 className="h4">All Movies (Today)</h4>
-						<Refresh />
+						<Refresh
+							sx={{
+								fontSize: '1.4rem !important',
+								color: 'magenta 1important',
+							}}
+							onClick={() =>
+								movie_dispatch({
+									type: 'REFRESH',
+									ismodalhome,
+									logged,
+								})
+							}
+						/>{' '}
+						<span style={{ color: 'red' }}>refresh</span>
 					</Box>
 
 					<input type="text" placeholder="Search movie.." />
