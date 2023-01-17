@@ -475,16 +475,19 @@ const Feed = () => {
 									fontSize: '1.4rem !important',
 									color: 'green !important',
 									fontWeight: 'bolder !important',
+									currsor: 'pointer',
 								}}
 								onClick={() =>
 									movie_dispatch({
 										type: 'REFRESH',
-										ismodalhome,
+
 										logged,
 									})
 								}
 							/>{' '}
-							<span style={{ color: 'red' }}>refresh</span>
+							<span style={{ color: 'red', currsor: 'pointer' }}>
+								refresh
+							</span>
 						</Box>
 					</Box>
 
