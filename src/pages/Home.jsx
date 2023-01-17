@@ -473,7 +473,8 @@ const Feed = () => {
 							<Refresh
 								sx={{
 									fontSize: '1.4rem !important',
-									color: 'magenta 1important',
+									color: 'green !important',
+									fontWeight: 'bolder !important',
 								}}
 								onClick={() =>
 									movie_dispatch({
