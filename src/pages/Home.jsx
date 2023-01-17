@@ -469,13 +469,13 @@ const Feed = () => {
 					<Box className="d-flex justify-content-between">
 						{' '}
 						<h4 className="h4">All Movies (Today)</h4>
-						<Box sx={{ currsor: 'pointer' }}>
+						<Box sx={{ cursor: 'pointer' }}>
 							<Refresh
 								sx={{
 									fontSize: '1.4rem !important',
 									color: 'green !important',
 									fontWeight: 'bolder !important',
-									currsor: 'pointer',
+									cursor: 'pointer',
 								}}
 								onClick={() =>
 									movie_dispatch({
@@ -485,7 +485,7 @@ const Feed = () => {
 									})
 								}
 							/>{' '}
-							<span style={{ color: 'red', currsor: 'pointer' }}>
+							<span style={{ color: 'red', cursor: 'pointer' }}>
 								refresh
 							</span>
 						</Box>
