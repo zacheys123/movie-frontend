@@ -32,7 +32,7 @@ function App() {
 		console.log(id);
 		try {
 			const response = await axios.get(
-				`http://localhost:4000/user/v2/${id}`,
+				`https://moviebackendz.onrender.com/user/v2/${id}`,
 			);
 
 			main_dispatch({

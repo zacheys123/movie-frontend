@@ -4,6 +4,7 @@ import { Form, Label } from 'react-bootstrap';
 import { Box, Button } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import Refresh from '@mui/icons-material/Refresh';
 import {
 	GENRE,
 	EMPTY,
@@ -465,7 +466,12 @@ const Feed = () => {
 					)}
 				</Form>
 				<Box className="movie__list">
-					<h4 className="h4">All Movies (Today)</h4>
+					<Box className="d-flex justify-content-between">
+						{' '}
+						<h4 className="h4">All Movies (Today)</h4>
+						<Refresh />
+					</Box>
+
 					<input type="text" placeholder="Search movie.." />
 					<Box className="listing">
 						<table className="table table-bordered table-striped my-2 bg-dark">

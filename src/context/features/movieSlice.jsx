@@ -7,7 +7,7 @@ import {
 	LOADING,
 	NEWUSER,
 } from '../action_type';
-const baseUrl = 'http://localhost:4000';
+const baseUrl = 'https://moviebackendz.onrender.com';
 export const createMovie = async (datah, dispatch, success) => {
 	const { userId, movie } = datah;
 
