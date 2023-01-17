@@ -1,6 +1,9 @@
 .feed {
 	flex: 9;
-	background: rgb(248, 240, 240);
+	background-image: url('../assets/tabular.jpg');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
 	color: rgb(234, 226, 226);
 	display: flex;
 	justify-content: center;
@@ -13,17 +16,18 @@
 		flex-direction: row;
 		border-right: 1px solid lightgrey;
 		box-shadow: rgba(0, 0, 0, 0.08) -3px 4px 12px;
-		background: linear-gradient(
-			hsl(20, 50%, 20%, 0.5) 70%,
-			hsla(44, 60%, 50%, 0.2)
-		) !important;
+
 		.formd {
 			flex: 6;
 			padding: 1rem !important;
 			border: none;
-			height: 80%;
+			height: 87%;
 			position: relative;
-
+			border-radius: 10px;
+			background: linear-gradient(
+				rgba(46, 20, 6, 0.9) 70%,
+				hsla(44, 77%, 8%, 0.7)
+			) !important;
 			margin: auto 0;
 
 			.form__input {
@@ -37,8 +41,19 @@
 			label {
 				margin: 2.5rem 0 0 0 !important;
 			}
+			label {
+				color: greenyellow !important;
+			}
 			button {
 				width: 10rem;
+				background: rgb(18, 196, 142);
+				border: none;
+				font-family: ariel;
+				color: yellow;
+				&:hover {
+					background: rgb(131, 23, 220);
+					color: white;
+				}
 			}
 			.movie {
 				button {
@@ -63,7 +78,7 @@
 			.h4 {
 				margin-top: -3rem;
 				margin-bottom: 4rem;
-				color: rgb(86, 24, 193);
+				color: rgb(92, 11, 234);
 				text-align: center;
 			}
 			.genre__list {
@@ -97,12 +112,9 @@
 		flex: 4;
 		box-shadow: rgba(100, 20, 10, 0.08) -3px 4px 12px !important;
 		padding: 0.5rem;
-		background: linear-gradient(
-			hsl(220, 50%, 80%, 0.5) 70%,
-			hsla(144, 40%, 50%, 0.2)
-		) !important;
+
 		h4 {
-			color: rgb(207, 225, 66);
+			color: rgb(188, 29, 213);
 		}
 		input {
 			padding: 0.5rem;

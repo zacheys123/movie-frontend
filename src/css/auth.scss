@@ -10,6 +10,14 @@
 	background-repeat: no-repeat;
 	background-size: cover;
 	font-family: 'Sofia Sans', sans-serif !important;
+	.login {
+		background: rgb(21, 177, 229);
+		border: none;
+		color: white;
+		&:hover {
+			background: rgb(7, 34, 92);
+		}
+	}
 	.profile__pic {
 		text-align: center !important;
 		width: 100% !important;
@@ -33,7 +41,7 @@
 	}
 	input {
 		width: 90% !important;
-		margin: 0.6rem 0 0.6rem 0 !important;
+		margin: 0.2rem 0 0.6rem 0 !important;
 		outline: none;
 		border: none !important;
 		border-bottom: 1px solid lightgrey !important;
@@ -43,9 +51,12 @@
 		text-transform: none !important;
 		margin: 2rem 10% 1rem 10% !important;
 		width: 70%;
+		color: white;
+		border: none;
+		background: rgb(228, 123, 37);
 		transition: all 0.3s ease-in;
 		&:hover {
-			background: rgb(48, 162, 200);
+			background: rgb(74, 58, 6);
 			color: white;
 			border: none;
 		}

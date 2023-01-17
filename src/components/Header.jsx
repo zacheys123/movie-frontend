@@ -8,7 +8,12 @@ import { Refresh, Settings, Logout } from '@mui/icons-material';
 import { useNavigate, Link } from 'react-router-dom';
 import { PROFILE, CLOSEMODAL } from '../context/action_type';
 import Modal from './Modal';
-import { addUser } from '../context/features/movieSlice';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import FullscreenIcon from '@mui/icons-material/Fullscreen';
+import {
+	addUser,
+	createSuggested,
+} from '../context/features/movieSlice';
 const Header = () => {
 	const {
 		main_state: { istheme, user, admin, profile },
@@ -21,6 +26,7 @@ const Header = () => {
 
 	const navigate = useNavigate();
 	const newref = useRef();
+	const newsug = useRef();
 	const adm = JSON.parse(window.localStorage.getItem('profile'));
 	const admId = adm?.result?._id;
 
@@ -32,9 +38,16 @@ const Header = () => {
 	};
 	//
 	const [showform, setForm] = useState();
+	const [addsuggested, setAddSuggested] = useState(false);
+	const [suggested, setSuggested] = useState(false);
 	const [newuser, setUser] = useState({ username: '', phone: '' });
+	const [newsuggested, setNewSuggested] = useState({ suggested: '' });
 	const handleChange = (ev) => {
 		setUser({ ...newuser, [ev.target.name]: ev.target.value });
+		setNewSuggested({
+			...newuser,
+			[ev.target.name]: ev.target.value,
+		});
 	};
 	const addNewUser = useCallback((ev) => {
 		ev.preventDefault();
@@ -52,6 +65,19 @@ const Header = () => {
 	}, []);
 	useEffect(() => {
 		newref.current = newuser;
+		newsug.current = newsuggested;
+	}, []);
+
+	const addSuggested = useCallback((ev) => {
+		ev.preventDefault();
+		const mysuggested = { userId: adm?.result?._id, newsug };
+		console.log(newsuggested);
+		createSuggested(
+			mysuggested,
+			movie_dispatch,
+			newsuggested,
+			success,
+		);
 	}, []);
 	const closemodal = () => {
 		movie_dispatch({ type: CLOSEMODAL });
@@ -135,15 +161,90 @@ const Header = () => {
 					onClick={() => navigate('/popular')}
 				>
 					popular movies
-				</Button>
+				</Button>{' '}
 				<Button
 					className={adm ? 'header' : 'disabled'}
 					variant="outlined"
 					size="small"
-					onClick={() => navigate('/suggested')}
+					onClick={() => {
+						setAddSuggested(true);
+						setSuggested((prev) => !prev);
+					}}
 				>
 					Suggested Movies
 				</Button>
+				{suggested && (
+					<Box className="suggested">
+						{addsuggested ? (
+							<>
+								<Box>
+									<Button
+										variant="outlined"
+										sx={{
+											display: 'flex',
+											justifyContent: 'space-between',
+										}}
+										onClick={() => {
+											setAddSuggested((prev) => !prev);
+										}}
+									>
+										Add Suggested Movie{' '}
+										<span>
+											<AddCircleOutlineIcon
+												sx={{ marginLeft: '.7rem' }}
+											/>
+										</span>
+									</Button>{' '}
+									<Button
+										variant="outlined"
+										sx={{
+											display: 'flex',
+											justifyContent: 'space-between',
+										}}
+									>
+										View Suggested Movies{' '}
+										<span>
+											<FullscreenIcon sx={{ marginLeft: '.7rem' }} />
+										</span>
+									</Button>{' '}
+								</Box>
+							</>
+						) : (
+							<Box className="addsuggested">
+								<form onSubmit={addSuggested} className="add__form">
+									<div>
+										<input
+											type="text"
+											name="suggested"
+											value={newsuggested.suggested}
+											placeholder="Enter Name"
+											onChange={handleChange}
+										/>
+
+										<Button
+											variant="contained"
+											type="submit"
+											size="small"
+										>
+											{!loading ? 'ADD' : 'Adding suggested movie...'}
+										</Button>
+									</div>
+									<>
+										{ismodal && (
+											<h6
+												style={{
+													color: 'yellow',
+												}}
+											>
+												All fields must be entered
+											</h6>
+										)}
+									</>
+								</form>
+							</Box>
+						)}
+					</Box>
+				)}
 				<Button
 					className={adm ? 'header' : 'disabled'}
 					variant="outlined"

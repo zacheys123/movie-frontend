@@ -90,12 +90,13 @@ export const moviereducer = (state = initialState, action) => {
 			return {
 				...state,
 				loading: !state.loading,
+				ismodal: !state.ismodal,
 			};
 		case NEWUSER:
 			return {
 				...state,
 				newuser: action.payload.newuser,
-				ismodal: !action.payload.ismodal,
+				ismodal: false,
 				ismodalhome: false,
 				success: true,
 				modalcontent: action.payload.modalcontent,

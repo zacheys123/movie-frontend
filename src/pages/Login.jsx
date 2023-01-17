@@ -128,7 +128,12 @@ function Login(props) {
 							className="form-control"
 						/>
 					</div>
-					<Button variant="outlined" color="secondary" type="submit">
+					<Button
+						variant="outlined"
+						className="login"
+						color="secondary"
+						type="submit"
+					>
 						{!loading ? (
 							'Login'
 						) : (
@@ -143,7 +148,7 @@ function Login(props) {
 						onClick={() => navigate('/register')}
 						style={{ cursor: 'pointer', color: 'blue' }}
 					>
-						Already have Account?Sign Up
+						Don't have Account?Sign Up
 					</small>
 				</form>
 			</Container>

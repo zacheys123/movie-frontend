@@ -102,3 +102,46 @@ export const addUser = async (
 		});
 	}
 };
+
+export const createSuggested = async (
+	suggested,
+	dispatch,
+	newsuggested,
+	success,
+) => {
+	const { userId, newsug } = suggested;
+	console.log(newsuggested);
+	try {
+		let response = await axios.put(
+			`${baseUrl}/movie/newsuggested/${userId}`,
+			newsug.current || newsuggested,
+		);
+
+		setTimeout(() => {
+			setTimeout(() => {
+				dispatch({
+					type: NEWUSER,
+					payload: {
+						newuser: response?.data,
+						modalcontent: response?.data?.message,
+						success,
+					},
+				});
+			}, 2000);
+			dispatch({
+				type: LOADING,
+			});
+		}, 4000);
+		dispatch({
+			type: LOADING,
+		});
+	} catch (error) {
+		console.log(userId);
+		dispatch({
+			type: ERRORADD,
+			payload: {
+				modalcontent: error?.response?.data?.message,
+			},
+		});
+	}
+};
