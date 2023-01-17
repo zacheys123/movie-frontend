@@ -120,7 +120,6 @@ export const moviereducer = (state = initialState, action) => {
 			return {
 				...state,
 				logged: !action.logged,
-				ismodalhome: !action.ismodalhome,
 			};
 	}
 };
