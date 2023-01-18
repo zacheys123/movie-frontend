@@ -192,8 +192,9 @@ $breakpoint-lgdesktop: 1480px;
 			.submit {
 				margin-top: 1.7rem !important;
 				text-transform: none;
-				color: red;
+				color: rgb(27, 8, 226);
 				font-weight: bold;
+				font-size: 1rem;
 				width: 100%;
 			}
 		}
@@ -325,6 +326,97 @@ $breakpoint-lgdesktop: 1480px;
 			th,
 			td {
 				font-size: 0.5rem !important;
+				color: yellow;
+			}
+		}
+	}
+}
+/* For tablets and large phones */
+@include tablet($breakpoint-phone) {
+	.feed {
+		min-height: 75vh !important;
+		overflow-y: hidden !important;
+	}
+	.feed__movies {
+		min-height: 76vh !important;
+		background: linear-gradient(
+			hsl(306, 8%, 43%),
+			hsl(300, 60%, 22%)
+		) !important;
+		width: 80% !important;
+		position: relative;
+		display: flex !important;
+		flex-direction: column !important;
+		.formd {
+			flex: 1;
+			position: relative;
+			.amount {
+				display: block !important;
+				label {
+					margin-top: 1rem !important;
+				}
+				input {
+					margin-top: 0.6rem !important;
+				}
+			}
+			.submit {
+				margin-top: 0.6rem;
+				font-size: 0.7rem;
+				position: absolute;
+				width: 92% !important;
+			}
+
+			.tabular,
+			.h4 {
+				display: block !important;
+				font-size: 0.7rem;
+			}
+		}
+		.movie__list {
+			display: none !important;
+		}
+		.movie__listphone {
+			flex: 4;
+			position: absolute;
+			box-shadow: rgba(100, 20, 10, 0.08) -3px 4px 12px !important;
+			width: 130%;
+			min-height: 85vh;
+			overflow-x: scroll;
+			background: white;
+			padding: 0.8rem !important;
+			z-index: 999;
+
+			margin-left: -3.2rem !important;
+			.movie__head {
+				border-bottom: 1px solid lightgrey;
+				h4,
+				.span {
+					font-size: 1rem;
+				}
+			}
+			h4 {
+				color: rgb(188, 29, 213);
+			}
+			input {
+				padding: 0.5rem;
+				width: 4.4rem;
+				outline: none;
+				color: white;
+				margin: 0.5rem auto 0 1rem !important;
+				border-radius: 40px;
+				background: rgb(60, 60, 80);
+				transition: all 0.5s ease-in-out;
+				&:focus-within {
+					width: 95%;
+				}
+			}
+			.listing table {
+				width: 95% !important;
+				height: 100%;
+			}
+			th,
+			td {
+				font-size: 0.9rem !important;
 				color: yellow;
 			}
 		}

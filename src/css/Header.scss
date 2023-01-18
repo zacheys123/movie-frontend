@@ -255,18 +255,60 @@ $breakpoint-lgdesktop: 1480px;
 	}
 	/* For tablets and large phones */
 	@include tablet($breakpoint-phone) {
+		.header {
+			margin: 0.2rem -1rem 0.2rem -0.9rem !important;
+		}
+		.main__prof {
+			.prof {
+				margin-left: -4.6rem !important;
+			}
+		}
 		.title {
 			.nav {
 				font-size: 0.9rem !important;
 			}
 		}
 		.sites {
+			position: absolute !important;
+			display: none;
+
 			button {
 				font-size: 0.6rem !important;
 			}
 		}
 		.menu {
-			display: none !important;
+			display: block !important;
+		}
+		.menu__nav {
+			display: block !important;
+			width: 6rem;
+			z-index: 999 !important;
+			margin-left: -4rem !important;
+			height: fit-content;
+			padding: 0.4rem;
+			text-align: center !important;
+			position: absolute !important;
+			background: black;
+
+			p {
+				color: white;
+				transition: all 0.2s ease-in-out;
+				font-size: 0.6rem;
+				cursor: pointer;
+				&:first-child {
+					margin-top: 0.7rem;
+				}
+				&:hover {
+					color: violet;
+				}
+			}
+		}
+		.add {
+			margin: 25rem 5rem 0 auto !important;
+			padding: 0.3rem;
+			input {
+				padding: -2.9rem !important;
+			}
 		}
 	}
 	/* For tablets and large phones */

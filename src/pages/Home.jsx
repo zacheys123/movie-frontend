@@ -17,7 +17,11 @@ import {
 import NoCellIcon from '@mui/icons-material/NoCell';
 import { useMainContext } from '../context/contexts_/MainContext';
 import { useMovieContext } from '../context/contexts_/MovieContext';
-import { useParams, useNavigate } from 'react-router-dom';
+import {
+	useParams,
+	useNavigate,
+	UNSAFE_DataRouterStateContext,
+} from 'react-router-dom';
 import Modal from '../components/Modal';
 import axios from 'axios';
 import { createMovie } from '../context/features/movieSlice';
@@ -543,13 +547,12 @@ const Feed = () => {
 									fontWeight: 'bolder !important',
 									cursor: 'pointer',
 								}}
-								onClick={() =>
+								onClick={() => {
 									movie_dispatch({
 										type: 'REFRESH',
-
 										logged,
-									})
-								}
+									});
+								}}
 							/>{' '}
 							<span style={{ color: 'red', cursor: 'pointer' }}>
 								refresh
