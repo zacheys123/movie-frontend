@@ -22,17 +22,16 @@ export const createMovie = async (
 			`${baseUrl}/movie/create/${userId}`,
 			movie,
 		);
-		console.log(response.data);
+
 		setTimeout(() => {
+			dispatch({
+				type: LOADING,
+			});
 			dispatch({
 				type: CREATEMOVIE,
 				payload: {
 					modalcontent: response?.data,
 				},
-			});
-
-			dispatch({
-				type: LOADING,
 			});
 		}, 2000);
 		dispatch({
