@@ -24,7 +24,6 @@ function Login(props) {
 	const [user, setUser] = useState({
 		email: '',
 		password: '',
-		confirmpassword: '',
 	});
 	const [passw, setPassw] = useState(false);
 	const handleInput = (ev) => {
@@ -112,22 +111,11 @@ function Login(props) {
 					</div>
 					<div className="form-group">
 						<label htmlFor="password">Password</label>
-						<input
-							name="password"
-							value={user.password}
-							onChange={handleInput}
-							type={!passw ? 'password' : 'text'}
-							className="form-control"
-						/>
-					</div>
-					<div className="form-group">
-						<label htmlFor="confirmpassword">Confirm Password</label>
-
 						<Box className="d-flex align-items-center">
 							{' '}
 							<input
-								name="confirmpassword"
-								value={user.confirmpassword}
+								name="password"
+								value={user.password}
 								onChange={handleInput}
 								type={!passw ? 'password' : 'text'}
 								className="form-control"
@@ -145,6 +133,7 @@ function Login(props) {
 							)}
 						</Box>
 					</div>
+
 					<Button
 						variant="outlined"
 						className="login"

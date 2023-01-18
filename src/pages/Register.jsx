@@ -34,6 +34,7 @@ function Register(props) {
 		phone: '',
 		email: '',
 		password: '',
+		confirmpassword: '',
 	});
 	const [passw, setPassw] = useState(false);
 	const handleInput = (ev) => {
@@ -50,7 +51,8 @@ function Register(props) {
 			adminData?.current.password &&
 			adminData?.current.email &&
 			adminData?.current.company &&
-			adminData?.current.phone
+			adminData?.current.phone &&
+			adminData?.current.confirmpassword
 		) {
 			if (adminData?.current?.password.length > 6) {
 				console.log(adminData.current);
@@ -150,13 +152,24 @@ function Register(props) {
 						/>
 					</div>
 					<div className="form-group">
-						<label htmlFor="email">Password</label>
+						<label htmlFor="confirmpassword"> Password</label>
+						<input
+							autoComplete="off"
+							name="password"
+							value={user.password}
+							onChange={handleInput}
+							type={!passw ? 'password' : 'text'}
+							className="form-control"
+						/>
+					</div>
+					<div className="form-group">
+						<label htmlFor="email">Confirm Password</label>
 						<Box className="d-flex align-items-center">
 							{' '}
 							<input
 								autoComplete="off"
 								name="password"
-								value={user.password}
+								value={user.confirmpassword}
 								onChange={handleInput}
 								type={!passw ? 'password' : 'text'}
 								className="form-control"
