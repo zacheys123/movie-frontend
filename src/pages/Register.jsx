@@ -203,8 +203,8 @@ function Register(props) {
 						)}{' '}
 					</Button>
 					<br />
-					<Box className="d-flex flex-column ">
-						<small
+					<Box className="d-flex flex-column foot">
+						<span
 							onClick={() => navigate('/login')}
 							style={{
 								cursor: 'pointer',
@@ -213,13 +213,13 @@ function Register(props) {
 							}}
 						>
 							Already have Account?Sign in
-						</small>
-						<small
+						</span>
+						<span
 							onClick={() => navigate('/')}
 							style={{ cursor: 'pointer', color: 'greenyellow' }}
 						>
 							Get Started-Moviehubz
-						</small>
+						</span>
 					</Box>
 				</form>
 			</Container>
