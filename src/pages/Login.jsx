@@ -82,7 +82,7 @@ function Login(props) {
 			className="auth_page"
 			style={{ height: props.height || '' }}
 		>
-			<Container className="form">
+			<Container className="form__login">
 				{ismodal && (
 					<Modal
 						closemodal={closemodal}
