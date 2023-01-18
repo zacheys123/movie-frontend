@@ -3,6 +3,7 @@ import { Routes, Route, useNavigate } from 'react-router-dom';
 import { Stack } from '@mui/material';
 import { useMainContext } from './context/contexts_/MainContext';
 import axios from 'axios';
+import { useMovieContext } from './context/contexts_/MovieContext';
 import Layout from './components/layout/Layout';
 import {
 	Home,
@@ -25,6 +26,10 @@ function App() {
 		main_state: { istheme, admin, user },
 		main_dispatch,
 	} = useMainContext();
+	const {
+		movie_state: { logged },
+		movie_dispatch,
+	} = useMovieContext();
 	const mydata = JSON.parse(localStorage.getItem('profile'));
 
 	const navigate = useNavigate();
@@ -66,7 +71,7 @@ function App() {
 				admin: mydata,
 			},
 		});
-	}, [admin?.result?._id]);
+	}, [admin?.result?._id, logged]);
 	const client = new QueryClient();
 	return (
 		<QueryClientProvider client={client}>

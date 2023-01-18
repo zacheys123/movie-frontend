@@ -86,7 +86,6 @@ export const addUser = async (
 			}, 2000);
 			setTimeout(() => {
 				setForm((prev) => !prev);
-				window.location.reload();
 			}, 1000);
 
 			console.log(response);
@@ -131,7 +130,6 @@ export const createSuggested = async (
 						success,
 					},
 				});
-				window.location.reload();
 			}, 2000);
 			dispatch({
 				type: LOADING,

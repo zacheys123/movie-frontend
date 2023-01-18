@@ -43,6 +43,7 @@ export const moviereducer = (state = initialState, action) => {
 				loading: false,
 				success: !action.payload.success,
 				error: false,
+				logged: !state.logged,
 			};
 		case MOVIES:
 			return {
@@ -101,6 +102,7 @@ export const moviereducer = (state = initialState, action) => {
 				ismodalhome: false,
 				success: true,
 				modalcontent: action.payload.modalcontent,
+				logged: !state.logged,
 			};
 		case ERRORADD:
 			return {
