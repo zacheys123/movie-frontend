@@ -168,7 +168,7 @@ function Register(props) {
 							{' '}
 							<input
 								autoComplete="off"
-								name=""
+								name="confirmpassword"
 								value={user.confirmpassword}
 								onChange={handleInput}
 								type={!passw ? 'password' : 'text'}
