@@ -7,6 +7,7 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
+import { Link } from 'react-router-dom';
 const LandingPage = () => {
 	const {
 		main_state: { istheme, admin, user },
@@ -59,16 +60,28 @@ const LandingPage = () => {
 						From Anywhere AnyTime.
 					</h2>
 					{user?.result?._id ? (
-						<Button
-							variant="contained"
-							onClick={() => navigate('/movie/feed')}
-							sx={{
-								textTransform: 'none',
-								background: 'blue !important',
-							}}
-						>
-							Explore Moviehubz
-						</Button>
+						<div className="d-flex flex-column py-2">
+							<Button
+								variant="contained"
+								onClick={() => navigate('/movie/feed')}
+								sx={{
+									textTransform: 'none',
+									background: 'blue !important',
+								}}
+							>
+								Explore Moviehubz
+							</Button>
+
+							<Link
+								to="/"
+								style={{
+									marginTop: '1.7rem',
+									color: 'yellow',
+								}}
+							>
+								Go Back
+							</Link>
+						</div>
 					) : (
 						<Button
 							variant="contained"
@@ -77,6 +90,7 @@ const LandingPage = () => {
 							Get Started
 						</Button>
 					)}
+					<div> </div>
 				</Box>
 			</Box>
 			<Box className="bottom__landing">

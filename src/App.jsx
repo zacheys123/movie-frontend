@@ -77,7 +77,11 @@ function App() {
 						<Route path="/movie/feed" element={<Home />} />
 						<Route path="dashboard" element={<Dashboard />} />
 						<Route path="login" element={<Login />} />
-						<Route exact path="/movie-list" element={<List />} />
+						<Route
+							exact
+							path="/movie-list/:id/latest"
+							element={<List />}
+						/>
 						<Route path="register" element={<Register />} />
 						<Route path="/profile/:adminId" element={<Profile />} />
 					</Route>

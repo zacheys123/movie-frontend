@@ -168,7 +168,7 @@ const Header = () => {
 			<Box className="title">
 				<h3
 					style={{ cursor: 'pointer', marginLeft: '-1.5rem' }}
-					onClick={() => navigate('/')}
+					onClick={() => navigate('/movie/feed')}
 					className={adm ? 'nav navbar navbar-brand ' : 'disabled'}
 				>
 					{admin?.result?.company
@@ -336,7 +336,9 @@ const Header = () => {
 					className={adm ? 'header' : 'disabled'}
 					variant="outlined"
 					size="small"
-					onClick={() => navigate('/latest')}
+					onClick={() =>
+						navigate(`/movie-list/${user?.result?._id}/latest`)
+					}
 				>
 					Latest Movies
 				</Button>
@@ -390,7 +392,14 @@ const Header = () => {
 							>
 								Suggested Movies
 							</p>
-							<p onClick={() => navigate('/latest')}>Latest Movies</p>
+							<p
+								onClick={() => {
+									setShowMenu((prev) => !prev);
+									navigate(`/movie-list/${user?.result?._id}/latest`);
+								}}
+							>
+								Latest Movies
+							</p>
 						</Box>
 					)}
 				</Box>

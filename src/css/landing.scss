@@ -132,7 +132,7 @@ $breakpoint-lgdesktop: 1480px;
 		margin-right: 1rem;
 		flex: 5 !important;
 		.center {
-			height: 18rem !important;
+			height: 21.5rem !important;
 			h2 {
 				font-size: 1.2rem;
 				padding: 0.6rem;
@@ -141,6 +141,7 @@ $breakpoint-lgdesktop: 1480px;
 				font-size: 1.39rem;
 			}
 			button {
+				width: 60%;
 				margin-top: 0.41rem !important;
 			}
 		}
