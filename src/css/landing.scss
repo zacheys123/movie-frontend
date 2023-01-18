@@ -77,7 +77,7 @@ $breakpoint-lgdesktop: 1480px;
 		align-items: center;
 		.center {
 			max-width: 35rem;
-			height: 55%;
+			height: 61% !important;
 			background: linear-gradient(
 				rgba(244, 244, 244, 0.6),
 				hsl(233, 34%, 45%)
@@ -86,6 +86,8 @@ $breakpoint-lgdesktop: 1480px;
 			margin-left: 2rem;
 			button {
 				margin-top: 3rem;
+				width: 50%;
+
 				background: hsl(15, 83%, 48%) !important;
 				font-family: helvetica sans-serif !important;
 				color: rgb(30, 242, 221);
@@ -141,8 +143,11 @@ $breakpoint-lgdesktop: 1480px;
 				font-size: 1.39rem;
 			}
 			button {
-				width: 60%;
+				width: 60% !important;
 				margin-top: 0.41rem !important;
+			}
+			.link {
+				display: none;
 			}
 		}
 	}

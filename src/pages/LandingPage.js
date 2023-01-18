@@ -34,7 +34,7 @@ const LandingPage = () => {
 						<span
 							style={{
 								fontWeight: 'bold ',
-								fontSize: '1.5rem',
+								fontSize: '1.9rem',
 								color: 'cyan',
 							}}
 						>
@@ -73,6 +73,7 @@ const LandingPage = () => {
 							</Button>
 
 							<Link
+								className="link"
 								to="/"
 								style={{
 									marginTop: '1.7rem',
