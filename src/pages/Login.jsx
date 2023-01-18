@@ -143,10 +143,7 @@ function Login(props) {
 						{!loading ? (
 							'Login'
 						) : (
-							<CircularProgress
-								size="20px"
-								sx={{ color: 'purple' }}
-							/>
+							<CircularProgress size="20px" sx={{ color: 'white' }} />
 						)}{' '}
 					</Button>
 					<br />

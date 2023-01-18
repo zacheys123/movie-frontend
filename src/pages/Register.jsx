@@ -196,10 +196,7 @@ function Register(props) {
 						{!loading ? (
 							'Register'
 						) : (
-							<CircularProgress
-								size="20px"
-								sx={{ color: 'purple' }}
-							/>
+							<CircularProgress size="20px" sx={{ color: 'white' }} />
 						)}{' '}
 					</Button>
 					<br />
