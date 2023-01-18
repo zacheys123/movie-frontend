@@ -94,7 +94,7 @@ function Login(props) {
 				)}
 				<h2 style={{ fontWeight: 'bold' }} align="center">
 					{' '}
-					Sign In
+					Sign In To Moviehubz
 				</h2>
 				<Box className="profile__pic">
 					<img src={profile} alt="" />
@@ -164,13 +164,17 @@ function Login(props) {
 					<Box className="d-flex flex-column ">
 						<small
 							onClick={() => navigate('/register')}
-							style={{ cursor: 'pointer', color: 'blue' }}
+							style={{
+								cursor: 'pointer',
+								color: 'yellow',
+								marginBottom: '.5rem',
+							}}
 						>
-							Don't have An Account?Sign in
+							Don't have An Account?Sign Up
 						</small>
 						<small
 							onClick={() => navigate('/')}
-							style={{ cursor: 'pointer', color: 'purple' }}
+							style={{ cursor: 'pointer', color: 'greenyellow' }}
 						>
 							Get Started-Moviehubz
 						</small>

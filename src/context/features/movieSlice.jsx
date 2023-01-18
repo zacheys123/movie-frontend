@@ -24,10 +24,6 @@ export const createMovie = async (
 		);
 		console.log(response.data);
 		setTimeout(() => {
-			setTimeout(() => {
-				navigate('/movie/feed');
-				window.location.reload();
-			}, 2000);
 			dispatch({
 				type: CREATEMOVIE,
 				payload: {

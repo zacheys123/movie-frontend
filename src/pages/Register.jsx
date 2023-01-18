@@ -91,7 +91,7 @@ function Register(props) {
 					/>
 				)}
 				<h2 style={{ fontWeight: 'bold' }} align="center">
-					Sign Up
+					Sign Up To Moviehubz
 				</h2>
 				<form>
 					<div className="form-group">
@@ -193,13 +193,17 @@ function Register(props) {
 					<Box className="d-flex flex-column ">
 						<small
 							onClick={() => navigate('/login')}
-							style={{ cursor: 'pointer', color: 'blue' }}
+							style={{
+								cursor: 'pointer',
+								color: 'yellow',
+								marginBottom: '.5rem',
+							}}
 						>
 							Already have Account?Sign in
 						</small>
 						<small
 							onClick={() => navigate('/')}
-							style={{ cursor: 'pointer', color: 'purple' }}
+							style={{ cursor: 'pointer', color: 'greenyellow' }}
 						>
 							Get Started-Moviehubz
 						</small>

@@ -103,10 +103,10 @@ $breakpoint-lgdesktop: 1480px;
 			height: 87%;
 			position: relative;
 			border-radius: 10px;
-			background: linear-gradient(
-				rgba(46, 20, 6, 0.9) 70%,
-				hsla(44, 77%, 8%, 0.7)
-			) !important;
+			background-image: url('../assets/feed.avif');
+			background-repeat: no-repeat;
+			background-position: center;
+			background-size: cover;
 			margin: auto 0;
 			.tabular {
 				margin-top: -3rem;
@@ -268,7 +268,7 @@ $breakpoint-lgdesktop: 1480px;
 				}
 			}
 			.submit {
-				margin-top: 0.6rem;
+				margin-top: -0.5rem;
 				font-size: 0.7rem;
 				position: absolute;
 				width: 92% !important;
