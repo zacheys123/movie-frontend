@@ -3,6 +3,7 @@ import '../css/Feed.scss';
 import { Form, Label } from 'react-bootstrap';
 import { Box, Button } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import Table from '@mui/icons-material/TableView';
 import Refresh from '@mui/icons-material/Refresh';
@@ -16,13 +17,16 @@ import {
 import NoCellIcon from '@mui/icons-material/NoCell';
 import { useMainContext } from '../context/contexts_/MainContext';
 import { useMovieContext } from '../context/contexts_/MovieContext';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import Modal from '../components/Modal';
 import axios from 'axios';
 import { createMovie } from '../context/features/movieSlice';
 import { MOVIES } from '../context/action_type';
 import { motion } from 'framer-motion';
+import { useQuery } from '@tanstack/react-query';
 const Feed = () => {
+	// fetch movies
+
 	const [showtable, setShowtable] = useState(false);
 	const movieref = useRef();
 	const [movie, setMovie] = useState({
@@ -60,7 +64,7 @@ const Feed = () => {
 	};
 
 	//* create movies for this user function
-
+	const navigate = useNavigate();
 	const users = user?.result?.users;
 
 	const createMovies = useCallback(
@@ -77,7 +81,7 @@ const Feed = () => {
 				const mymovie = { userId: admin?.result?._id, movie };
 				console.log(movie);
 
-				createMovie(mymovie, movie_dispatch, success);
+				createMovie(mymovie, movie_dispatch, success, navigate);
 				movie_dispatch({ type: LOGGED, logged });
 			} else {
 				console.log(movie);

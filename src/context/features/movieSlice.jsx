@@ -9,7 +9,12 @@ import {
 	NEWUSER,
 } from '../action_type';
 const baseUrl = 'https://moviebackendz.onrender.com';
-export const createMovie = async (datah, dispatch, success) => {
+export const createMovie = async (
+	datah,
+	dispatch,
+	success,
+	navigate,
+) => {
 	const { userId, movie } = datah;
 
 	try {
@@ -20,7 +25,7 @@ export const createMovie = async (datah, dispatch, success) => {
 		console.log(response.data);
 		setTimeout(() => {
 			setTimeout(() => {
-				Navigate('/movie/feed');
+				navigate('/movie/feed');
 				window.location.reload();
 			}, 2000);
 			dispatch({

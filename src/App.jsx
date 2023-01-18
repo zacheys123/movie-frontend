@@ -15,6 +15,11 @@ import {
 import Profile from './pages/profile/Profile';
 import { JWT, GETUSER } from './context/action_type';
 import LandingPage from './pages/LandingPage';
+import {
+	QueryClient,
+	QueryClientProvider,
+} from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 function App() {
 	const {
 		main_state: { istheme, admin, user },
@@ -27,11 +32,9 @@ function App() {
 		if (!mydata) {
 			navigate('/');
 		}
-		return () => {
-			return admin?.result?._id;
-		};
-	}, []);
+	}, [admin?.result?._id]);
 	const id = admin?.result?._id;
+
 	const getUser = async () => {
 		console.log(id);
 		try {
@@ -64,21 +67,24 @@ function App() {
 			},
 		});
 	}, [admin?.result?._id]);
+	const client = new QueryClient();
 	return (
-		<Layout>
-			<Routes>
-				<Route path="/">
-					<Route index element={<LandingPage />} />
-					<Route path="/movie/feed" element={<Home />} />
-					<Route path="dashboard" element={<Dashboard />} />
-					<Route path="login" element={<Login />} />
-					<Route exact path="/movie-list" element={<List />} />
-					<Route path="register" element={<Register />} />
-					<Route path="/profile/:adminId" element={<Profile />} />
-				</Route>
-				<Route path="*" element={<NoPage />} />
-			</Routes>
-		</Layout>
+		<QueryClientProvider client={client}>
+			<Layout>
+				<Routes>
+					<Route path="/">
+						<Route index element={<LandingPage />} />
+						<Route path="/movie/feed" element={<Home />} />
+						<Route path="dashboard" element={<Dashboard />} />
+						<Route path="login" element={<Login />} />
+						<Route exact path="/movie-list" element={<List />} />
+						<Route path="register" element={<Register />} />
+						<Route path="/profile/:adminId" element={<Profile />} />
+					</Route>
+					<Route path="*" element={<NoPage />} />
+				</Routes>
+			</Layout>
+		</QueryClientProvider>
 	);
 }
 export default App;

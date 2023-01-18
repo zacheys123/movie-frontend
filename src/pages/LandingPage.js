@@ -6,12 +6,14 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import { useNavigate } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 const LandingPage = () => {
 	const {
 		main_state: { istheme, admin, user },
 		main_dispatch,
 	} = useMainContext();
 	const navigate = useNavigate();
+
 	return (
 		<div className="landing">
 			<Box className="head__landing">

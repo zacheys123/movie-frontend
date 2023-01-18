@@ -17,3 +17,4 @@ export const ERRORADD = 'ERRORADD';
 export const EMPTYHOME = 'EMPTYHOME';
 export const LOGGED = 'LOGGED';
 export const REFRESH = 'REFRESH';
+export const DELETEUSER = 'DELETEUSER';

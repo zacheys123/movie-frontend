@@ -11,7 +11,11 @@ import { useMainContext } from '../context/contexts_/MainContext';
 import { useMovieContext } from '../context/contexts_/MovieContext';
 import { Refresh, Settings, Logout } from '@mui/icons-material';
 import { useNavigate, Link } from 'react-router-dom';
-import { PROFILE, CLOSEMODAL } from '../context/action_type';
+import {
+	PROFILE,
+	CLOSEMODAL,
+	DELETEUSER,
+} from '../context/action_type';
 import { motion } from 'framer-motion';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import FullscreenIcon from '@mui/icons-material/Fullscreen';
@@ -19,6 +23,8 @@ import {
 	addUser,
 	createSuggested,
 } from '../context/features/movieSlice';
+import Delete from '@mui/icons-material/DeleteForever';
+import axios from 'axios';
 const Header = () => {
 	const {
 		main_state: { istheme, user, admin, profile },
@@ -47,6 +53,7 @@ const Header = () => {
 	const [suggested, setSuggested] = useState(false);
 	const [allsuggested, setallsuggested] = useState(false);
 	const [showmenu, setShowMenu] = useState(false);
+	const [remove, setRemove] = useState(false);
 
 	const usernameref = useRef(null);
 	const phoneref = useRef(null);
@@ -75,51 +82,87 @@ const Header = () => {
 		createSuggested(mysuggested, movie_dispatch, success);
 	}, []);
 
+	const removeuser = async (myid) => {
+		await axios.delete(
+			`http://localhost:4000/movie/remove/${myid}`,
+			myid,
+		);
+		movie_dispatch({
+			type: DELETEUSER,
+			payload: user?.result?.users,
+		});
+	};
 	return (
 		<div className="header">
 			{showform && (
 				<Box className="add">
-					<form onSubmit={addNewUser} className="add__form">
-						<h5
-							className="text-light"
-							align="center"
-							style={{
-								color: 'white !important',
-								marginTop: '1rem',
-								marginBottom: '-1rem',
-							}}
-						>
-							Add New User
-						</h5>
-						<input
-							type="text"
-							name="username"
-							ref={usernameref}
-							placeholder="Enter Name"
-						/>
-						<input
-							type="text"
-							name="phone"
-							ref={phoneref}
-							placeholder="Enter Phone Number"
-						/>
-						<>
-							{ismodal && (
-								<h6
-									style={{
-										color: 'yellow',
-										margin: '1.4rem auto -1rem auto',
-										textAlign: 'center',
-									}}
-								>
-									All fields must be entered
-								</h6>
-							)}
-						</>
-						<Button variant="contained" type="submit" size="small">
-							{!loading ? 'ADD' : 'Adding user...'}
-						</Button>
-					</form>
+					{remove ? (
+						<ol start="1">
+							{user?.result?.users.map((data) => {
+								return (
+									<li key={data._id}>
+										<p style={{ color: 'white' }}>{data.username}</p>
+										<span>
+											<Delete
+												sx={{ color: 'red' }}
+												onClick={removeuser(data._id)}
+											/>
+										</span>
+									</li>
+								);
+							})}
+						</ol>
+					) : (
+						<form onSubmit={addNewUser} className="add__form">
+							<h5
+								className="text-light"
+								align="center"
+								style={{
+									color: 'white !important',
+									marginTop: '1rem',
+									marginBottom: '-1rem',
+								}}
+							>
+								Add New User
+							</h5>
+							<input
+								type="text"
+								name="username"
+								ref={usernameref}
+								placeholder="Enter Name"
+							/>
+							<input
+								type="text"
+								name="phone"
+								ref={phoneref}
+								placeholder="Enter Phone Number"
+							/>
+							<>
+								{ismodal && (
+									<h6
+										style={{
+											color: 'yellow',
+											margin: '1.4rem auto -1rem auto',
+											textAlign: 'center',
+										}}
+									>
+										All fields must be entered
+									</h6>
+								)}
+							</>
+							<Button variant="contained" type="submit" size="small">
+								{!loading ? 'ADD' : 'Adding user...'}
+							</Button>
+
+							<Button
+								size="small"
+								variant="outlined"
+								onClick={() => setRemove((prev) => !prev)}
+							>
+								Remove user
+							</Button>
+						</form>
+					)}
 				</Box>
 			)}
 			<Box className="title">
@@ -128,8 +171,8 @@ const Header = () => {
 					onClick={() => navigate('/')}
 					className={adm ? 'nav navbar navbar-brand ' : 'disabled'}
 				>
-					{user?.result?.company
-						? user?.result?.company
+					{admin?.result?.company
+						? admin?.result?.company
 						: ' MovieHubz co'}
 				</h3>
 			</Box>
