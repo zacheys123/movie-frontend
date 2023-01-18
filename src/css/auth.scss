@@ -81,6 +81,7 @@ $breakpoint-lgdesktop: 1480px;
 		max-width: 27rem !important;
 		padding: 2rem;
 		color: white;
+		// background-image:url('../assets/register.jpg');
 	}
 	input {
 		width: 90% !important;
@@ -122,8 +123,9 @@ $breakpoint-lgdesktop: 1480px;
 @include phone($breakpoint-phone) {
 	.form {
 		width: 70% !important;
-
+		background-image: url('../assets/register.jpg');
 		padding: -0.7rem;
+		color: black !important;
 		input,
 		label {
 			font-size: 0.7rem;
@@ -142,6 +144,12 @@ $breakpoint-lgdesktop: 1480px;
 		.submit {
 			margin-top: -2rem !important;
 			font-size: 0.9rem !important;
+		}
+		.foot {
+			span {
+				color: purple !important;
+				font-size: 0.8rem !important;
+			}
 		}
 	}
 }
