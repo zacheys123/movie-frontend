@@ -63,7 +63,7 @@ function Register(props) {
 					createAdmin(navigate, main_dispatch, loading, adminData);
 				} else {
 					main_dispatch({
-						type: 'WRONGPASSWORD',
+						type: WRONGPASSWORD,
 						modalcontent: 'Both Passwords Should Match',
 					});
 				}
