@@ -1,4 +1,45 @@
 @import url('https://fonts.googleapis.com/css2?family=Sofia+Sans:wght@200&display=swap');
+$breakpoint-phone: 480px;
+$breakpoint-tablet: 768px;
+$breakpoint-laptop: 992px;
+$breakpoint-desktop: 1200px;
+$breakpoint-lgdesktop: 1480px;
+@mixin phone($breakpoint-phone) {
+	@media (max-width: $breakpoint-phone) {
+		@content;
+	}
+}
+
+// tablet mixin
+@mixin tablet($breakpoint-phone) {
+	@media (min-width: $breakpoint-phone) and (max-width: $breakpoint-tablet) {
+		@content;
+	}
+}
+// laptop mixin
+@mixin laptop($breakpoint-tablet) {
+	@media (min-width: $breakpoint-tablet) and (max-width: $breakpoint-laptop) {
+		@content;
+	}
+}
+// laptop mixin
+@mixin desktop($breakpoint-laptop) {
+	@media (min-width: $breakpoint-tablet) and (max-width: $breakpoint-laptop) {
+		@content;
+	}
+}
+// laptop mixin
+@mixin lgdesktop($breakpoint-desktop) {
+	@media (min-width: $breakpoint-tablet) and (max-width: $breakpoint-laptop) {
+		@content;
+	}
+}
+// laptop mixin
+@mixin lg($breakpoint-lgdesktop) {
+	@media (min-width: $breakpoint-lgdesktop) {
+		@content;
+	}
+}
 
 .auth_page {
 	flex: 9;
@@ -63,9 +104,9 @@
 			border: none;
 		}
 	}
-	h2 {
+	h2,
+	h3 {
 		color: #eeada3;
-
 		text-shadow: 10px 10px 25px rgb(187, 17, 217),
 			-10px 10px 25px rgb(103, 4, 104),
 			-10px -10px 25px rgb(248, 26, 93),
@@ -75,4 +116,35 @@
 	input:focus {
 		outline-width: 0 !important;
 	}
+}
+
+/* For Mobile phones */
+@include phone($breakpoint-phone) {
+	.form {
+		width: 70% !important;
+
+		padding: -0.7rem;
+		input,
+		label {
+			font-size: 0.7rem;
+		}
+		input {
+			margin-top: -0.12rem !important;
+		}
+		h2 {
+			color: yellow;
+			font-size: 1.3rem !important;
+		}
+		h3 {
+			color: yellow;
+			font-size: 1.2rem !important;
+		}
+		.submit {
+			margin-top: -2rem !important;
+			font-size: 0.9rem !important;
+		}
+	}
+}
+/* For tablets and large phones */
+@include tablet($breakpoint-phone) {
 }

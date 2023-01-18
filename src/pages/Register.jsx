@@ -90,9 +90,9 @@ function Register(props) {
 						error={error}
 					/>
 				)}
-				<h2 style={{ fontWeight: 'bold' }} align="center">
+				<h3 style={{ fontWeight: 'bold' }} align="center">
 					Sign Up To Moviehubz
-				</h2>
+				</h3>
 				<form>
 					<div className="form-group">
 						<label htmlFor="firstname">Firstname</label>
