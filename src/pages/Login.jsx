@@ -35,11 +35,7 @@ function Login(props) {
 	const handleLogin = useCallback(
 		(ev) => {
 			ev.preventDefault();
-			if (
-				userdata?.current?.email &&
-				userdata?.current?.password &&
-				userdata?.current?.confirmpassword
-			) {
+			if (userdata?.current?.email && userdata?.current?.password) {
 				if (
 					userdata?.current?.password ===
 					userdata?.current?.confirmpassword
