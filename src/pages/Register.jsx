@@ -56,7 +56,17 @@ function Register(props) {
 		) {
 			if (adminData?.current?.password.length > 6) {
 				console.log(adminData.current);
-				createAdmin(navigate, main_dispatch, loading, adminData);
+				if (
+					adminData?.current?.password ===
+					adminData?.current?.confirmpassword
+				) {
+					createAdmin(navigate, main_dispatch, loading, adminData);
+				} else {
+					main_dispatch({
+						type: 'WRONGPASSWORD',
+						modalcontent: 'Both Passwords Should Match',
+					});
+				}
 			} else {
 				main_dispatch({
 					type: PASSWORDLENGTH,

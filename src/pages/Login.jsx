@@ -37,25 +37,15 @@ function Login(props) {
 			ev.preventDefault();
 			if (userdata?.current?.email && userdata?.current?.password) {
 				if (
-					userdata?.current?.password ===
-					userdata?.current?.confirmpassword
+					userdata?.current?.email.length > 6 &&
+					userdata?.current?.password.length > 6
 				) {
-					if (
-						userdata?.current?.email.length > 6 &&
-						userdata?.current?.password.length > 6
-					) {
-						adminLogin(navigate, main_dispatch, loading, userdata);
-					} else {
-						main_dispatch({
-							type: 'PASSWORDLENGTH',
-							modalcontent:
-								' Password should be at least 6 characters long',
-						});
-					}
+					adminLogin(navigate, main_dispatch, loading, userdata);
 				} else {
 					main_dispatch({
-						type: 'WRONGPASSWORD',
-						modalcontent: 'Both Passwords Should Match',
+						type: 'PASSWORDLENGTH',
+						modalcontent:
+							' Password should be at least 6 characters long',
 					});
 				}
 			} else {
