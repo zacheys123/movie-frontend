@@ -33,7 +33,7 @@ const LandingPage = () => {
 						<span
 							style={{
 								fontWeight: 'bold ',
-								fontSize: '2.5rem',
+								fontSize: '1.5rem',
 								color: 'cyan',
 							}}
 						>
@@ -47,7 +47,8 @@ const LandingPage = () => {
 						<span style={{ fontWeight: 'bold', color: 'red' }}>
 							Platform{' '}
 						</span>{' '}
-						and Access To Movies and Your Movie Data.With{' '}
+						for Movies And Related Info, and Access To Movies and Your
+						Movie Data.With{' '}
 						<span style={{ fontWeight: 'bold', color: 'pink' }}>
 							MovieHubz{' '}
 						</span>{' '}

@@ -1,5 +1,47 @@
 @import url('https://fonts.googleapis.com/css2?family=Sofia+Sans:wght@200&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Ubuntu');
+$breakpoint-phone: 480px;
+$breakpoint-tablet: 768px;
+$breakpoint-laptop: 992px;
+$breakpoint-desktop: 1200px;
+$breakpoint-lgdesktop: 1480px;
+@mixin phone($breakpoint-phone) {
+	@media (max-width: $breakpoint-phone) {
+		@content;
+	}
+}
+
+// tablet mixin
+@mixin tablet($breakpoint-phone) {
+	@media (min-width: $breakpoint-phone) and (max-width: $breakpoint-tablet) {
+		@content;
+	}
+}
+// laptop mixin
+@mixin laptop($breakpoint-tablet) {
+	@media (min-width: $breakpoint-tablet) and (max-width: $breakpoint-laptop) {
+		@content;
+	}
+}
+// laptop mixin
+@mixin desktop($breakpoint-laptop) {
+	@media (min-width: $breakpoint-tablet) and (max-width: $breakpoint-laptop) {
+		@content;
+	}
+}
+// laptop mixin
+@mixin lgdesktop($breakpoint-desktop) {
+	@media (min-width: $breakpoint-tablet) and (max-width: $breakpoint-laptop) {
+		@content;
+	}
+}
+// laptop mixin
+@mixin lg($breakpoint-lgdesktop) {
+	@media (min-width: $breakpoint-lgdesktop) {
+		@content;
+	}
+}
+
 .landing {
 	background-image: url('../assets/landing.jpg');
 	background-position: center;
@@ -66,4 +108,59 @@
 			padding: 0.6rem;
 		}
 	}
+}
+/* For Mobile phones */
+@include phone($breakpoint-phone) {
+	.head__landing {
+		flex: 0.5 !important;
+		.formd {
+			input {
+				margin-left: 0.8rem;
+				width: 85%;
+				&:not(:first-child) {
+					width: 45%;
+					margin-left: -0.4rem;
+				}
+			}
+			button {
+				padding: 0.2rem;
+				font-size: 0.7rem;
+			}
+		}
+	}
+	.center__landing {
+		margin-right: 1rem;
+		flex: 5 !important;
+		.center {
+			height: 18rem !important;
+			h2 {
+				font-size: 1.2rem;
+				padding: 0.6rem;
+			}
+			span {
+				font-size: 1.39rem;
+			}
+			button {
+				margin-top: 0.41rem !important;
+			}
+		}
+	}
+	.bottom__landing {
+		flex: 2 !important;
+	}
+}
+/* For tablets and large phones */
+@include tablet($breakpoint-phone) {
+}
+/* For tablets and large phones */
+@include laptop($breakpoint-tablet) {
+}
+/* For desktops */
+@include desktop($breakpoint-laptop) {
+}
+/* For large desktops*/
+@include lgdesktop($breakpoint-lgdesktop) {
+}
+/* For large desktops*/
+@include lg($breakpoint-lgdesktop) {
 }
