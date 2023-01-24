@@ -1,5 +1,16 @@
-.profile {
-	flex: 9;
-	background: black;
-	color: white;
+@media screen and (max-device-width: 480px) and (min-device-width: 320px) {
+	.profile {
+		display: flex;
+
+		flex-direction: column !important;
+		overflow-y: auto;
+		min-height: 100vh !important;
+	}
+	.actions > button {
+		margin-top: -1rem !important;
+	}
+	.head__update {
+		margin-top: -1rem !important;
+		margin-bottom: -2.1rem !important;
+	}
 }

@@ -26,6 +26,7 @@ function App() {
 		main_state: { istheme, admin, user },
 		main_dispatch,
 	} = useMainContext();
+
 	const {
 		movie_state: { logged },
 		movie_dispatch,

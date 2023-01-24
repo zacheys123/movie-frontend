@@ -16,6 +16,10 @@ function MainContext({ children }) {
 		userInfo: '',
 		profile: false,
 		user: {},
+		loader: false,
+		disabled: false,
+		disablepass: false,
+		showValidate: false,
 	};
 	const [main_state, main_dispatch] = useReducer(
 		main_reducer,

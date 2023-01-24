@@ -10,6 +10,12 @@ import {
 	CLOSEMODAL,
 	SUCCESS,
 	PROFILE,
+	UPDATE,
+	UPDATE_ERROR,
+	DELETE_USER,
+	DELETE_WAIT,
+	DELETE_ERROR,
+	NO_DATA,
 } from '../action_type';
 export const main_reducer = (state = {}, action) => {
 	switch (action.type) {
@@ -111,6 +117,47 @@ export const main_reducer = (state = {}, action) => {
 				profile: !action.profile,
 			};
 
+		case UPDATE:
+			return {
+				...state,
+				loading: false,
+				success: !action.payload.success,
+				ismodal: !action.payload.ismodal,
+				modalcontent: action.payload.modalcontent,
+				logged: !state.logged,
+			};
+		case UPDATE_ERROR:
+			return {
+				...state,
+				ismodal: !action.ismodal,
+				modalcontent: action.payload,
+				loading: false,
+			};
+		case DELETE_USER:
+			return {
+				...state,
+				ismodal: !action.ismodal,
+				modalcontent: action.payload.modalcontent,
+				loader: true,
+			};
+		case DELETE_ERROR:
+			return {
+				...state,
+				ismodal: !action.ismodal,
+				modalcontent: action.payload,
+				loader: true,
+			};
+		case DELETE_WAIT:
+			return {
+				...state,
+				loader: true,
+			};
+		case NO_DATA:
+			return {
+				...state,
+				ismodal: true,
+				modalcontent: 'Cannot Submit Empty Inputs',
+			};
 		default:
 			return {
 				...state,

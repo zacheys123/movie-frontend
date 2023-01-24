@@ -92,6 +92,9 @@ $breakpoint-lgdesktop: 1480px;
 				font-family: helvetica sans-serif !important;
 				color: rgb(30, 242, 221);
 				font-weight: bold;
+				&:hover {
+					background: rgb(71, 8, 5);
+				}
 			}
 		}
 	}
