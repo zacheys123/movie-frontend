@@ -71,6 +71,7 @@ export const Image_Data = styled.div`
 	img {
 		height: 20rem;
 		width: 20rem;
+		border-radius: 100%;
 	}
 	label {
 		position: absolute;

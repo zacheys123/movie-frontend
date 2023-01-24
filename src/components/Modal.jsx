@@ -4,7 +4,7 @@ const Modal = ({ closemodal, modalcontent, success, error }) => {
 	useEffect(() => {
 		setTimeout(() => {
 			closemodal();
-		}, 5000);
+		}, 3000);
 	}, []);
 	return (
 		<>

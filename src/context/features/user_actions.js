@@ -13,7 +13,10 @@ export const update_user = async (
 ) => {
 	console.log(id);
 	try {
-		let user = await axios.put(`${baseUrl}/user/v2/${id}`, myprof);
+		let user = await axios.put(
+			`${baseUrl}/user/v2/update/${id}`,
+			myprof,
+		);
 		setTimeout(() => {
 			setMainContext({
 				type: 'UPDATE',

@@ -16,6 +16,7 @@ import {
 	DELETE_WAIT,
 	DELETE_ERROR,
 	NO_DATA,
+	SETPASSWORD,
 } from '../action_type';
 export const main_reducer = (state = {}, action) => {
 	switch (action.type) {
@@ -157,6 +158,12 @@ export const main_reducer = (state = {}, action) => {
 				...state,
 				ismodal: true,
 				modalcontent: 'Cannot Submit Empty Inputs',
+			};
+		case SETPASSWORD:
+			return {
+				...state,
+				showValidate: !action.showValidate,
+				disablepass: !action.disablepass,
 			};
 		default:
 			return {

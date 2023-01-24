@@ -24,3 +24,4 @@ export const DELETE_USER = 'DELETEUSER';
 export const DELETE_WAIT = 'DELETE_WAIT';
 export const DELETE_ERROR = 'DELETE_ERROR';
 export const NO_DATA = 'NO_DATA';
+export const SETPASSWORD = 'SETPASSWORD';

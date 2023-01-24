@@ -38,6 +38,11 @@ import {
 	useLocation,
 } from 'react-router-dom';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
+import {
+	WRONGPASSWORD,
+	NO_DATA,
+	SETPASSWORD,
+} from '../../context/action_type';
 const Profile = () => {
 	const [image, setImage] = useState();
 
@@ -53,6 +58,7 @@ const Profile = () => {
 			disabled,
 			disablepass,
 			showValidate,
+			user,
 		},
 		main_dispatch,
 	} = useMainContext();
@@ -85,8 +91,8 @@ const Profile = () => {
 		});
 	};
 
-	const { id } = useParams();
-	// Update function
+	const adm = JSON.parse(window.localStorage.getItem('profile'));
+	const id = adm?.result?._id; // Update function
 	const update_acc = useCallback((ev) => {
 		const myprofile = { prevData, userId: id };
 
@@ -106,10 +112,10 @@ const Profile = () => {
 					navigate,
 				);
 			} else {
-				main_dispatch({ type: 'WRONG_PASSWORD' });
+				main_dispatch({ type: WRONGPASSWORD });
 			}
 		} else {
-			main_dispatch({ type: 'NO_DATA' });
+			main_dispatch({ type: NO_DATA });
 		}
 	}, []);
 
@@ -139,23 +145,23 @@ const Profile = () => {
 
 	// Get User Data
 	const getUserData = async (ev) => {
-		const baseUrl = process.env.REACT_APP_BASE;
+		const baseUrl = 'http://localhost:4000';
 
 		try {
 			const response = await axios.get(`${baseUrl}/user/v2/${id}`);
 			console.log(response?.data);
 			setDataProfile(response?.data);
 			setProf({
-				username: response?.data?.username,
-				email: response?.data?.email,
-				company: response?.data?.company,
-				marital: response?.data?.marital || '',
-				occupation: response?.data?.occupation,
-				city: response?.data?.city,
-				package: response?.data?.package,
-				company: response?.data?.company,
-				password: response?.data?.password,
-				confirmpassword: response?.data?.password,
+				username: response?.data?.result?.username,
+				email: response?.data?.result?.email,
+				company: response?.data?.result?.company,
+				marital: response?.data?.result?.marital || '',
+				occupation: response?.data?.result?.occupation,
+				city: response?.data?.result?.city,
+				package: response?.data?.result?.package,
+				company: response?.data?.result?.company,
+				password: response?.data?.result?.password,
+				confirmpassword: response?.data?.result?.password,
 			});
 			setImage(response?.data?.profilepicture);
 		} catch (error) {
@@ -555,7 +561,7 @@ const Profile = () => {
 							variant="outlined"
 							onClick={() => {
 								main_dispatch({
-									type: 'SETPASSWORD',
+									type: SETPASSWORD,
 									showValidate,
 									disablepass,
 								});
@@ -674,7 +680,7 @@ const Profile = () => {
 							className="actions"
 						>
 							<Button
-								disabled={loading || !disable}
+								disabled={loading || disable}
 								onClick={update_acc}
 								variant="outlined"
 								sx={{
