@@ -293,8 +293,9 @@ const ConfirmData = () => {
 							Amateur
 						</h5>
 						<Typography variant="body">
-							In this Amateur plan more functionality is added to this
-							plan and packages to use,
+							In this Amateur plan not much functionality is added to
+							this plan and packages to use,but you can add movie than
+							two movies at a time
 						</Typography>
 						<div id="table">
 							<div className="row">
@@ -311,7 +312,7 @@ const ConfirmData = () => {
 									Add 2 movies once{' '}
 								</div>
 								<div className="col-lg-2 col-md-2 col-sm-2">
-									&times;
+									&#x2713;
 								</div>
 							</div>
 							<div className="row">
@@ -384,7 +385,8 @@ const ConfirmData = () => {
 						</h5>
 						<Typography variant="body">
 							In this World Class offering all functionalities to
-							games, enjoy this plan and packages ,
+							movies, enjoy this plan and packages ,view and add
+							suggested movies
 						</Typography>
 						<div id="table">
 							<div className="row">
@@ -474,11 +476,12 @@ const ConfirmData = () => {
 						</h5>
 						<Typography
 							variant="subtitle"
-							sx={{ fontSize: '.6rem !important' }}
+							sx={{ fontSize: '.8rem !important' }}
 						>
-							In this Premium plan all functionalities,games and all
+							In this Premium plan all functionalities,movies and all
 							updates are done in this plan.Enjoy all premium
-							functions from our package
+							functions from our package,access latest movies from
+							netflix ,hulu,HBO as soon as they are released
 						</Typography>
 						<div id="table" className="prem">
 							<div className="row">
@@ -582,7 +585,8 @@ const ConfirmData = () => {
 						<Box>
 							<span>
 								Welcome {user?.result?.username} to{' '}
-								<span style={{ color: 'yellow' }}> Gamehubz</span>,You
+								<span style={{ color: 'yellow' }}> MovieHubz</span>
+								,You
 								<h2>{res}</h2> <h4>({userInfo})</h4>.You can always
 								upgrade your plan when you click on user settings.
 							</span>
