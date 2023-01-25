@@ -14,13 +14,17 @@ const LandingPage = () => {
 		main_dispatch,
 	} = useMainContext();
 	const navigate = useNavigate();
-
+	const [val, setVal] = React.useState('');
 	return (
 		<div className="landing">
 			<Box className="head__landing">
 				<form className="formd">
 					<div className="form-group">
-						<input type="text" disabled value={user?.result?.email} />
+						<input
+							type="text"
+							disabled
+							value={user?.result?.email || val}
+						/>
 					</div>
 					<input type="text" placeholder="leave a comment" />
 					<Button size="small" variant="contained" type="submit">

@@ -17,7 +17,7 @@ https://moviebackendz.onrender.com/register`,
 
 		setTimeout(() => {
 			setTimeout(() => {
-				navigate('/');
+				navigate('/create/plan');
 				window.location.reload();
 			}, 3000);
 			window.localStorage.setItem(

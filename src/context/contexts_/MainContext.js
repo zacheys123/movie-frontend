@@ -20,6 +20,9 @@ function MainContext({ children }) {
 		disabled: false,
 		disablepass: false,
 		showValidate: false,
+		res: '',
+		loader: false,
+		isplan: false,
 	};
 	const [main_state, main_dispatch] = useReducer(
 		main_reducer,

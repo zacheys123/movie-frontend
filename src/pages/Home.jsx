@@ -22,6 +22,8 @@ import Modal from '../components/Modal';
 import axios from 'axios';
 import { createMovie } from '../context/features/movieSlice';
 import { MOVIES } from '../context/action_type';
+import Movietwo from './Movietwo';
+import MovieThree from './Movie3';
 import { motion } from 'framer-motion';
 import { useQuery } from '@tanstack/react-query';
 const Feed = () => {
@@ -54,6 +56,9 @@ const Feed = () => {
 			error,
 			modalcontent,
 			logged,
+			one_movie,
+			two_movie,
+			three_movie,
 		},
 		movie_dispatch,
 	} = useMovieContext();
@@ -136,378 +141,384 @@ const Feed = () => {
 	return (
 		<div className="feed">
 			<Box className="feed__movies">
-				<Form onSubmit={createMovies} className="formd">
-					{ismodalhome ? (
-						<Modal
-							modalcontent={modalcontent}
-							closemodal={closemodal}
-							error={error}
-							success={success}
-						/>
-					) : (
-						<Box className="d-flex justify-content-between align-items-center">
-							{!showtable ? (
-								<h4 className="h4">New Movie Entry!!</h4>
-							) : (
-								''
-							)}
-							{!showtable && (
-								<Box className="tabular">
-									<Table
-										onClick={() => setShowtable((prev) => !prev)}
-									/>
-									<span onClick={() => setShowtable((prev) => !prev)}>
-										View Movies
-									</span>
-								</Box>
-							)}
-						</Box>
-					)}
-
-					<div className="row">
-						<div className="col-md-12 select mx-2">
-							<Form.Select
-								size="sm"
-								name="user"
-								value={movie.user}
-								onChange={handleChange}
-							>
-								{users &&
-									users.map((data) => {
-										return (
-											<option
-												key={data._id}
-												value={data.username || 'New User'}
-											>
-												{data.username}
-											</option>
-										);
-									})}
-							</Form.Select>
-						</div>
-						<Form.Group className="row movie">
-							<div className="col">
-								<Form.Control
-									value={movie.movie_name}
-									onChange={handleChange}
-									className="form__inputs mx-2"
-									type="text"
-									name="movie_name"
-									placeholder="Enter movie"
-								/>
-							</div>
-							<div className="col">
-								<Form.Control
-									value={movie.season}
-									onChange={handleChange}
-									className="form__inputs mx-2"
-									type="text"
-									name="season"
-									placeholder="Enter season "
-								/>
-							</div>
-						</Form.Group>
-						<Form.Group className="row movie">
-							<div className="col">
-								<Form.Control
-									className="form__inputs mx-2"
-									value={movie.episodes}
-									onChange={handleChange}
-									type="text"
-									name="episodes"
-									placeholder="Number of Episodes"
-								/>
-							</div>
-							<div className="col">
-								<Form.Control
-									className="form__inputs mx-2"
-									value={movie.customer_name}
-									onChange={handleChange}
-									type="text"
-									name="customer_name"
-									placeholder="Enter customer name"
-								/>
-							</div>
-						</Form.Group>
-						<Form.Group className="movie">
-							<div className="col">
-								<div className="col mx-3 genres">
-									<Button
-										onClick={() =>
-											movie_dispatch({ type: GENRE, isgenre })
-										}
-										variant="contained"
-									>
-										<span className="genre">
-											<span>Genre </span>
-											{!isgenre ? (
-												<KeyboardArrowDownIcon />
-											) : (
-												<KeyboardArrowUpIcon />
-											)}
+				{one_movie && (
+					<Form onSubmit={createMovies} className="formd">
+						{ismodalhome ? (
+							<Modal
+								modalcontent={modalcontent}
+								closemodal={closemodal}
+								error={error}
+								success={success}
+							/>
+						) : (
+							<Box className="d-flex justify-content-between align-items-center">
+								{!showtable ? (
+									<h4 className="h4">New Movie Entry!!</h4>
+								) : (
+									''
+								)}
+								{!showtable && (
+									<Box className="tabular">
+										<Table
+											onClick={() => setShowtable((prev) => !prev)}
+										/>
+										<span
+											onClick={() => setShowtable((prev) => !prev)}
+										>
+											View Movies
 										</span>
-									</Button>
-								</div>
-								<div className="col ">
+									</Box>
+								)}
+							</Box>
+						)}
+
+						<div className="row">
+							<div className="col-md-12 select mx-2">
+								<Form.Select
+									size="sm"
+									name="user"
+									value={movie.user}
+									onChange={handleChange}
+								>
+									{users &&
+										users.map((data) => {
+											return (
+												<option
+													key={data._id}
+													value={data.username || 'New User'}
+												>
+													{data.username}
+												</option>
+											);
+										})}
+								</Form.Select>
+							</div>
+							<Form.Group className="row movie">
+								<div className="col">
 									<Form.Control
-										disabled
-										className="form__inputs"
-										value={movie.genre}
-										type="text"
+										value={movie.movie_name}
 										onChange={handleChange}
-										name="genre"
+										className="form__inputs mx-2"
+										type="text"
+										name="movie_name"
+										placeholder="Enter movie"
+									/>
+								</div>
+								<div className="col">
+									<Form.Control
+										value={movie.season}
+										onChange={handleChange}
+										className="form__inputs mx-2"
+										type="text"
+										name="season"
+										placeholder="Enter season "
+									/>
+								</div>
+							</Form.Group>
+							<Form.Group className="row movie">
+								<div className="col">
+									<Form.Control
+										className="form__inputs mx-2"
+										value={movie.episodes}
+										onChange={handleChange}
+										type="text"
+										name="episodes"
+										placeholder="Number of Episodes"
+									/>
+								</div>
+								<div className="col">
+									<Form.Control
+										className="form__inputs mx-2"
+										value={movie.customer_name}
+										onChange={handleChange}
+										type="text"
+										name="customer_name"
+										placeholder="Enter customer name"
+									/>
+								</div>
+							</Form.Group>
+							<Form.Group className="movie">
+								<div className="col">
+									<div className="col mx-3 genres">
+										<Button
+											onClick={() =>
+												movie_dispatch({ type: GENRE, isgenre })
+											}
+											variant="contained"
+										>
+											<span className="genre">
+												<span>Genre </span>
+												{!isgenre ? (
+													<KeyboardArrowDownIcon />
+												) : (
+													<KeyboardArrowUpIcon />
+												)}
+											</span>
+										</Button>
+									</div>
+									<div className="col ">
+										<Form.Control
+											disabled
+											className="form__inputs"
+											value={movie.genre}
+											type="text"
+											onChange={handleChange}
+											name="genre"
+										/>
+									</div>
+								</div>
+							</Form.Group>
+
+							<div className="row amount1">
+								<div className="col amount">
+									<Form.Label htmlFor="amount">
+										Amount Owed:{' '}
+									</Form.Label>
+									&nbsp;
+									<Form.Control
+										className="form__inputs"
+										type="number"
+										name="amount"
+										value={movie.amount}
+										onChange={handleChange}
+										placeholder=""
 									/>
 								</div>
 							</div>
-						</Form.Group>
-
-						<div className="row amount1">
-							<div className="col amount">
-								<Form.Label htmlFor="amount">
-									Amount Owed:{' '}
-								</Form.Label>
-								&nbsp;
-								<Form.Control
-									className="form__inputs"
-									type="number"
-									name="amount"
-									value={movie.amount}
-									onChange={handleChange}
-									placeholder=""
-								/>
+							<div className="amount1">
+								<div className="col amount">
+									<Form.Label htmlFor="amountpaid">
+										AmountPaid:{' '}
+									</Form.Label>
+									&nbsp;&nbsp;&nbsp;&nbsp;
+									<Form.Control
+										name="paid"
+										value={movie.paid}
+										onChange={handleChange}
+										className="form__inputs"
+										type="number"
+									/>
+								</div>
 							</div>
 						</div>
-						<div className="amount1">
-							<div className="col amount">
-								<Form.Label htmlFor="amountpaid">
-									AmountPaid:{' '}
-								</Form.Label>
-								&nbsp;&nbsp;&nbsp;&nbsp;
-								<Form.Control
-									name="paid"
-									value={movie.paid}
-									onChange={handleChange}
-									className="form__inputs"
-									type="number"
-								/>
-							</div>
-						</div>
-					</div>
-					<Button
-						type="submit"
-						variant="outlined"
-						className="submit"
-						color="secondary"
-					>
-						{loading ? 'Adding Movie...' : 'Entry Movie'}
-					</Button>
-					{isgenre && (
-						<Box className="genre__list">
-							<div className="row">
-								<div className="col">
-									<p></p>
-									<p
-										onClick={() => {
-											movie_dispatch({ type: GENRE, isgenre });
-											setMovie((prev) => {
-												return { ...prev, genre: 'Action' };
-											});
-										}}
-									>
-										Action
-									</p>
-									<p
-										onClick={() => {
-											movie_dispatch({ type: GENRE, isgenre });
-											setMovie((prev) => {
-												return { ...prev, genre: 'Anime' };
-											});
-										}}
-									>
-										Anime
-									</p>
-									<p
-										onClick={() => {
-											movie_dispatch({ type: GENRE, isgenre });
-											setMovie((prev) => {
-												return { ...prev, genre: 'Children' };
-											});
-										}}
-									>
-										Children & Family
-									</p>
-									<p
-										onClick={() => {
-											movie_dispatch({ type: GENRE, isgenre });
-											setMovie((prev) => {
-												return { ...prev, genre: 'Classic' };
-											});
-										}}
-									>
-										Classics
-									</p>
-									<p
-										onClick={() => {
-											movie_dispatch({ type: GENRE, isgenre });
-											setMovie((prev) => {
-												return { ...prev, genre: 'Comedies' };
-											});
-										}}
-									>
-										Comedies
-									</p>
-									<p
-										onClick={() => {
-											movie_dispatch({ type: GENRE, isgenre });
-											setMovie((prev) => {
-												return { ...prev, genre: 'Drama' };
-											});
-										}}
-									>
-										Drama
-									</p>
-								</div>
-								<div className="col">
-									<p></p>
-									<p
-										onClick={() => {
-											movie_dispatch({ type: GENRE, isgenre });
-											setMovie((prev) => {
-												return { ...prev, genre: 'Hollywood' };
-											});
-										}}
-									>
-										HollyWood
-									</p>
-									<p
-										onClick={() => {
-											movie_dispatch({ type: GENRE, isgenre });
-											setMovie((prev) => {
-												return { ...prev, genre: 'Horror' };
-											});
-										}}
-									>
-										Horror
-									</p>
-									<p
-										onClick={() => {
-											movie_dispatch({ type: GENRE, isgenre });
-											setMovie((prev) => {
-												return { ...prev, genre: 'Independent' };
-											});
-										}}
-									>
-										Independent
-									</p>
-									<p
-										onClick={() => {
-											movie_dispatch({ type: GENRE, isgenre });
-											setMovie((prev) => {
-												return { ...prev, genre: 'Indian' };
-											});
-										}}
-									>
-										Indian
-									</p>
-									<p
-										onClick={() => {
-											movie_dispatch({ type: GENRE, isgenre });
-											setMovie((prev) => {
-												return { ...prev, genre: 'Kenyan' };
-											});
-										}}
-									>
-										Kenyan
-									</p>
-									<p
-										onClick={() => {
-											movie_dispatch({ type: GENRE, isgenre });
-											setMovie((prev) => {
-												return { ...prev, genre: 'Nollywood' };
-											});
-										}}
-									>
-										NollyWood
-									</p>
-								</div>
-								<div className="col">
-									<p></p>
-									<p
-										onClick={() => {
-											movie_dispatch({ type: GENRE, isgenre });
-											setMovie((prev) => {
-												return { ...prev, genre: 'Romance' };
-											});
-										}}
-									>
-										Romance
-									</p>
-									<p
-										onClick={() => {
-											movie_dispatch({ type: GENRE, isgenre });
-											setMovie((prev) => {
-												return { ...prev, genre: 'Scifi' };
-											});
-										}}
-									>
-										Scifi
-									</p>
+						<Button
+							type="submit"
+							variant="outlined"
+							className="submit"
+							color="secondary"
+						>
+							{loading ? 'Adding Movie...' : 'Entry Movie'}
+						</Button>
+						{isgenre && (
+							<Box className="genre__list">
+								<div className="row">
+									<div className="col">
+										<p></p>
+										<p
+											onClick={() => {
+												movie_dispatch({ type: GENRE, isgenre });
+												setMovie((prev) => {
+													return { ...prev, genre: 'Action' };
+												});
+											}}
+										>
+											Action
+										</p>
+										<p
+											onClick={() => {
+												movie_dispatch({ type: GENRE, isgenre });
+												setMovie((prev) => {
+													return { ...prev, genre: 'Anime' };
+												});
+											}}
+										>
+											Anime
+										</p>
+										<p
+											onClick={() => {
+												movie_dispatch({ type: GENRE, isgenre });
+												setMovie((prev) => {
+													return { ...prev, genre: 'Children' };
+												});
+											}}
+										>
+											Children & Family
+										</p>
+										<p
+											onClick={() => {
+												movie_dispatch({ type: GENRE, isgenre });
+												setMovie((prev) => {
+													return { ...prev, genre: 'Classic' };
+												});
+											}}
+										>
+											Classics
+										</p>
+										<p
+											onClick={() => {
+												movie_dispatch({ type: GENRE, isgenre });
+												setMovie((prev) => {
+													return { ...prev, genre: 'Comedies' };
+												});
+											}}
+										>
+											Comedies
+										</p>
+										<p
+											onClick={() => {
+												movie_dispatch({ type: GENRE, isgenre });
+												setMovie((prev) => {
+													return { ...prev, genre: 'Drama' };
+												});
+											}}
+										>
+											Drama
+										</p>
+									</div>
+									<div className="col">
+										<p></p>
+										<p
+											onClick={() => {
+												movie_dispatch({ type: GENRE, isgenre });
+												setMovie((prev) => {
+													return { ...prev, genre: 'Hollywood' };
+												});
+											}}
+										>
+											HollyWood
+										</p>
+										<p
+											onClick={() => {
+												movie_dispatch({ type: GENRE, isgenre });
+												setMovie((prev) => {
+													return { ...prev, genre: 'Horror' };
+												});
+											}}
+										>
+											Horror
+										</p>
+										<p
+											onClick={() => {
+												movie_dispatch({ type: GENRE, isgenre });
+												setMovie((prev) => {
+													return { ...prev, genre: 'Independent' };
+												});
+											}}
+										>
+											Independent
+										</p>
+										<p
+											onClick={() => {
+												movie_dispatch({ type: GENRE, isgenre });
+												setMovie((prev) => {
+													return { ...prev, genre: 'Indian' };
+												});
+											}}
+										>
+											Indian
+										</p>
+										<p
+											onClick={() => {
+												movie_dispatch({ type: GENRE, isgenre });
+												setMovie((prev) => {
+													return { ...prev, genre: 'Kenyan' };
+												});
+											}}
+										>
+											Kenyan
+										</p>
+										<p
+											onClick={() => {
+												movie_dispatch({ type: GENRE, isgenre });
+												setMovie((prev) => {
+													return { ...prev, genre: 'Nollywood' };
+												});
+											}}
+										>
+											NollyWood
+										</p>
+									</div>
+									<div className="col">
+										<p></p>
+										<p
+											onClick={() => {
+												movie_dispatch({ type: GENRE, isgenre });
+												setMovie((prev) => {
+													return { ...prev, genre: 'Romance' };
+												});
+											}}
+										>
+											Romance
+										</p>
+										<p
+											onClick={() => {
+												movie_dispatch({ type: GENRE, isgenre });
+												setMovie((prev) => {
+													return { ...prev, genre: 'Scifi' };
+												});
+											}}
+										>
+											Scifi
+										</p>
 
-									<p
-										onClick={() => {
-											movie_dispatch({ type: GENRE, isgenre });
-											setMovie((prev) => {
-												return { ...prev, genre: 'Sports' };
-											});
-										}}
-									>
-										Sporty
-									</p>
-									<p
-										onClick={() => {
-											movie_dispatch({ type: GENRE, isgenre });
-											setMovie((prev) => {
-												return { ...prev, genre: 'Fantasy' };
-											});
-										}}
-									>
-										Fantasy
-									</p>
-									<p
-										onClick={() => {
-											movie_dispatch({ type: GENRE, isgenre });
-											setMovie((prev) => {
-												return { ...prev, genre: 'Thriller' };
-											});
-										}}
-									>
-										Thriller
-									</p>
-									<p
-										onClick={() => {
-											movie_dispatch({ type: GENRE, isgenre });
-											setMovie((prev) => {
-												return { ...prev, genre: 'Dramedy' };
-											});
-										}}
-									>
-										Dramedy
-									</p>
-									<p
-										onClick={() => {
-											movie_dispatch({ type: GENRE, isgenre });
-											setMovie((prev) => {
-												return { ...prev, genre: 'Dramedy' };
-											});
-										}}
-									>
-										Medical
-									</p>
+										<p
+											onClick={() => {
+												movie_dispatch({ type: GENRE, isgenre });
+												setMovie((prev) => {
+													return { ...prev, genre: 'Sports' };
+												});
+											}}
+										>
+											Sporty
+										</p>
+										<p
+											onClick={() => {
+												movie_dispatch({ type: GENRE, isgenre });
+												setMovie((prev) => {
+													return { ...prev, genre: 'Fantasy' };
+												});
+											}}
+										>
+											Fantasy
+										</p>
+										<p
+											onClick={() => {
+												movie_dispatch({ type: GENRE, isgenre });
+												setMovie((prev) => {
+													return { ...prev, genre: 'Thriller' };
+												});
+											}}
+										>
+											Thriller
+										</p>
+										<p
+											onClick={() => {
+												movie_dispatch({ type: GENRE, isgenre });
+												setMovie((prev) => {
+													return { ...prev, genre: 'Dramedy' };
+												});
+											}}
+										>
+											Dramedy
+										</p>
+										<p
+											onClick={() => {
+												movie_dispatch({ type: GENRE, isgenre });
+												setMovie((prev) => {
+													return { ...prev, genre: 'Dramedy' };
+												});
+											}}
+										>
+											Medical
+										</p>
+									</div>
 								</div>
-							</div>
-						</Box>
-					)}
-				</Form>
+							</Box>
+						)}
+					</Form>
+				)}
+				{two_movie && <Movietwo />}
+				{three_movie && <MovieThree />}
 				<Box
 					className={!showtable ? 'movie__list' : 'movie__listphone'}
 				>

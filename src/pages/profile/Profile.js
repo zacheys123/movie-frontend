@@ -28,7 +28,7 @@ import {
 	update_user,
 	delete_user,
 } from '../../context/features/user_actions';
-import './profile.css';
+import './profile.scss';
 import Modal from '../../components/Modal';
 import EditIcon from '@mui/icons-material/Edit';
 import {
@@ -58,7 +58,7 @@ const Profile = () => {
 			disabled,
 			disablepass,
 			showValidate,
-			user,
+			logged,
 		},
 		main_dispatch,
 	} = useMainContext();
@@ -145,7 +145,7 @@ const Profile = () => {
 
 	// Get User Data
 	const getUserData = async (ev) => {
-		const baseUrl = 'http://localhost:4000';
+		const baseUrl = 'https://moviebackendz.onrender.com';
 
 		try {
 			const response = await axios.get(`${baseUrl}/user/v2/${id}`);
@@ -195,13 +195,19 @@ const Profile = () => {
 
 	React.useEffect(() => {
 		getUserData();
-	}, []);
+	}, [logged]);
 
 	return (
-		<Stack sx={{ background: 'white', minHeight: '85vh !important' }}>
+		<Stack
+			sx={{
+				background: 'white',
+				minHeight: '85vh !important',
+				width: '100%',
+			}}
+		>
 			<MainStack className="profile">
-				<Left_Bar>
-					<Image_Data>
+				<Left_Bar className="profile_left">
+					<Image_Data className="profile_image">
 						<h4>Change Profile Picture</h4>
 						<Box
 							sx={{
@@ -210,6 +216,7 @@ const Profile = () => {
 								background: 'rgb(20, 22, 52)',
 								marginBottom: '2.6rem',
 							}}
+							className="dp_picture"
 						>
 							<img src={logo} />
 							<span>
@@ -680,7 +687,7 @@ const Profile = () => {
 							className="actions"
 						>
 							<Button
-								disabled={loading || disable}
+								disabled={loading}
 								onClick={update_acc}
 								variant="outlined"
 								sx={{

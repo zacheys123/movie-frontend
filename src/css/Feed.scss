@@ -151,9 +151,14 @@ $breakpoint-lgdesktop: 1480px;
 					padding: 0.15rem;
 					width: 7rem;
 				}
+				.col {
+					border: none !important;
+				}
 			}
 			.amount {
 				display: flex;
+
+				border: none !important;
 				align-items: center;
 				.form__inputs {
 					width: 14rem !important;

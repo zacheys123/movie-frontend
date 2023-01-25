@@ -12,6 +12,9 @@ import {
 	LOGGED,
 	REFRESH,
 	EMPTYHOME,
+	RECORD_ONE,
+	RECORD_TWO,
+	RECORD_THREE,
 } from '../action_type';
 export const initialState = {
 	isgenre: false,
@@ -26,6 +29,9 @@ export const initialState = {
 	errorm: false,
 	newuser: [],
 	logged: false,
+	one_movie: false,
+	two_movie: false,
+	three_movie: false,
 };
 export const moviereducer = (state = initialState, action) => {
 	switch (action.type) {
@@ -122,6 +128,27 @@ export const moviereducer = (state = initialState, action) => {
 			return {
 				...state,
 				logged: !action.logged,
+			};
+		case RECORD_ONE:
+			return {
+				...state,
+				one_movie: true,
+				two_movie: false,
+				three_movie: false,
+			};
+		case RECORD_TWO:
+			return {
+				...state,
+				one_movie: false,
+				two_movie: true,
+				three_movie: false,
+			};
+		case RECORD_THREE:
+			return {
+				...state,
+				one_movie: false,
+				two_movie: false,
+				three_movie: true,
 			};
 	}
 };

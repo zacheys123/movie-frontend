@@ -1,5 +1,14 @@
 import axios from 'axios';
-const baseUrl = process.env.REACT_APP_BASE;
+import {
+	UPDATE,
+	UPDATE_ERROR,
+	DELETE_USER,
+	DELETE_WAIT,
+	DELETE_ERROR,
+	LOADING,
+	PLAN,
+} from '../action_type';
+const baseUrl = 'https://moviebackendz.onrender.com';
 
 export const update_user = async (
 	setMainContext,
@@ -8,8 +17,6 @@ export const update_user = async (
 	id,
 	ismodal,
 	success,
-	navigate,
-	refetch,
 ) => {
 	console.log(id);
 	try {
@@ -18,8 +25,9 @@ export const update_user = async (
 			myprof,
 		);
 		setTimeout(() => {
+			setMainContext({ type: LOADING });
 			setMainContext({
-				type: 'UPDATE',
+				type: UPDATE,
 				payload: {
 					loading,
 					success,
@@ -28,16 +36,14 @@ export const update_user = async (
 					modalcontent: 'Data Succesfully Updated',
 				},
 			});
-
 			setTimeout(() => {
-				refetch();
 				window.location.reload();
-			}, 5000);
+			}, 2000);
 		}, 3000);
-		setMainContext({ type: 'UPDATE_LOADING' });
+		setMainContext({ type: LOADING });
 	} catch (error) {
 		setMainContext({
-			type: 'UPDATE_ERROR',
+			type: UPDATE_ERROR,
 			payload: error.response.data || error.message,
 		});
 	}
@@ -60,7 +66,7 @@ export const delete_user = async (
 
 		setTimeout(() => {
 			setMainContext({
-				type: 'DELETE_USER',
+				type: DELETE_USER,
 				payload: {
 					loader,
 					success,
@@ -71,16 +77,60 @@ export const delete_user = async (
 			});
 			setTimeout(() => {
 				window.localStorage.removeItem('profile');
-				navigate('/register');
 				window.location.reload();
 			}, 4000);
 		}, 3000);
-		setMainContext({ type: 'DELETE_WAIT' });
+		setMainContext({ type: DELETE_WAIT });
 	} catch (error) {
 		console.log(error);
 		setMainContext({
-			type: 'DELETE_ERROR',
+			type: DELETE_ERROR,
 			payload: error.response.data || error.message,
 		});
+	}
+};
+
+export const createPlan = async (
+	plan,
+	navigate,
+	loading,
+	setMainContext,
+) => {
+	try {
+		if (plan.userId) {
+			if (plan?.free?.length > 0) {
+				console.log(plan?.free);
+				const response = await axios.put(
+					`${baseUrl}/user/v2/package/${plan.userId}`,
+					plan,
+				);
+				console.log(response?.data?.result);
+
+				setTimeout(() => {
+					setMainContext({ type: LOADING });
+					setMainContext({
+						type: PLAN,
+						res: response?.data?.message,
+						userInfo: plan?.free,
+					});
+
+					window.localStorage.setItem(
+						'userInfo',
+						JSON.stringify(plan?.free),
+					);
+				}, 6000);
+
+				setMainContext({ type: LOADING });
+			} else {
+				console.log('No Value Entered');
+			}
+		} else {
+			console.log('No UserId');
+		}
+	} catch (error) {
+		setTimeout(() => {
+			navigate('/create/plan');
+		}, 2000);
+		setMainContext({ type: LOADING });
 	}
 };

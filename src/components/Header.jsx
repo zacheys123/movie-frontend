@@ -9,7 +9,18 @@ import { Box, IconButton, Avatar, Button } from '@mui/material';
 import { Menu, DarkMode, WbSunny } from '@mui/icons-material';
 import { useMainContext } from '../context/contexts_/MainContext';
 import { useMovieContext } from '../context/contexts_/MovieContext';
-import { Refresh, Settings, Logout } from '@mui/icons-material';
+import {
+	Refresh,
+	Settings,
+	Logout,
+	Upgrade,
+} from '@mui/icons-material';
+import {
+	setFree,
+	setAmateur,
+	setWorld,
+	setPremium,
+} from './plan/movie_config';
 import { useNavigate, Link } from 'react-router-dom';
 import {
 	PROFILE,
@@ -57,7 +68,9 @@ const Header = () => {
 
 	const usernameref = useRef(null);
 	const phoneref = useRef(null);
-	const suggestedref = useRef(null);
+	const suggestedref = useRef();
+	const suggestref = useRef(null);
+	const latestref = useRef(null);
 
 	// add a new user to add movies
 	const addNewUser = useCallback((ev) => {
@@ -84,7 +97,7 @@ const Header = () => {
 
 	const removeuser = async (myid) => {
 		await axios.delete(
-			`http://localhost:4000/movie/remove/${myid}`,
+			`https://moviebackendz.onrender.com/movie/remove/${myid}`,
 			myid,
 		);
 		movie_dispatch({
@@ -92,6 +105,26 @@ const Header = () => {
 			payload: user?.result?.users,
 		});
 	};
+	const myInfo = JSON.parse(window.localStorage.getItem('userInfo'));
+
+	const refs = {
+		suggestref,
+		latestref,
+	};
+
+	useEffect(() => {
+		switch (myInfo) {
+			case 'Free':
+				setFree(refs);
+			case 'Amateur':
+				setAmateur(refs);
+			case 'World':
+				setWorld(refs);
+			case 'Premium':
+				setPremium(refs);
+		}
+	}, []);
+
 	return (
 		<div className="header">
 			{showform && (
@@ -196,6 +229,7 @@ const Header = () => {
 					popular movies
 				</Button>{' '}
 				<Button
+					ref={suggestref}
 					className={adm ? 'header' : 'disabled'}
 					variant="outlined"
 					size="small"
@@ -333,6 +367,7 @@ const Header = () => {
 					</motion.div>
 				)}
 				<Button
+					ref={latestref}
 					className={adm ? 'header' : 'disabled'}
 					variant="outlined"
 					size="small"
@@ -417,7 +452,7 @@ const Header = () => {
 						<Box className="d-flex flex-column position-absolute bg-dark prof">
 							<Button
 								variant="outlined"
-								siz="small"
+								size="small"
 								onClick={() => {
 									main_dispatch({ type: PROFILE, profile });
 									navigate(`/profile/${admId}`);
@@ -430,13 +465,29 @@ const Header = () => {
 							</Button>
 							<Button
 								variant="outlined"
-								span
 								onClick={() => window.location.reload()}
 							>
 								<span onClick={() => window.location.reload()}>
 									<Refresh sx={{ fontSize: '.8rem' }} />
 								</span>
 								Refresh
+							</Button>
+							<Button
+								variant="outlined"
+								onClick={() => {
+									navigate('/create/plan');
+									window.location.reload();
+								}}
+							>
+								<span
+									onClick={() => {
+										navigate('//create/plan');
+										window.location.reload();
+									}}
+								>
+									<Upgrade sx={{ fontSize: '.8rem' }} />
+								</span>
+								Upgrade package
 							</Button>
 							<Button variant="outlined" onClick={logout}>
 								<span>

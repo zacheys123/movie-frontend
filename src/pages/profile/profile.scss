@@ -1,0 +1,45 @@
+@media screen and (max-device-width: 480px) and (min-device-width: 320px) {
+	.profile {
+		display: flex;
+
+		flex-direction: column !important;
+		overflow-y: auto;
+		min-height: 100vh !important;
+	}
+	.actions > button {
+		margin-top: -1rem !important;
+	}
+	.head__update {
+		margin-top: -1rem !important;
+		margin-bottom: -2.1rem !important;
+	}
+	.profile_image label {
+		right: 4rem !important;
+	}
+	.profile_image {
+		display: flex !important;
+		justify-content: center !important;
+		align-items: center !important;
+	}
+	img {
+		margin-left: 2rem;
+	}
+}
+@media screen and (max-device-width: 1024px) and (min-device-width: 768px) {
+	.profile {
+		overflow-y: auto !important;
+		min-height: 65vh !important;
+	}
+	img {
+		// height: 20rem !important;
+		// width: 20rem !important;
+		border-radius: 100% !important;
+	}
+	.actions > button {
+		margin-top: 3rem !important;
+	}
+	.head__update {
+		margin-top: 2rem !important;
+		margin-bottom: -1.1rem !important;
+	}
+}

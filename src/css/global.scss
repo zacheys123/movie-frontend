@@ -1,0 +1,8 @@
+.active {
+	pointer-events: visible !important;
+	opacity: 1 !important;
+}
+.remove-active {
+	pointer-events: none !important;
+	opacity: 0.4 !important;
+}

@@ -15,7 +15,11 @@ import {
 	DELETE_USER,
 	DELETE_WAIT,
 	DELETE_ERROR,
+	LOGOUT,
 	NO_DATA,
+	PLAN,
+	UNPLAN,
+	PLAN_ERROR,
 	SETPASSWORD,
 } from '../action_type';
 export const main_reducer = (state = {}, action) => {
@@ -97,7 +101,7 @@ export const main_reducer = (state = {}, action) => {
 				...state,
 				admin: action.payload.admin,
 			};
-		case 'LOGOUT':
+		case LOGOUT:
 			return {
 				...state,
 				ismodal: true,
@@ -110,7 +114,7 @@ export const main_reducer = (state = {}, action) => {
 		case LOADING:
 			return {
 				...state,
-				loading: !action.loading,
+				loading: !state.loading,
 			};
 		case PROFILE:
 			return {
@@ -121,7 +125,7 @@ export const main_reducer = (state = {}, action) => {
 		case UPDATE:
 			return {
 				...state,
-				loading: false,
+
 				success: !action.payload.success,
 				ismodal: !action.payload.ismodal,
 				modalcontent: action.payload.modalcontent,
@@ -164,6 +168,26 @@ export const main_reducer = (state = {}, action) => {
 				...state,
 				showValidate: !action.showValidate,
 				disablepass: !action.disablepass,
+			};
+		case PLAN:
+			return {
+				...state,
+				res: action.res,
+				loading: false,
+				isplan: true,
+				userInfo: action.userInfo,
+			};
+
+		case UNPLAN:
+			return {
+				...state,
+				isplan: !action.loading,
+			};
+
+		case PLAN_ERROR:
+			return {
+				...state,
+				loading: true,
 			};
 		default:
 			return {

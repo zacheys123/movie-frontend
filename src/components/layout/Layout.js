@@ -1,17 +1,81 @@
 import { useRef, useState, useEffect } from 'react';
 import Header from '../Header';
 import Footer from '../Footer';
-import { Box } from '@mui/material';
-
+import { Box, Button } from '@mui/material';
+import { useLocation } from 'react-router-dom';
 import './Layout.scss';
+import { useMovieContext } from '../../context/contexts_/MovieContext';
+import {
+	RECORD_ONE,
+	RECORD_TWO,
+	RECORD_THREE,
+} from '../../context/action_type';
 import { Login, Register } from '../../pages';
-function Layout({ children }) {
-	const mydata = JSON.parse(localStorage.getItem('profile'));
+import {
+	setFree,
+	setAmateur,
+	setWorld,
+	setPremium,
+} from '../plan/movie_config';
 
-	useEffect(() => {}, []);
+function Layout({ children }) {
+	const { movie_dispatch } = useMovieContext();
+	const myinfo = JSON.parse(localStorage.getItem('userInfo'));
+	const location = useLocation();
+
+	const tworef = useRef(null);
+	const threeref = useRef();
+
+	const refs = {
+		tworef,
+		threeref,
+	};
+
+	useEffect(() => {
+		switch (myinfo) {
+			case 'Free':
+				setFree(refs);
+			case 'Amateur':
+				setAmateur(refs);
+			case 'World':
+				setWorld(refs);
+			case 'Premium':
+				setPremium(refs);
+		}
+	}, []);
 	return (
 		<div className="layout">
 			<Header />
+			{location.pathname === '/movie/feed' && (
+				<Box className="movie_count">
+					<Button
+						variant="outlined"
+						onClick={() => movie_dispatch({ type: RECORD_ONE })}
+						color="secondary"
+						size="small"
+					>
+						1 movie
+					</Button>
+					<Button
+						onClick={() => movie_dispatch({ type: RECORD_TWO })}
+						variant="outlined"
+						ref={tworef}
+						color="secondary"
+						size="small"
+					>
+						2-3 movies
+					</Button>
+					<Button
+						onClick={() => movie_dispatch({ type: RECORD_THREE })}
+						variant="outlined"
+						ref={threeref}
+						color="secondary"
+						size="small"
+					>
+						3 and above movies
+					</Button>
+				</Box>
+			)}
 			<Box className="children">{children}</Box>
 			<Footer />
 		</div>

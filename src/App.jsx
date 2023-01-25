@@ -20,6 +20,8 @@ import {
 	QueryClient,
 	QueryClientProvider,
 } from '@tanstack/react-query';
+import './css/global.scss';
+import Plan from './pages/Plan';
 import { useQuery } from '@tanstack/react-query';
 function App() {
 	const {
@@ -55,10 +57,7 @@ function App() {
 					userInfo: response?.data?.package,
 				},
 			});
-			window.localStorage.setItem(
-				'userinfo',
-				JSON.stringify(response?.data?.package),
-			);
+			console.log(user);
 		} catch (error) {
 			console.log(error.response.data.message);
 		}
@@ -89,7 +88,9 @@ function App() {
 							element={<List />}
 						/>
 						<Route path="register" element={<Register />} />
+
 						<Route path="/profile/:adminId" element={<Profile />} />
+						<Route path="/create/plan" element={<Plan />} />
 					</Route>
 					<Route path="*" element={<NoPage />} />
 				</Routes>

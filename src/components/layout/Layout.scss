@@ -1,19 +1,40 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+@import url('https://fonts.googleapis.com/css2?family=Sofia+Sans:wght@200&display=swap');
 .layout {
 	display: flex;
 	flex-direction: column;
 	min-height: 100vh;
 	max-width: 100vw;
 	margin: auto;
+	font-family: 'Sofia Sans', sans-serif !important;
 
 	.children {
 		display: flex;
 		flex-direction: row;
 		min-height: 90vh;
 	}
+	.movie_count {
+		width: 100%;
+		padding: 0.7rem;
+		background: black;
+		text-align: center;
+		button {
+			text-transform: none;
+			color: rgb(192, 218, 24);
+			margin-left: 2rem;
+			border: 1px solid rgb(164, 17, 132);
+			&:hover {
+				background: rgb(25, 208, 147) !important;
+				color: yellow;
+			}
+		}
+	}
 }
-.remove-active {
-	display: none;
+.remove-activebutton {
+	border: none !important;
 }
-.active {
-	display: none;
+.active_button {
+	border: 2px solid yellow !important;
+	background: yellow !important;
+	color: black !important;
 }
