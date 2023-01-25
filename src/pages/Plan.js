@@ -20,6 +20,7 @@ import { createPlan } from '../context/features/user_actions';
 import axios from 'axios';
 import { motion } from 'framer-motion';
 import Success from '@mui/icons-material/CheckBox';
+import { HEADER_HIDE } from '../context/action_type';
 const ConfirmData = () => {
 	const [plan, setPlan] = useState({
 		free: '',
@@ -135,9 +136,8 @@ const ConfirmData = () => {
 	);
 
 	useEffect(() => {
-		setId(JSON.parse(window.localStorage.getItem('profile')));
 		prevData.current = plan;
-	}, [plan]);
+	}, []);
 
 	const myuserInfo = JSON.parse(localStorage.getItem('userInfo'));
 	return (
@@ -604,6 +604,7 @@ const ConfirmData = () => {
 								color="primary"
 								onClick={() => {
 									navigate('/');
+									main_dispatch({ type: HEADER_HIDE });
 									window.location.reload();
 								}}
 							>

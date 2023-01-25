@@ -23,6 +23,7 @@ function MainContext({ children }) {
 		res: '',
 		loader: false,
 		isplan: false,
+		isheader: false,
 	};
 	const [main_state, main_dispatch] = useReducer(
 		main_reducer,

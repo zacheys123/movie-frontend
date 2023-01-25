@@ -26,6 +26,7 @@ import {
 	PROFILE,
 	CLOSEMODAL,
 	DELETEUSER,
+	HEADER_HIDE,
 } from '../context/action_type';
 import { motion } from 'framer-motion';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
@@ -38,7 +39,7 @@ import Delete from '@mui/icons-material/DeleteForever';
 import axios from 'axios';
 const Header = () => {
 	const {
-		main_state: { istheme, user, isplan, admin, profile },
+		main_state: { istheme, user, isplan, isheader, admin, profile },
 		main_dispatch,
 	} = useMainContext();
 	const {
@@ -127,7 +128,7 @@ const Header = () => {
 
 	return (
 		<>
-			{!isplan && (
+			{!isheader && (
 				<div className="header">
 					{showform && (
 						<Box className="add">

@@ -31,4 +31,5 @@ export const PLAN_ERROR = 'PLAN_ERROR';
 export const UNPLAN = 'UNPLAN';
 export const RECORD_ONE = 'RECORD_ONE';
 export const RECORD_TWO = 'RECORD_TWO';
-export const RECORD_THREE = 'REECORD_THREE';
+export const RECORD_THREE = 'RECORD_THREE';
+export const HEADER_HIDE = 'HEADER_HIDE';

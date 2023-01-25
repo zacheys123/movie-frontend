@@ -5,6 +5,7 @@ import {
 	DELETE_USER,
 	DELETE_WAIT,
 	DELETE_ERROR,
+	HEADER_HIDE,
 	LOADING,
 	PLAN,
 } from '../action_type';

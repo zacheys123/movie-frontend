@@ -16,6 +16,7 @@ import {
 	DELETE_WAIT,
 	DELETE_ERROR,
 	LOGOUT,
+	HEADER_HIDE,
 	NO_DATA,
 	PLAN,
 	UNPLAN,
@@ -188,6 +189,11 @@ export const main_reducer = (state = {}, action) => {
 			return {
 				...state,
 				loading: true,
+			};
+		case HEADER_HIDE:
+			return {
+				...state,
+				isheader: !state.isheader,
 			};
 		default:
 			return {
