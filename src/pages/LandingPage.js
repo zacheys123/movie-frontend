@@ -111,17 +111,6 @@ const LandingPage = () => {
 							>
 								Explore Moviehubz
 							</motion.button>
-
-							<Link
-								className="link"
-								to="/"
-								style={{
-									marginTop: '1.7rem',
-									color: 'yellow',
-								}}
-							>
-								Go Back
-							</Link>
 						</div>
 					) : (
 						<Button

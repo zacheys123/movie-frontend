@@ -100,7 +100,7 @@ export const createPlan = async (
 	try {
 		if (plan.userId) {
 			if (plan?.free?.length > 0) {
-				console.log(plan?.free);
+				console.log(plan?.userId);
 				const response = await axios.put(
 					`${baseUrl}/user/v2/package/${plan.userId}`,
 					plan,

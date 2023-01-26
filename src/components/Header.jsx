@@ -478,7 +478,6 @@ const Header = () => {
 										variant="outlined"
 										onClick={() => {
 											navigate('/create/plan');
-											window.location.reload();
 										}}
 									>
 										<span
