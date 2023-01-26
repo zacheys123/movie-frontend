@@ -21,6 +21,7 @@ import axios from 'axios';
 import { motion } from 'framer-motion';
 import Success from '@mui/icons-material/CheckBox';
 import { HEADER_HIDE } from '../context/action_type';
+import { useQuery } from '@tanstack/react-query';
 const ConfirmData = () => {
 	const [plan, setPlan] = useState({
 		free: '',
@@ -42,7 +43,7 @@ const ConfirmData = () => {
 		setPlan({ ...plan, [ev.target.name]: ev.target.value });
 	};
 	console.log(myid?.result?._id);
-	const { id } = useParams();
+	const id = myid?.result?._id;
 	const navigate = useNavigate();
 
 	const free_plan = useCallback(
@@ -139,6 +140,12 @@ const ConfirmData = () => {
 		prevData.current = plan;
 	}, []);
 
+	const { data: alldata } = useQuery(['getdata'], async () => {
+		const response = await axios.get(
+			`https://moviebackendz.onrender.com/user/v2/${id}`,
+		);
+		return response.data;
+	});
 	const myuserInfo = JSON.parse(localStorage.getItem('userInfo'));
 	return (
 		<Container sx={{ height: '85vh' }} className="main">
@@ -172,7 +179,10 @@ const ConfirmData = () => {
 							>
 								Currently:
 							</span>
-							<span style={{ color: 'red' }}> {myuserInfo}</span>
+							<span style={{ color: 'red' }}>
+								{' '}
+								{alldata?.result?.package}
+							</span>
 						</div>
 					) : (
 						'Currently : No package'
