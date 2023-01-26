@@ -13,6 +13,7 @@ import {
 	CLOSEMODAL,
 	EMPTYHOME,
 	LOGGED,
+	GETUSER,
 } from '../context/action_type';
 import NoCellIcon from '@mui/icons-material/NoCell';
 import { useMainContext } from '../context/contexts_/MainContext';
@@ -43,7 +44,7 @@ const Feed = () => {
 	});
 
 	const {
-		main_state: { istheme, admin, user },
+		main_state: { istheme, user },
 		main_dispatch,
 	} = useMainContext();
 	const {
@@ -71,7 +72,12 @@ const Feed = () => {
 	//* create movies for this user function
 	const navigate = useNavigate();
 	const users = user?.result?.users;
-
+	const [myid, setId] = useState(() => {
+		const storedvalues = localStorage.getItem('profile');
+		if (!storedvalues) return {};
+		return JSON.parse(storedvalues);
+	});
+	const id = myid?.result?._id;
 	const createMovies = useCallback(
 		(ev) => {
 			ev.preventDefault();
@@ -83,11 +89,10 @@ const Feed = () => {
 				movie.genre &&
 				movie.amount
 			) {
-				const mymovie = { userId: admin?.result?._id, movie };
+				const mymovie = { userId: id, movie };
 				console.log(movie);
 
 				createMovie(mymovie, movie_dispatch, success, navigate);
-				movie_dispatch({ type: LOGGED, logged });
 			} else {
 				console.log(movie);
 				movie_dispatch({
@@ -104,20 +109,21 @@ const Feed = () => {
 	};
 
 	// getting all movies for this user
-	const getMovie = async (source) => {
-		try {
-			movie_dispatch({
-				type: MOVIES,
-				payload: { movies: user?.result?.movies },
-			});
-		} catch (error) {
-			console.log(error.message);
-		}
-	};
+	const { data: alldata, refetch } = useQuery(['users'], async () => {
+		const response = await axios.get(
+			`https://moviebackendz.onrender.com/user/v2/${id}`,
+		);
+		main_dispatch({
+			type: GETUSER,
+			payload: { user: response?.data },
+		});
+		movie_dispatch({
+			type: MOVIES,
+			payload: { movies: response?.data?.result?.movies },
+		});
+		return response.data;
+	});
 
-	useEffect(() => {
-		getMovie();
-	}, [ismodalhome, logged, movieref]);
 	const [searchquery, setQuery] = useState('');
 
 	const moviefunc = () => {
@@ -554,12 +560,7 @@ const Feed = () => {
 									fontWeight: 'bolder !important',
 									cursor: 'pointer',
 								}}
-								onClick={() => {
-									movie_dispatch({
-										type: 'REFRESH',
-										logged,
-									});
-								}}
+								onClick={refetch}
 							/>{' '}
 							<span style={{ color: 'red', cursor: 'pointer' }}>
 								refresh

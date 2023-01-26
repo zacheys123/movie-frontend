@@ -39,7 +39,7 @@ import Delete from '@mui/icons-material/DeleteForever';
 import axios from 'axios';
 const Header = () => {
 	const {
-		main_state: { istheme, user, isplan, isheader, admin, profile },
+		main_state: { istheme, isheader, profile },
 		main_dispatch,
 	} = useMainContext();
 	const {
@@ -72,6 +72,7 @@ const Header = () => {
 	const suggestedref = useRef();
 	const suggestref = useRef(null);
 	const latestref = useRef(null);
+	const popularref = useRef(null);
 
 	// add a new user to add movies
 	const addNewUser = useCallback((ev) => {
@@ -111,6 +112,7 @@ const Header = () => {
 	const refs = {
 		suggestref,
 		latestref,
+		popularref,
 	};
 
 	useEffect(() => {
@@ -125,6 +127,11 @@ const Header = () => {
 				setPremium(refs);
 		}
 	}, []);
+	const [user, setUser] = useState(() => {
+		const storedvalues = localStorage.getItem('profile');
+		if (!storedvalues) return {};
+		return JSON.parse(storedvalues);
+	});
 
 	return (
 		<>
@@ -132,79 +139,51 @@ const Header = () => {
 				<div className="header">
 					{showform && (
 						<Box className="add">
-							{remove ? (
-								<ol start="1">
-									{user?.result?.users.map((data) => {
-										return (
-											<li key={data._id}>
-												<p style={{ color: 'white' }}>
-													{data.username}
-												</p>
-												<span>
-													<Delete
-														sx={{ color: 'red' }}
-														onClick={removeuser(data._id)}
-													/>
-												</span>
-											</li>
-										);
-									})}
-								</ol>
-							) : (
-								<form onSubmit={addNewUser} className="add__form">
-									<h5
-										className="text-light"
-										align="center"
-										style={{
-											color: 'white !important',
-											marginTop: '1rem',
-											marginBottom: '-1rem',
-										}}
-									>
-										Add New User
-									</h5>
-									<input
-										type="text"
-										name="username"
-										ref={usernameref}
-										placeholder="Enter Name"
-									/>
-									<input
-										type="text"
-										name="phone"
-										ref={phoneref}
-										placeholder="Enter Phone Number"
-									/>
-									<>
-										{ismodal && (
-											<h6
-												style={{
-													color: 'yellow',
-													margin: '1.4rem auto -1rem auto',
-													textAlign: 'center',
-												}}
-											>
-												All fields must be entered
-											</h6>
-										)}
-									</>
-									<Button
-										variant="contained"
-										type="submit"
-										size="small"
-									>
-										{!loading ? 'ADD' : 'Adding user...'}
-									</Button>
-
-									<Button
-										size="small"
-										variant="outlined"
-										onClick={() => setRemove((prev) => !prev)}
-									>
-										Remove user
-									</Button>
-								</form>
-							)}
+							<form onSubmit={addNewUser} className="add__form">
+								<h5
+									className="text-light"
+									align="center"
+									style={{
+										color: 'white !important',
+										marginTop: '1rem',
+										marginBottom: '-1rem',
+									}}
+								>
+									Add New User
+								</h5>
+								<input
+									type="text"
+									name="username"
+									ref={usernameref}
+									placeholder="Enter Name"
+								/>
+								<input
+									type="text"
+									name="phone"
+									ref={phoneref}
+									placeholder="Enter Phone Number"
+								/>
+								<>
+									{ismodal && (
+										<h6
+											style={{
+												color: 'yellow',
+												margin: '1.4rem auto -1rem auto',
+												textAlign: 'center',
+											}}
+										>
+											All fields must be entered
+										</h6>
+									)}
+								</>
+								<Button
+									variant="contained"
+									type="submit"
+									size="small"
+								>
+									{!loading ? 'ADD' : 'Adding user...'}
+								</Button>
+							</form>
 						</Box>
 					)}
 					<Box className="title">
@@ -215,8 +194,8 @@ const Header = () => {
 								adm ? 'nav navbar navbar-brand ' : 'disabled'
 							}
 						>
-							{admin?.result?.company
-								? admin?.result?.company
+							{user?.result?.company
+								? user?.result?.company
 								: ' MovieHubz co'}
 						</h3>
 					</Box>
@@ -232,6 +211,7 @@ const Header = () => {
 							Add New User
 						</Button>
 						<Button
+							ref={popularref}
 							className={adm ? 'header' : 'disabled'}
 							variant="outlined"
 							size="small"

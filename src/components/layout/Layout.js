@@ -5,12 +5,13 @@ import { Box, Button } from '@mui/material';
 import { useLocation } from 'react-router-dom';
 import './Layout.scss';
 import { useMovieContext } from '../../context/contexts_/MovieContext';
+import { useMainContext } from '../../context/contexts_/MainContext';
 import {
 	RECORD_ONE,
 	RECORD_TWO,
 	RECORD_THREE,
 } from '../../context/action_type';
-import { Login, Register } from '../../pages';
+
 import {
 	setFree,
 	setAmateur,
@@ -20,6 +21,9 @@ import {
 
 function Layout({ children }) {
 	const { movie_dispatch } = useMovieContext();
+	const {
+		main_state: { istheme },
+	} = useMainContext();
 	const myinfo = JSON.parse(localStorage.getItem('userInfo'));
 	const location = useLocation();
 
@@ -43,9 +47,13 @@ function Layout({ children }) {
 				setPremium(refs);
 		}
 	}, []);
+
 	return (
-		<div className="layout">
-			<Header />
+		<div className={!istheme ? 'layout' : 'darkmode'}>
+			<Box className="layout_header_container">
+				<Header />
+			</Box>
+
 			{location.pathname === '/movie/feed' && (
 				<Box className="movie_count">
 					<Button

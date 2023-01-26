@@ -16,13 +16,56 @@
 	.movie_count {
 		width: 100%;
 		padding: 0.7rem;
-		background: black;
+		background: rgb(62, 6, 6);
 		text-align: center;
 		button {
 			text-transform: none;
 			color: rgb(192, 218, 24);
 			margin-left: 2rem;
+			font-weight: bold;
 			border: 1px solid rgb(164, 17, 132);
+			&:hover {
+				background: rgb(25, 208, 147) !important;
+				color: yellow;
+			}
+		}
+	}
+}
+.remove-activebutton {
+	border: none !important;
+}
+.active_button {
+	border: 2px solid yellow !important;
+	background: yellow !important;
+	color: black !important;
+}
+// darkmode
+.darkmode {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	max-width: 100vw;
+	margin: auto;
+	font-family: 'Sofia Sans', sans-serif !important;
+
+	.children {
+		display: flex;
+		flex-direction: row;
+		min-height: 90vh;
+	}
+	.movie_count {
+		width: 100%;
+		padding: 0.7rem;
+		background: rgb(245, 241, 241);
+		text-align: center;
+		button {
+			background: rgb(142, 115, 8);
+			text-transform: none;
+			color: rgb(192, 218, 24);
+			margin-left: 2rem;
+			font-weight: bold;
+			border: 1px solid rgb(210, 27, 170);
+
 			&:hover {
 				background: rgb(25, 208, 147) !important;
 				color: yellow;

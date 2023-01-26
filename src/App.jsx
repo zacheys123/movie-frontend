@@ -22,75 +22,78 @@ import {
 } from '@tanstack/react-query';
 import './css/global.scss';
 import Plan from './pages/Plan';
+import PrivateRoutes from './components/PrivateRoutes';
 import { useQuery } from '@tanstack/react-query';
 function App() {
-	const {
-		main_state: { istheme, admin, user },
-		main_dispatch,
-	} = useMainContext();
-
-	const {
-		movie_state: { logged },
-		movie_dispatch,
-	} = useMovieContext();
 	const mydata = JSON.parse(localStorage.getItem('profile'));
+	const myinfo = JSON.parse(localStorage.getItem('userInfo'));
 
 	const navigate = useNavigate();
 	useEffect(() => {
-		if (!mydata) {
+		if (!mydata || !myinfo) {
 			navigate('/');
 		}
-	}, [admin?.result?._id]);
-	const id = admin?.result?._id;
+	}, [mydata?.result?._id]);
 
-	const getUser = async () => {
-		console.log(id);
-		try {
-			const response = await axios.get(
-				`https://moviebackendz.onrender.com/user/v2/${id}`,
-			);
-
-			main_dispatch({
-				type: GETUSER,
-				payload: {
-					user: response?.data,
-					userInfo: response?.data?.package,
-				},
-			});
-			console.log(user);
-		} catch (error) {
-			console.log(error.response.data.message);
-		}
-	};
-	useEffect(() => {
-		getUser();
-
-		main_dispatch({
-			type: JWT,
-			payload: {
-				admin: mydata,
-			},
-		});
-	}, [admin?.result?._id, logged]);
 	const client = new QueryClient();
 	return (
 		<QueryClientProvider client={client}>
 			<Layout>
 				<Routes>
 					<Route path="/">
-						<Route index element={<LandingPage />} />
-						<Route path="/movie/feed" element={<Home />} />
-						<Route path="dashboard" element={<Dashboard />} />
+						<Route
+							index
+							element={
+								<PrivateRoutes>
+									{' '}
+									<LandingPage />
+								</PrivateRoutes>
+							}
+						/>
+						<Route
+							path="/movie/feed"
+							element={
+								<PrivateRoutes>
+									<Home />
+								</PrivateRoutes>
+							}
+						/>
+						<Route
+							path="dashboard"
+							element={
+								<PrivateRoutes>
+									<Dashboard />
+								</PrivateRoutes>
+							}
+						/>
 						<Route path="login" element={<Login />} />
 						<Route
 							exact
 							path="/movie-list/:id/latest"
-							element={<List />}
+							element={
+								<PrivateRoutes>
+									<List />
+								</PrivateRoutes>
+							}
 						/>
 						<Route path="register" element={<Register />} />
 
-						<Route path="/profile/:adminId" element={<Profile />} />
-						<Route path="/create/plan" element={<Plan />} />
+						<Route
+							path="/profile/:adminId"
+							element={
+								<PrivateRoutes>
+									<Profile />
+								</PrivateRoutes>
+							}
+						/>
+						<Route
+							path="/create/plan"
+							element={
+								<PrivateRoutes>
+									<Plan />
+								</PrivateRoutes>
+							}
+						/>
 					</Route>
 					<Route path="*" element={<NoPage />} />
 				</Routes>

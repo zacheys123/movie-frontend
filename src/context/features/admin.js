@@ -16,10 +16,6 @@ https://moviebackendz.onrender.com/register`,
 		);
 
 		setTimeout(() => {
-			setTimeout(() => {
-				navigate('/create/plan');
-				window.location.reload();
-			}, 3000);
 			window.localStorage.setItem(
 				'profile',
 				JSON.stringify(response.data),
@@ -32,7 +28,8 @@ https://moviebackendz.onrender.com/register`,
 					loading,
 				},
 			});
-		}, 2000);
+		}, 1000);
+		navigate('/create/plan');
 		console.log(response?.data);
 		dispatch({ type: LOADING, loading });
 	} catch (error) {
@@ -57,10 +54,6 @@ export const adminLogin = async (
 		);
 
 		setTimeout(() => {
-			setTimeout(() => {
-				navigate('/');
-				window.location.reload();
-			}, 3000);
 			window.localStorage.setItem(
 				'profile',
 				JSON.stringify(response.data),
@@ -73,7 +66,8 @@ export const adminLogin = async (
 					loading,
 				},
 			});
-		}, 2000);
+			navigate('/');
+		}, 1000);
 		console.log(response?.data);
 		dispatch({ type: 'LOADING', loading });
 	} catch (error) {

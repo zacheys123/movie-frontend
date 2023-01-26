@@ -5,6 +5,11 @@ const Footer = () => {
 	const {
 		main_state: { admin },
 	} = useMainContext();
-	return <div className="footer">&copy;{admin?.result?.company}</div>;
+	const [user, setUser] = React.useState(() => {
+		const storedvalues = localStorage.getItem('profile');
+		if (!storedvalues) return {};
+		return JSON.parse(storedvalues);
+	});
+	return <div className="footer">&copy;{user?.result?.company}</div>;
 };
 export default Footer;

@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import '../css/landing.scss';
 import { Box, Button } from '@mui/material';
 import { useMainContext } from '../context/contexts_/MainContext';
@@ -10,11 +10,17 @@ import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 const LandingPage = () => {
 	const {
-		main_state: { istheme, admin, user },
+		main_state: { istheme, admin },
 		main_dispatch,
 	} = useMainContext();
 	const navigate = useNavigate();
-	const [val, setVal] = React.useState('');
+	const [val, setVal] = useState('');
+
+	const [user, setUser] = useState(() => {
+		const storedvalues = localStorage.getItem('profile');
+		if (!storedvalues) return {};
+		return JSON.parse(storedvalues);
+	});
 	return (
 		<div className="landing">
 			<Box className="head__landing">

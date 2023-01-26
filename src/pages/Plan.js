@@ -148,7 +148,7 @@ const ConfirmData = () => {
 	});
 	const myuserInfo = JSON.parse(localStorage.getItem('userInfo'));
 	return (
-		<Container sx={{ height: '85vh' }} className="main">
+		<Container sx={{ height: '85vh' }} className="main bg-dark">
 			<Box
 				className="main__plan"
 				sx={{
@@ -162,7 +162,7 @@ const ConfirmData = () => {
 				}}
 			>
 				<div className="d-flex flex-column head">
-					<h4 style={{ color: 'black' }}>Choose A Plan</h4>
+					<h4 style={{ color: 'white' }}>Choose A Plan</h4>
 
 					{myuserInfo ? (
 						<div
@@ -173,7 +173,7 @@ const ConfirmData = () => {
 						>
 							<span
 								style={{
-									color: 'navy !important',
+									color: 'yellow',
 									fontWeight: '600',
 								}}
 							>
@@ -215,7 +215,7 @@ const ConfirmData = () => {
 							allocated to this plan and packages to use,lets get to
 							it
 						</Typography>
-						<div id="table">
+						<div id="table" className="mb-5">
 							<div className="row">
 								<div className="col-lg-6 col-md-8 col-sm-8">
 									Add 1 Movie
@@ -228,6 +228,14 @@ const ConfirmData = () => {
 							<div className="row">
 								<div className="col-lg-6 col-md-8 col-sm-8">
 									Add 2 movies once{' '}
+								</div>
+								<div className="col-lg-2 col-md-2 col-sm-2">
+									&times;
+								</div>
+							</div>
+							<div className="row">
+								<div className="col-lg-6 col-md-8 col-sm-8">
+									View Popular movies{' '}
 								</div>
 								<div className="col-lg-2 col-md-2 col-sm-2">
 									&times;
@@ -266,7 +274,7 @@ const ConfirmData = () => {
 								type="text"
 								onChange={handlePlan}
 								value={plan.free}
-								placeholder=" Free 100ksh/day"
+								placeholder=" Free 50ksh/day"
 							/>
 							<Button
 								onClick={free_plan}
@@ -289,7 +297,7 @@ const ConfirmData = () => {
 						</Box>
 					</Box>
 					<Box
-						className="box amateur"
+						className="box amateur mt-1"
 						style={{ opacity: isplan || loading ? 0.4 : 1 }}
 					>
 						{' '}
@@ -320,6 +328,14 @@ const ConfirmData = () => {
 							<div className="row">
 								<div className="col-lg-6 col-md-8 col-sm-8">
 									Add 2 movies once{' '}
+								</div>
+								<div className="col-lg-2 col-md-2 col-sm-2">
+									&#x2713;
+								</div>
+							</div>
+							<div className="row">
+								<div className="col-lg-6 col-md-8 col-sm-8">
+									View Popular movies{' '}
 								</div>
 								<div className="col-lg-2 col-md-2 col-sm-2">
 									&#x2713;
@@ -358,7 +374,7 @@ const ConfirmData = () => {
 								type="text"
 								onChange={handlePlan}
 								value={plan.amateur}
-								placeholder=" 150ksh/day"
+								placeholder=" 100ksh/day"
 							/>
 							<Button
 								onClick={amateur}
@@ -418,6 +434,14 @@ const ConfirmData = () => {
 							</div>
 							<div className="row">
 								<div className="col-lg-6 col-md-8 col-sm-8">
+									View Popular movies{' '}
+								</div>
+								<div className="col-lg-2 col-md-2 col-sm-2">
+									&#x2713;
+								</div>
+							</div>
+							<div className="row">
+								<div className="col-lg-6 col-md-8 col-sm-8">
 									View Latest and Upcoming Movies{' '}
 								</div>
 								<div className="col-lg-2 col-md-2 col-sm-2">
@@ -449,7 +473,7 @@ const ConfirmData = () => {
 								type="text"
 								onChange={handlePlan}
 								value={plan.world}
-								placeholder=" 800ksh/day"
+								placeholder=" 650ksh/day"
 							/>
 							<Button
 								onClick={world}
@@ -493,7 +517,7 @@ const ConfirmData = () => {
 							functions from our package,access latest movies from
 							netflix ,hulu,HBO as soon as they are released
 						</Typography>
-						<div id="table" className="prem">
+						<div id="table" className="prem mt-1">
 							<div className="row">
 								<div className="col-lg-6 col-md-8 col-sm-8">
 									Add 1 Movie
@@ -514,6 +538,14 @@ const ConfirmData = () => {
 							<div className="row">
 								<div className="col-lg-6 col-md-8 col-sm-8">
 									View Latest and Upcoming Movies{' '}
+								</div>
+								<div className="col-lg-2 col-md-2 col-sm-2">
+									&#x2713;
+								</div>
+							</div>
+							<div className="row">
+								<div className="col-lg-6 col-md-8 col-sm-8">
+									View Popular movies{' '}
 								</div>
 								<div className="col-lg-2 col-md-2 col-sm-2">
 									&#x2713;
@@ -568,10 +600,10 @@ const ConfirmData = () => {
 				</Stack>
 				{loading && (
 					<motion.div
-						initial={{ opacity: 0 }}
+						initial={{ opacity: 0, transform: 'scale(0)' }}
 						animate={{
 							transform: 'scale(1)',
-							opacity: 0.6,
+							opacity: 0.7,
 							transition: { duration: 0.9 },
 						}}
 						className="loading"
@@ -587,11 +619,37 @@ const ConfirmData = () => {
 						initial={{ transform: 'scale(0)', opacity: 0 }}
 						animate={{
 							transform: 'scale(1)',
-							opacity: 0.7,
+
+							opacity: 0.9,
 							transition: { duration: 0.6 },
 						}}
 						className="plan_success"
 					>
+						<motion.div
+							initial={{ transform: 'rotate(0deg)', opacity: 0 }}
+							animate={{
+								transform: 'rotate(360deg)',
+
+								opacity: 0.9,
+								transition: { duration: 0.8 },
+							}}
+							style={{
+								height: '5rem',
+								width: '5rem',
+								fontSize: '3.7rem',
+								borderRadius: '100%',
+							}}
+						>
+							<Success
+								sx={{
+									fontSize: '3.7rem',
+									height: '90%',
+									width: '90%',
+									borderRadius: '100% !important',
+									color: 'rgb(145, 569, 352)',
+								}}
+							/>
+						</motion.div>
 						<Box>
 							<span>
 								Welcome {user?.result?.username} to{' '}
@@ -602,12 +660,6 @@ const ConfirmData = () => {
 							</span>
 							<h1>
 								<span>SUCCESS</span>
-								<Success
-									sx={{
-										fontSize: '1.7rem',
-										color: 'rgb(245, 569, 352)',
-									}}
-								/>
 							</h1>{' '}
 							<Button
 								variant="contained"
