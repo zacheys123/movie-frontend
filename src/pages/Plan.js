@@ -30,7 +30,7 @@ const ConfirmData = () => {
 	});
 	const [myid, setId] = useState(() => {
 		const storedvalues = localStorage.getItem('profile');
-		if (!storedvalues) return [];
+		if (!storedvalues) return {};
 		return JSON.parse(storedvalues);
 	});
 	const prevData = useRef({});
