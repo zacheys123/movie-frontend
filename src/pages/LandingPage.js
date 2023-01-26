@@ -9,6 +9,10 @@ import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import netflix from '../assets/neflix.mp4';
+import home from '../assets/home.mp4';
+import palmer from '../assets/palmer.mp4';
+import slumber from '../assets/slumber.mp4';
 const LandingPage = () => {
 	const {
 		main_state: { istheme, admin },
@@ -44,6 +48,26 @@ const LandingPage = () => {
 			},
 		},
 	};
+	const variants1 = {
+		hidden: {
+			scale: 0,
+			x: '100%',
+			opacity: 0,
+		},
+		show: {
+			scale: 1.1,
+			x: ['100%', '10%', '45%'],
+			opacity: 1,
+			transition: {
+				delay: 0.7,
+				duration: 0.6,
+			},
+		},
+	};
+	const trailers = [netflix, palmer, home, slumber];
+	const randomtrailers =
+		trailers[Math.floor(Math.random() * trailers.length)];
+	console.log(randomtrailers);
 	return (
 		<div className="landing">
 			<Box className="head__landing">
@@ -120,7 +144,14 @@ const LandingPage = () => {
 							Get Started
 						</Button>
 					)}
-					<div> </div>
+				</motion.div>
+				<motion.div
+					variants={variants1}
+					initial="hidden"
+					animate="show"
+					className="videos"
+				>
+					<video controls autoPlay src={randomtrailers}></video>
 				</motion.div>
 			</Box>
 			<Box className="bottom__landing">
