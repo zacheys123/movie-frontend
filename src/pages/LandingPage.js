@@ -8,6 +8,7 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 const LandingPage = () => {
 	const {
 		main_state: { istheme, admin },
@@ -21,6 +22,28 @@ const LandingPage = () => {
 		if (!storedvalues) return {};
 		return JSON.parse(storedvalues);
 	});
+	const buttonvariants = {
+		hover: {
+			scale: [1, 1.1, 1, 1.1],
+			transition: {
+				duration: 0.3,
+			},
+		},
+	};
+	const variants = {
+		hidden: {
+			x: '100%',
+			opacity: 0,
+		},
+		show: {
+			x: ['100%', '0%', '5%'],
+			opacity: 1,
+			transition: {
+				delay: 0.7,
+				duration: 0.6,
+			},
+		},
+	};
 	return (
 		<div className="landing">
 			<Box className="head__landing">
@@ -39,7 +62,12 @@ const LandingPage = () => {
 				</form>
 			</Box>
 			<Box className="center__landing">
-				<Box className="center">
+				<motion.div
+					variants={variants}
+					initial="hidden"
+					animate="show"
+					className="center"
+				>
 					<h2>
 						<span
 							style={{
@@ -71,7 +99,9 @@ const LandingPage = () => {
 					</h2>
 					{user?.result?._id ? (
 						<div className="d-flex flex-column py-2">
-							<Button
+							<motion.button
+								variants={buttonvariants}
+								whileHover="hover"
 								variant="contained"
 								onClick={() => navigate('/movie/feed')}
 								sx={{
@@ -80,7 +110,7 @@ const LandingPage = () => {
 								}}
 							>
 								Explore Moviehubz
-							</Button>
+							</motion.button>
 
 							<Link
 								className="link"
@@ -102,7 +132,7 @@ const LandingPage = () => {
 						</Button>
 					)}
 					<div> </div>
-				</Box>
+				</motion.div>
 			</Box>
 			<Box className="bottom__landing">
 				<Box className="follow">

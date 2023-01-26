@@ -136,7 +136,7 @@ const Header = () => {
 	return (
 		<>
 			{!isheader && (
-				<div className="header">
+				<div className={istheme ? 'header' : 'header_darkmode'}>
 					{showform && (
 						<Box className="add">
 							<form onSubmit={addNewUser} className="add__form">
@@ -377,7 +377,7 @@ const Header = () => {
 					<Box className="toggle__button">
 						{istheme ? (
 							<IconButton
-								className="theme"
+								className="dark"
 								onClick={() =>
 									main_dispatch({ type: 'THEME', payload: istheme })
 								}
@@ -386,6 +386,7 @@ const Header = () => {
 							</IconButton>
 						) : (
 							<IconButton
+								className="theme"
 								onClick={() =>
 									main_dispatch({ type: 'THEME', payload: istheme })
 								}

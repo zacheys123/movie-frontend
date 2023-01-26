@@ -99,7 +99,12 @@ $breakpoint-lgdesktop: 1480px;
 		button {
 			margin: 0.4rem !important;
 			font-family: 'Ubuntu', sans-serif;
-			color: purple !important;
+			color: rgb(244, 236, 244) !important;
+			background: linear-gradient(
+				hsl(322, 45%, 45%) 20%,
+				hsl(300, 30%, 23%)
+			);
+			padding: 0.4rem;
 		}
 		.suggested {
 			position: absolute;
@@ -171,6 +176,9 @@ $breakpoint-lgdesktop: 1480px;
 		justify-content: space-around;
 		margin-right: 0.6rem;
 		align-items: center;
+		.dark {
+			color: black !important;
+		}
 	}
 	.disabled {
 		pointer-events: none;
@@ -195,6 +203,344 @@ $breakpoint-lgdesktop: 1480px;
 			}
 		}
 	}
+
+	/* For Mobile phones */
+	@include phone($breakpoint-phone) {
+		.header {
+			margin: 0.2rem -1rem 0.2rem -0.9rem !important;
+		}
+		.main__prof {
+			.prof {
+				margin-left: -4.6rem !important;
+			}
+		}
+		.title {
+			.nav {
+				font-size: 0.9rem !important;
+			}
+		}
+		.sites {
+			position: absolute !important;
+			display: none;
+
+			button {
+				font-size: 0.6rem !important;
+			}
+		}
+		.menu {
+			display: block !important;
+		}
+		.menu__nav {
+			display: block !important;
+			width: 6rem;
+			z-index: 999 !important;
+			margin-left: -4rem !important;
+			height: fit-content;
+			padding: 0.4rem;
+			text-align: center !important;
+			position: absolute !important;
+			background: black;
+
+			p {
+				color: white;
+				transition: all 0.2s ease-in-out;
+				font-size: 0.6rem;
+				cursor: pointer;
+				&:first-child {
+					margin-top: 0.7rem;
+				}
+				&:hover {
+					color: violet;
+				}
+			}
+		}
+		.add {
+			margin: 25rem 5rem 0 auto !important;
+			padding: 0.3rem;
+			input {
+				padding: -2.9rem !important;
+			}
+		}
+	}
+	/* For tablets and large phones */
+	@include tablet($breakpoint-phone) {
+		.header {
+			margin: 0.2rem -1rem 0.2rem -0.9rem !important;
+		}
+		.main__prof {
+			.prof {
+				margin-left: -4.6rem !important;
+			}
+		}
+		.title {
+			.nav {
+				font-size: 0.9rem !important;
+			}
+		}
+		.sites {
+			position: absolute !important;
+			display: none;
+
+			button {
+				font-size: 0.6rem !important;
+			}
+		}
+		.menu {
+			display: block !important;
+		}
+		.menu__nav {
+			display: block !important;
+			width: 6rem;
+			z-index: 999 !important;
+			margin-left: -4rem !important;
+			height: fit-content;
+			padding: 0.4rem;
+			text-align: center !important;
+			position: absolute !important;
+			background: black;
+
+			p {
+				color: white;
+				transition: all 0.2s ease-in-out;
+				font-size: 0.6rem;
+				cursor: pointer;
+				&:first-child {
+					margin-top: 0.7rem;
+				}
+				&:hover {
+					color: violet;
+				}
+			}
+		}
+		.add {
+			margin: 25rem 5rem 0 auto !important;
+			padding: 0.3rem;
+			input {
+				padding: -2.9rem !important;
+			}
+		}
+	}
+	/* For tablets and large phones */
+	@include laptop($breakpoint-tablet) {
+		.title {
+			.nav {
+				font-size: 0.9rem !important;
+			}
+		}
+		.sites {
+			button {
+				font-size: 0.6rem !important;
+			}
+		}
+		.menu {
+			display: none !important;
+		}
+	}
+	/* For desktops */
+	@include desktop($breakpoint-laptop) {
+		.title {
+			.nav {
+				font-size: 0.9rem !important;
+			}
+		}
+		.sites {
+			button {
+				font-size: 0.6rem !important;
+			}
+		}
+		.menu {
+			display: none !important;
+		}
+	}
+	/* For large desktops*/
+	@include lgdesktop($breakpoint-lgdesktop) {
+		.title {
+			.nav {
+				font-size: 0.9rem !important;
+			}
+		}
+		.sites {
+			button {
+				font-size: 0.6rem !important;
+			}
+		}
+		.menu {
+			display: none !important;
+		}
+	}
+	/* For large desktops*/
+	@include lg($breakpoint-lgdesktop) {
+		.menu {
+			display: none !important;
+		}
+	}
+	.darkmode_header {
+	}
+}
+
+// styling for darkmod
+.header_darkmode {
+	flex: 0.3;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: 0.2rem 0;
+	position: relative;
+	background: rgb(62, 6, 6);
+	.add {
+		font-family: 'Sofia Sans', sans-serif !important;
+		position: absolute;
+		width: 20rem !important;
+		background: rgb(23, 21, 21);
+
+		z-index: 999;
+		border-radius: 20px;
+		box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px,
+			rgba(0, 0, 0, 0.07) 0px 2px 2px, rgba(0, 0, 0, 0.07) 0px 4px 4px;
+
+		margin: 25% -55% -5% 30% !important;
+		.add__form {
+			display: flex;
+			flex-direction: column;
+		}
+		button {
+			font-size: 0.7rem !important;
+			width: 50%;
+			text-transform: none;
+			margin: 2rem auto;
+			&:hover {
+				background: cyan !important;
+				color: red;
+				font-weight: bold !important;
+			}
+		}
+		input {
+			width: 70%;
+			padding: 0.3rem;
+			outline: none;
+			margin: 1.5rem auto -1rem;
+		}
+	}
+	.title {
+		margin-left: 1.9rem;
+		.nav {
+			font-weight: bold;
+			font-family: 'Ubuntu', sans-serif;
+			font-weight: 800 !important;
+			color: rgba(241, 233, 243, 0.61);
+			text-align: center;
+			letter-spacing: 5px;
+			text-shadow: 2px 3px 20px #dfd9dc, -4px 4px 30px #d90ce0;
+		}
+	}
+	.sites {
+		position: relative;
+		button {
+			margin: 0.4rem !important;
+			font-family: 'Ubuntu', sans-serif;
+			color: rgb(31, 29, 31) !important;
+			background: lightblue;
+			padding: 0.4rem;
+		}
+		.suggested {
+			position: absolute;
+			background: black;
+			z-index: 999 !important;
+			max-width: 49%;
+			margin-left: 11rem;
+			color: white;
+			padding: 0.8rem;
+			display: flex;
+			justify-content: center;
+			border-radius: 10px;
+			align-items: center;
+			button {
+				color: white !important;
+				border: none;
+				width: 100%;
+				text-shadow: 6px 3px 20px #ff99cc, -4px 4px 30px #7fa710;
+				&:hover {
+					background: rgb(44, 43, 43);
+				}
+			}
+		}
+		.addsuggested {
+			max-width: 100%;
+			z-index: 999 !important;
+			padding: 0.8rem;
+			input {
+				width: 100%;
+				margin-bottom: 0.6rem;
+			}
+			div {
+				margin-bottom: 1rem;
+			}
+			button {
+				margin-left: 2.1rem !important;
+				width: 70%;
+				&:hover {
+					background: rgb(156, 107, 24);
+				}
+			}
+			h6 {
+				margin: 1rem 3rem 1rem 3.4rem;
+				font-size: 0.8rem;
+			}
+		}
+		.allsuggested {
+			position: absolute;
+			z-index: 999 !important;
+			background: rgb(5, 144, 151);
+			box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px,
+				rgba(0, 0, 0, 0.07) 0px 2px 2px,
+				rgba(0, 0, 0, 0.07) 0px 4px 4px !important;
+			min-height: fit-content;
+			width: 70%;
+			color: greenyellow;
+			text-align: center;
+			font-size: 0.7rem;
+
+			h6 {
+				color: rgb(230, 213, 230);
+				margin-top: 0.7rem;
+				text-decoration: underline;
+			}
+		}
+	}
+	.toggle__button {
+		display: flex;
+		justify-content: space-around;
+		margin-right: 0.6rem;
+		align-items: center;
+		color: white;
+		.theme {
+			color: white !important;
+		}
+	}
+	.disabled {
+		pointer-events: none;
+	}
+	.main__prof {
+		position: relative;
+		z-index: 999;
+		.prof {
+			margin-left: -3.54rem !important;
+			button {
+				font-size: 0.5rem !important;
+				color: white;
+				margin: 0.9rem;
+				&:last-child {
+					margin-bottom: 1.3rem;
+				}
+			}
+			span {
+				font-size: 0.4rem !important;
+				color: greenyellow !important;
+				margin-right: 0.9rem;
+			}
+		}
+	}
+
 	/* For Mobile phones */
 	@include phone($breakpoint-phone) {
 		.header {
@@ -366,3 +712,4 @@ $breakpoint-lgdesktop: 1480px;
 		}
 	}
 }
+// end

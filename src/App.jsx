@@ -25,6 +25,10 @@ import Plan from './pages/Plan';
 import PrivateRoutes from './components/PrivateRoutes';
 import { useQuery } from '@tanstack/react-query';
 function App() {
+	const {
+		main_state: { istheme },
+	} = useMainContext();
+
 	const mydata = JSON.parse(localStorage.getItem('profile'));
 	const myinfo = JSON.parse(localStorage.getItem('userInfo'));
 
@@ -38,7 +42,7 @@ function App() {
 	const client = new QueryClient();
 	return (
 		<QueryClientProvider client={client}>
-			<Layout>
+			<Layout style={{ background: istheme ? 'black' : '' }}>
 				<Routes>
 					<Route path="/">
 						<Route

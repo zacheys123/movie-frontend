@@ -86,11 +86,13 @@ $breakpoint-lgdesktop: 1480px;
 			margin-left: 2rem;
 			button {
 				margin-top: 3rem;
-				width: 50%;
-
-				background: hsl(15, 83%, 48%) !important;
+				width: 40%;
+				border-radius: 50px;
+				padding: 1rem;
+				background: hsl(13, 17%, 16%) !important;
 				font-family: helvetica sans-serif !important;
-				color: rgb(30, 242, 221);
+				color: rgb(166, 164, 164);
+				border: 1px solid rgb(86, 85, 85);
 				font-weight: bold;
 				&:hover {
 					background: rgb(71, 8, 5);

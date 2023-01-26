@@ -3,7 +3,7 @@ import { MainProvider } from '../config';
 import { main_reducer } from '../reducers/main';
 function MainContext({ children }) {
 	const initialState = {
-		istheme: false,
+		istheme: true,
 		ismodal: false,
 		modalcontent: '',
 		loading: false,
