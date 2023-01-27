@@ -66,6 +66,8 @@ const Profile = () => {
 	const navigate = useNavigate();
 
 	const [prof, setProf] = useState({
+		firstname: '',
+		lastname: ' ',
 		username: '',
 		email: ' ',
 		marital: '',
@@ -152,6 +154,8 @@ const Profile = () => {
 			console.log(response?.data);
 			setDataProfile(response?.data);
 			setProf({
+				firstname: response?.data?.result?.firtname,
+				lastname: response?.data?.result?.lastname,
 				username: response?.data?.result?.username,
 				email: response?.data?.result?.email,
 				company: response?.data?.result?.company,
@@ -201,7 +205,7 @@ const Profile = () => {
 		<Stack
 			sx={{
 				background: 'white',
-				minHeight: '85vh !important',
+				minHeight: '95vh !important',
 				width: '100%',
 			}}
 		>
@@ -350,6 +354,80 @@ const Profile = () => {
 							background: istheme ? 'white' : 'black',
 						}}
 					>
+						<Profile_Data disabled={disable} className="form-group">
+							<TextField
+								disabled={!disable}
+								InputLabelProps={{
+									shrink: true,
+									style: {
+										color: istheme ? 'grey' : 'grey',
+										marginLeft: '.5rem',
+										pointerEvents: 'none',
+									},
+								}}
+								name="firstname"
+								labelid="demo-simple-select-standard-label"
+								id="demo-simple-select-standard"
+								variant="standard"
+								label="Firstname"
+								sx={{
+									color: 'white',
+									width: '100%',
+									borderLeft: !istheme ? '2px solid grey' : 'none',
+									borderBottom: '1px solid lightgrey',
+								}}
+								inputProps={{
+									style: {
+										color: !istheme
+											? disabled
+												? 'black'
+												: 'white'
+											: 'white',
+										marginLeft: '.5rem',
+									},
+								}}
+								value={prof?.firstname || ''}
+								onChange={handleChange}
+								type="text"
+							/>
+						</Profile_Data>
+						<Profile_Data disabled={disable} className="form-group">
+							<TextField
+								disabled={!disable}
+								InputLabelProps={{
+									shrink: true,
+									style: {
+										color: istheme ? 'grey' : 'grey',
+										marginLeft: '.5rem',
+										pointerEvents: 'none',
+									},
+								}}
+								name="lastname"
+								labelid="demo-simple-select-standard-label"
+								id="demo-simple-select-standard"
+								variant="standard"
+								label="Lastname"
+								sx={{
+									color: 'white',
+									width: '100%',
+									borderLeft: !istheme ? '2px solid grey' : 'none',
+									borderBottom: '1px solid lightgrey',
+								}}
+								inputProps={{
+									style: {
+										color: !istheme
+											? disabled
+												? 'black'
+												: 'white'
+											: 'white',
+										marginLeft: '.5rem',
+									},
+								}}
+								value={prof?.lastname || ''}
+								onChange={handleChange}
+								type="text"
+							/>
+						</Profile_Data>
 						<Profile_Data disabled={disable} className="form-group">
 							<TextField
 								disabled={!disable}

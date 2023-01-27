@@ -33,7 +33,7 @@ export const MainStack = styled.div`
 	}
 `;
 export const Main = styled.div`
-	height: 84.5vh;
+	height: 93.5vh;
 	flex: 8;
 	background: ${({ istheme }) => (istheme ? 'white' : 'black')};
 
@@ -43,7 +43,7 @@ export const Main = styled.div`
 	}
 `;
 export const Left_Bar = styled.div`
-	height: 84.5vh;
+	height: 93.5vh;
 	flex: 2;
 	background: ${({ istheme }) => (istheme ? 'black' : 'black')};
 	h4 {
