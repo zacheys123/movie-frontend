@@ -105,6 +105,11 @@ $breakpoint-lgdesktop: 1480px;
 				hsl(300, 30%, 23%)
 			);
 			padding: 0.4rem;
+			transition: background 0.6s ease-in;
+			&:hover {
+				background: rgb(114, 12, 177);
+				color: rgb(169, 227, 10) !important;
+			}
 		}
 		.suggested {
 			position: absolute;
@@ -441,6 +446,10 @@ $breakpoint-lgdesktop: 1480px;
 			color: rgb(31, 29, 31) !important;
 			background: lightblue;
 			padding: 0.4rem;
+			&:hover {
+				background: rgb(114, 12, 177);
+				color: white !important;
+			}
 		}
 		.suggested {
 			position: absolute;

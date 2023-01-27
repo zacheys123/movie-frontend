@@ -28,9 +28,9 @@ https://moviebackendz.onrender.com/register`,
 					loading,
 				},
 			});
+			navigate('/create/plan');
 		}, 1000);
-		navigate('/create/plan');
-		console.log(response?.data);
+
 		dispatch({ type: LOADING, loading });
 	} catch (error) {
 		dispatch({

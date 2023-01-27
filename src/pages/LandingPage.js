@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import '../css/landing.scss';
 import { Box, Button } from '@mui/material';
 import { useMainContext } from '../context/contexts_/MainContext';
@@ -13,13 +13,13 @@ import netflix from '../assets/neflix.mp4';
 import home from '../assets/home.mp4';
 import palmer from '../assets/palmer.mp4';
 import slumber from '../assets/slumber.mp4';
+import Email from './Email';
 const LandingPage = () => {
 	const {
 		main_state: { istheme, admin },
 		main_dispatch,
 	} = useMainContext();
 	const navigate = useNavigate();
-	const [val, setVal] = useState('');
 
 	const [user, setUser] = useState(() => {
 		const storedvalues = localStorage.getItem('profile');
@@ -64,26 +64,20 @@ const LandingPage = () => {
 			},
 		},
 	};
-	const trailers = [netflix, palmer, home, slumber];
-	const randomtrailers =
-		trailers[Math.floor(Math.random() * trailers.length)];
-	console.log(randomtrailers);
+	const [randomtrailers, setRandom] = useState('');
+	const random = () => {
+		const trailers = [netflix, palmer, home, slumber];
+		setRandom(trailers[Math.floor(Math.random() * trailers.length)]);
+		return randomtrailers;
+	};
+
+	useEffect(() => {
+		random();
+	});
 	return (
 		<div className="landing">
 			<Box className="head__landing">
-				<form className="formd">
-					<div className="form-group">
-						<input
-							type="text"
-							disabled
-							value={user?.result?.email || val}
-						/>
-					</div>
-					<input type="text" placeholder="leave a comment" />
-					<Button size="small" variant="contained" type="submit">
-						Send Email
-					</Button>
-				</form>
+				<Email user={user} />
 			</Box>
 			<Box className="center__landing">
 				<motion.div

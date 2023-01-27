@@ -21,7 +21,7 @@ import {
 	setWorld,
 	setPremium,
 } from './plan/movie_config';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import {
 	PROFILE,
 	CLOSEMODAL,
@@ -56,6 +56,7 @@ const Header = () => {
 	const logout = (ev) => {
 		ev.preventDefault();
 		window.localStorage.removeItem('profile');
+		window.localStorage.removeItem('userInfo');
 		navigate('/');
 		window.location.reload();
 	};
@@ -109,6 +110,7 @@ const Header = () => {
 	};
 	const myInfo = JSON.parse(window.localStorage.getItem('userInfo'));
 
+	const location = useLocation();
 	const refs = {
 		suggestref,
 		latestref,
@@ -132,10 +134,10 @@ const Header = () => {
 		if (!storedvalues) return {};
 		return JSON.parse(storedvalues);
 	});
-
+	console.log(myInfo);
 	return (
 		<>
-			{!isheader && (
+			{myInfo && (
 				<div className={istheme ? 'header' : 'header_darkmode'}>
 					{showform && (
 						<Box className="add">
@@ -200,6 +202,16 @@ const Header = () => {
 						</h3>
 					</Box>
 					<Box className="sites">
+						{location.pathname !== '/' && (
+							<Button
+								className={adm ? 'header' : 'disabled'}
+								variant="outlined"
+								size="small"
+								onClick={() => navigate('/')}
+							>
+								Homepage
+							</Button>
+						)}
 						<Button
 							className={adm ? 'header' : 'disabled'}
 							variant="outlined"

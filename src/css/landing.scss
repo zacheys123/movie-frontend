@@ -43,7 +43,7 @@ $breakpoint-lgdesktop: 1480px;
 }
 
 .landing {
-	background-image: url('../assets/landing.jpg');
+	background-image: url('../assets/landing.jpg') !important;
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -64,9 +64,13 @@ $breakpoint-lgdesktop: 1480px;
 			align-items: center;
 			button {
 				text-transform: none;
+				&:hover {
+					background: rgb(95, 127, 243);
+				}
 			}
 			input {
 				margin-right: 0.5rem;
+				outline: none;
 			}
 		}
 	}
