@@ -18,6 +18,12 @@ const Email = ({ user }) => {
 	const sendEmail = async (e) => {
 		e.preventDefault();
 		if (email && username && message) {
+			const result = await emailjs.sendForm(
+				process.env.REACT_APP_SERVICE,
+				process.env.REACT_APP_TEMPLATE,
+				form.current,
+				process.env.REACT_APP_PUBLIC,
+			);
 			try {
 				setTimeout(() => {
 					main_dispatch({ type: LOADING });
@@ -33,7 +39,7 @@ const Email = ({ user }) => {
 					});
 					setMessage('');
 				}, 2000);
-
+				console.log(result);
 				main_dispatch({ type: LOADING });
 			} catch (error) {
 				console.log(error);
