@@ -16,6 +16,9 @@ https://moviebackendz.onrender.com/register`,
 		);
 
 		setTimeout(() => {
+			setTimeout(() => {
+				navigate('/create/plan');
+			}, 2000);
 			window.localStorage.setItem(
 				'profile',
 				JSON.stringify(response.data),
@@ -28,7 +31,6 @@ https://moviebackendz.onrender.com/register`,
 					loading,
 				},
 			});
-			navigate('/create/plan');
 		}, 1000);
 
 		dispatch({ type: LOADING, loading });

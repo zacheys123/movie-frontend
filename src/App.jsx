@@ -34,7 +34,7 @@ function App() {
 
 	const navigate = useNavigate();
 	useEffect(() => {
-		if (!mydata || !myinfo) {
+		if (!mydata) {
 			navigate('/');
 		}
 	}, [mydata?.result?._id]);
