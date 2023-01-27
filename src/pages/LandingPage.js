@@ -176,6 +176,42 @@ const LandingPage = () => {
 							/>
 						</Box>
 					</span>
+					<motion.div
+						initial={{ x: '-100%' }}
+						animate={{
+							x: ['-5%', '25%', '5%'],
+							y: '-8rem',
+							transition: { duration: 0.8, esae: 'easeInOut' },
+						}}
+						style={{
+							background: 'lightgrey',
+							padding: '.5rem',
+							width: '40%',
+						}}
+					>
+						<span
+							style={{
+								position: 'absolute',
+								right: '10px',
+								width: '3rem !important',
+								height: '3rem !important',
+								fontSize: '3rem !important',
+								top: 0,
+							}}
+						>
+							&times;
+						</span>
+						<h6>
+							{' '}
+							More information has been sent to your &nbsp;
+							<a
+								style={{ color: 'purple' }}
+								href ='mailto:gmail.com'
+							>
+								Email
+							</a>
+						</h6>
+					</motion.div>
 				</Box>
 				<Box className="bottom__data">
 					<span className="text-light">
