@@ -31,6 +31,7 @@ const Email = ({ user }) => {
 						progress: undefined,
 						theme: 'light',
 					});
+					setMessage('');
 				}, 2000);
 
 				main_dispatch({ type: LOADING });

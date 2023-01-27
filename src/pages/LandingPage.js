@@ -56,10 +56,10 @@ const LandingPage = () => {
 		},
 		show: {
 			scale: 1.1,
-			x: ['100%', '10%', '45%'],
+			x: ['100%', '5%', '10%'],
 			opacity: 1,
 			transition: {
-				delay: 0.7,
+				delay: 1.7,
 				duration: 0.6,
 			},
 		},

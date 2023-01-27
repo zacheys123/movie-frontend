@@ -42,7 +42,7 @@ function App() {
 	const client = new QueryClient();
 	return (
 		<QueryClientProvider client={client}>
-			<Layout style={{ background: istheme ? 'black' : '' }}>
+			<Layout>
 				<Routes>
 					<Route path="/">
 						<Route
