@@ -71,13 +71,31 @@ const Feed = () => {
 
 	//* create movies for this user function
 	const navigate = useNavigate();
-	const users = user?.result?.users;
+
 	const [myid, setId] = useState(() => {
 		const storedvalues = localStorage.getItem('profile');
 		if (!storedvalues) return {};
 		return JSON.parse(storedvalues);
 	});
 	const id = myid?.result?._id;
+
+	// getting all movies for this user
+	const { data: alldata, refetch } = useQuery(['users'], async () => {
+		const response = await axios.get(
+			`https://moviebackendz.onrender.com/user/v2/${id}`,
+		);
+		main_dispatch({
+			type: GETUSER,
+			payload: { user: response?.data },
+		});
+		movie_dispatch({
+			type: MOVIES,
+			payload: { movies: response?.data?.result?.movies },
+		});
+		return response.data;
+	});
+	const users = alldata?.result?.users;
+
 	const createMovies = useCallback(
 		(ev) => {
 			ev.preventDefault();
@@ -107,22 +125,6 @@ const Feed = () => {
 	const closemodal = () => {
 		movie_dispatch({ type: CLOSEMODAL });
 	};
-
-	// getting all movies for this user
-	const { data: alldata, refetch } = useQuery(['users'], async () => {
-		const response = await axios.get(
-			`https://moviebackendz.onrender.com/user/v2/${id}`,
-		);
-		main_dispatch({
-			type: GETUSER,
-			payload: { user: response?.data },
-		});
-		movie_dispatch({
-			type: MOVIES,
-			payload: { movies: response?.data?.result?.movies },
-		});
-		return response.data;
-	});
 
 	const [searchquery, setQuery] = useState('');
 

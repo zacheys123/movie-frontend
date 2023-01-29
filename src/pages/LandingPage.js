@@ -74,6 +74,7 @@ const LandingPage = () => {
 	useEffect(() => {
 		random();
 	});
+	const [moreemail, setEmail] = useState(true);
 	return (
 		<div className="landing">
 			<Box className="head__landing">
@@ -176,42 +177,46 @@ const LandingPage = () => {
 							/>
 						</Box>
 					</span>
-					<motion.div
-						initial={{ x: '-100%' }}
-						animate={{
-							x: ['-5%', '25%', '5%'],
-							y: '-8rem',
-							transition: { duration: 0.8, esae: 'easeInOut' },
-						}}
-						style={{
-							background: 'lightgrey',
-							padding: '.5rem',
-							width: '40%',
-						}}
-					>
-						<span
+					{moreemail && (
+						<motion.div
+							initial={{ x: '-100%' }}
+							animate={{
+								x: ['-5%', '25%', '5%'],
+								y: '-8rem',
+								transition: { duration: 0.8, esae: 'easeInOut' },
+							}}
 							style={{
-								position: 'absolute',
-								right: '10px',
-								width: '3rem !important',
-								height: '3rem !important',
-								fontSize: '3rem !important',
-								top: 0,
+								background: 'lightgrey',
+								padding: '.5rem',
+								width: '40%',
 							}}
 						>
-							&times;
-						</span>
-						<h6>
-							{' '}
-							More information has been sent to your &nbsp;
-							<a
-								style={{ color: 'purple' }}
-								href ='mailto:gmail.com'
+							<span
+								style={{
+									position: 'absolute',
+									right: '10px',
+									width: '3rem !important',
+									height: '3rem !important',
+									fontSize: '3rem !important',
+									top: 0,
+									cursor: 'pointer',
+								}}
+								onClick={() => setEmail((prev) => !prev)}
 							>
-								Email
-							</a>
-						</h6>
-					</motion.div>
+								&times;
+							</span>
+							<h6>
+								{' '}
+								More information has been sent to your &nbsp;
+								<a
+									style={{ color: 'purple' }}
+									href="mailto:gmail.com"
+								>
+									Email
+								</a>
+							</h6>
+						</motion.div>
+					)}
 				</Box>
 				<Box className="bottom__data">
 					<span className="text-light">

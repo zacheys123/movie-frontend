@@ -36,6 +36,7 @@ import {
 	createSuggested,
 } from '../context/features/movieSlice';
 import Delete from '@mui/icons-material/DeleteForever';
+import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 const Header = () => {
 	const {
@@ -48,11 +49,18 @@ const Header = () => {
 	} = useMovieContext();
 
 	const navigate = useNavigate();
-	const newref = useRef();
-	const newsug = useRef();
+
 	const adm = JSON.parse(window.localStorage.getItem('profile'));
 	const admId = adm?.result?._id;
 
+	// getting all movies for this user
+	const { data: alldata, refetch } = useQuery(['users'], async () => {
+		const response = await axios.get(
+			`https://moviebackendz.onrender.com/user/v2/${admId}`,
+		);
+
+		return response.data;
+	});
 	const logout = (ev) => {
 		ev.preventDefault();
 		window.localStorage.removeItem('profile');
@@ -84,6 +92,7 @@ const Header = () => {
 		};
 		const myuser = { userId: adm?.result?._id, newuser };
 		addUser(myuser, movie_dispatch, success, setForm, ismodal);
+		refetch();
 		console.log(adm?.result?._id);
 	}, []);
 
@@ -98,16 +107,16 @@ const Header = () => {
 		createSuggested(mysuggested, movie_dispatch, success);
 	}, []);
 
-	const removeuser = async (myid) => {
-		await axios.delete(
-			`https://moviebackendz.onrender.com/movie/remove/${myid}`,
-			myid,
-		);
-		movie_dispatch({
-			type: DELETEUSER,
-			payload: user?.result?.users,
-		});
-	};
+	// const removeuser = async (myid) => {
+	// 	await axios.delete(
+	// 		`https://moviebackendz.onrender.com/movie/remove/${myid}`,
+	// 		myid,
+	// 	);
+	// 	movie_dispatch({
+	// 		type: DELETEUSER,
+	// 		payload: user?.result?.users,
+	// 	});
+	// };
 	const myInfo = JSON.parse(window.localStorage.getItem('userInfo'));
 
 	const location = useLocation();
@@ -134,7 +143,7 @@ const Header = () => {
 		if (!storedvalues) return {};
 		return JSON.parse(storedvalues);
 	});
-	console.log(myInfo);
+
 	return (
 		<>
 			{myInfo && (

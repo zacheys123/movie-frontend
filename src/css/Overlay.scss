@@ -2,7 +2,7 @@
 	position: relative;
 }
 .free {
-	background: white;
+	background: rgb(227, 185, 106);
 	margin-top: 0.7rem;
 	margin-right: 0.8rem;
 	flex: 27%;
@@ -10,41 +10,81 @@
 	text-align: center;
 	transition: 0.4s transform ease-in-out;
 	font-size: 0.9rem;
+	color: rgb(30, 53, 230);
+	input {
+		width: 9rem;
+		border: none;
+		font-weight: bold;
+		pointer-events: none;
+		outline: none;
+		margin-top: 5.5rem !important;
+	}
 }
 .amateur {
 	transform: scale(1);
 	transition: 0.4s transform ease-in-out;
-	background: lightgrey;
+	background: rgb(94, 88, 88);
 	margin-top: 0.7rem;
 	text-align: center;
 	margin-right: 0.8rem;
 	flex: 27%;
+	color: white;
 	font-size: 0.9rem;
+	input {
+		width: 9rem;
+		border: none;
+		font-weight: bold;
+		pointer-events: none;
+		outline: none;
+		margin-top: 3rem !important;
+	}
 }
 .world {
 	transform: scale(1);
 	transition: 0.4s transform ease-in-out;
-	background: lightgrey;
+	background: rgb(101, 12, 68);
 	margin-top: 0.7rem;
 	text-align: center;
 	margin-right: 0.8rem;
 	flex: 27%;
 	font-size: 0.9rem;
+	color: white;
+	input {
+		width: 9rem;
+		border: none;
+		padding: 0.3rem !important;
+		font-weight: bolder !important;
+		color: rgb(8, 3, 3);
+		pointer-events: none;
+		outline: none;
+		margin-top: 4.5rem !important;
+	}
 }
 .premium {
 	transform: scale(1);
 	transition: 0.4s transform ease-in-out;
 	margin-right: 0.8rem;
-	background: white;
+	background: rgb(14, 12, 12);
 	margin-top: 0.7rem;
 	text-align: center;
+	color: rgb(231, 228, 228);
 
 	flex: 27%;
 	.col-lg-6 {
 		font-size: 0.86rem;
 	}
+	input {
+		width: 9rem;
+		border: none;
+		font-weight: bold;
+		pointer-events: none;
+		outline: none;
+		margin-top: 0.8rem !important;
+	}
 }
 .box {
+	width: 15%;
+	height: 91%;
 	box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
 		rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
 		rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
@@ -56,19 +96,15 @@
 	width: 80%;
 	margin: 0 auto;
 }
-.box input[type='text'] {
-	width: 9rem;
-	border: none;
-	font-weight: bold;
-	pointer-events: none;
-	outline: none;
-	margin-top: -0.6rem;
-}
-.box input[type='text']:first-child {
+input[type='text']:first-child {
 	border: 1px solid grey;
 }
 .box button {
-	margin-top: 0.6rem;
+	margin-top: 0.9rem;
+	width: 70%;
+	font-size: 0.7rem !important;
+	padding: 0.5rem !important;
+	bottom: 0 !important;
 }
 .col {
 	border: 1px solid grey;
@@ -77,8 +113,9 @@
 }
 
 #table {
+	height: 40%;
 	width: 80% !important;
-	margin: 3.5rem auto;
+	margin: 2rem auto !important;
 }
 #table .row {
 	display: -webkit-flex;

@@ -95,8 +95,28 @@ const Profile = () => {
 
 	const adm = JSON.parse(window.localStorage.getItem('profile'));
 	const id = adm?.result?._id; // Update function
+	const imageref = useRef();
+	const handleImage = (e) => {
+		{
+			const file = e.target.files[0];
+			Transformfile(file);
+		}
+	};
+	const Transformfile = (file) => {
+		const reader = new FileReader();
+		if (file) {
+			reader.readAsDataURL(file);
+			reader.onloadend = () => {
+				setImage(reader.result);
+			};
+		} else {
+			setImage('');
+		}
+	};
 	const update_acc = useCallback((ev) => {
-		const myprofile = { prevData, userId: id };
+		let form = { prevData, imageref };
+		console.log(form?.imageref?.current);
+		const myprofile = { form, userId: id };
 
 		ev.preventDefault();
 		if (prevData?.current?.username && prevData?.current?.email) {
@@ -154,7 +174,7 @@ const Profile = () => {
 			console.log(response?.data);
 			setDataProfile(response?.data);
 			setProf({
-				firstname: response?.data?.result?.firtname,
+				firstname: response?.data?.result?.firstname,
 				lastname: response?.data?.result?.lastname,
 				username: response?.data?.result?.username,
 				email: response?.data?.result?.email,
@@ -167,7 +187,6 @@ const Profile = () => {
 				password: response?.data?.result?.password,
 				confirmpassword: response?.data?.result?.password,
 			});
-			setImage(response?.data?.profilepicture);
 		} catch (error) {
 			console.log(error.message);
 		}
@@ -190,6 +209,7 @@ const Profile = () => {
 	React.useEffect(() => {
 		profile.current = allprof;
 		prevData.current = prof;
+		imageref.current = image;
 	}, [prof]);
 	const closemodal = () => {
 		main_dispatch({ type: 'CLOSEMODAL', ismodal });
@@ -213,6 +233,7 @@ const Profile = () => {
 				<Left_Bar className="profile_left">
 					<Image_Data className="profile_image">
 						<h4>Change Profile Picture</h4>
+
 						<Box
 							sx={{
 								height: '20em',
@@ -222,7 +243,7 @@ const Profile = () => {
 							}}
 							className="dp_picture"
 						>
-							<img src={logo} />
+							{image ? <img src={image} /> : 'Profile picture here!!'}
 							<span>
 								<label htmlFor="dp_image">
 									<AddAPhotoIcon
@@ -239,11 +260,11 @@ const Profile = () => {
 								style={{
 									display: 'none',
 								}}
-								multiple
-								onChange={(e) => setImage(e.target.files[0])}
+								onChange={handleImage}
 								type="file"
 							/>
 						</Box>
+
 						<Box
 							sx={{
 								color: 'lightgrey',

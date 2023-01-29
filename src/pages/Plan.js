@@ -36,7 +36,15 @@ const ConfirmData = () => {
 	});
 	const prevData = useRef({});
 	const {
-		main_state: { loading, loader, userInfo, isplan, res, user },
+		main_state: {
+			loading,
+			loader,
+			userInfo,
+			isplan,
+			res,
+			user,
+			istheme,
+		},
 		main_dispatch,
 	} = useMainContext();
 	const handlePlan = (ev) => {
@@ -148,7 +156,11 @@ const ConfirmData = () => {
 	});
 	const myuserInfo = JSON.parse(localStorage.getItem('userInfo'));
 	return (
-		<Container sx={{ height: '85vh' }} className="main bg-dark">
+		<Container
+			sx={{ height: '85vh' }}
+			className="main"
+			style={{ background: !istheme ? 'black' : 'inherit' }}
+		>
 			<Box
 				className="main__plan"
 				sx={{
@@ -162,7 +174,9 @@ const ConfirmData = () => {
 				}}
 			>
 				<div className="d-flex flex-column head">
-					<h4 style={{ color: 'white' }}>Choose A Plan</h4>
+					<h4 style={{ color: istheme ? 'black' : 'white' }}>
+						Choose A Plan
+					</h4>
 
 					{myuserInfo ? (
 						<div
@@ -173,13 +187,13 @@ const ConfirmData = () => {
 						>
 							<span
 								style={{
-									color: 'yellow',
+									color: istheme ? 'navy' : 'cyan',
 									fontWeight: '600',
 								}}
 							>
 								Currently:
 							</span>
-							<span style={{ color: 'red' }}>
+							<span style={{ color: istheme ? 'red' : 'yellow' }}>
 								{' '}
 								{alldata?.result?.package}
 							</span>
@@ -205,10 +219,10 @@ const ConfirmData = () => {
 							style={{
 								fontFamily: "'Open Sans', sans-serif",
 								marginTop: '.5rem',
-								color: 'orange',
+								color: 'green',
 							}}
 						>
-							Free Plan
+							Basic Plan
 						</h5>
 						<Typography variant="body">
 							&nbsp;&nbsp;In this free plan there are afew that are
@@ -282,7 +296,8 @@ const ConfirmData = () => {
 								sx={{
 									background: 'lightblue',
 									mt: '2rem',
-									background: 'orange',
+									color: 'black',
+									background: 'magenta',
 								}}
 							>
 								{loader ? (
@@ -297,7 +312,7 @@ const ConfirmData = () => {
 						</Box>
 					</Box>
 					<Box
-						className="box amateur mt-1"
+						className="box amateur"
 						style={{ opacity: isplan || loading ? 0.4 : 1 }}
 					>
 						{' '}
@@ -305,10 +320,10 @@ const ConfirmData = () => {
 							style={{
 								fontFamily: "'Open Sans', sans-serif",
 								marginTop: '.5rem',
-								color: 'green',
+								color: 'magenta',
 							}}
 						>
-							Amateur
+							Standard
 						</h5>
 						<Typography variant="body">
 							In this Amateur plan not much functionality is added to
@@ -397,22 +412,30 @@ const ConfirmData = () => {
 						</Box>
 					</Box>
 					<Box
-						className="box world"
-						style={{ opacity: isplan || loading ? 0.4 : 1 }}
+						className="box premium"
+						style={{
+							opacity: isplan || loading ? 0.4 : 1,
+							background: !istheme ? 'white' : 'inherit',
+							color: !istheme ? 'black' : 'inherit',
+						}}
 					>
 						<h5
 							style={{
 								fontFamily: "'Open Sans', sans-serif",
 								marginTop: '.5rem',
-								color: 'purple',
+								color: 'red',
 							}}
 						>
-							World Class
+							Premium
 						</h5>
-						<Typography variant="body">
-							In this World Class offering all functionalities to
-							movies, enjoy this plan and packages ,view and add
-							suggested movies
+						<Typography
+							variant="subtitle"
+							sx={{ fontSize: '.8rem !important' }}
+						>
+							In this Premium plan all functionalities,movies and all
+							updates are done in this plan.Enjoy all premium
+							functions from our package,access latest movies from
+							netflix ,hulu,HBO as soon as they are released
 						</Typography>
 						<div id="table">
 							<div className="row">
@@ -496,27 +519,24 @@ const ConfirmData = () => {
 						</Box>
 					</Box>
 					<Box
-						className="box premium"
+						className="box world"
 						style={{ opacity: isplan || loading ? 0.4 : 1 }}
 					>
 						<h5
 							style={{
 								fontFamily: "'Open Sans', sans-serif",
 								marginTop: '.5rem',
-								color: 'red',
+								color: 'yellow',
 							}}
 						>
-							Premium
+							World Class
 						</h5>
-						<Typography
-							variant="subtitle"
-							sx={{ fontSize: '.8rem !important' }}
-						>
-							In this Premium plan all functionalities,movies and all
-							updates are done in this plan.Enjoy all premium
-							functions from our package,access latest movies from
-							netflix ,hulu,HBO as soon as they are released
+						<Typography variant="body">
+							In this World Class offering all functionalities to
+							movies, enjoy this plan and packages ,view and add
+							suggested movies
 						</Typography>
+
 						<div id="table" className="prem mt-1">
 							<div className="row">
 								<div className="col-lg-6 col-md-8 col-sm-8">

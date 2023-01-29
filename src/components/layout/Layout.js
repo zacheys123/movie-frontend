@@ -17,7 +17,7 @@ import {
 	setAmateur,
 	setWorld,
 	setPremium,
-} from '../plan/movie_config';
+} from '../plan/_config';
 
 function Layout({ children }) {
 	const { movie_dispatch } = useMovieContext();
