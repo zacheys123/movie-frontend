@@ -144,6 +144,12 @@ const Header = () => {
 		return JSON.parse(storedvalues);
 	});
 
+	const [source, setSource] = useState(() => {
+		let first = user.result.firstname.split('')[0];
+		let second = user.result.lastname.toUpperCase().split('')[0];
+		return `${first}${second}`;
+	});
+
 	return (
 		<>
 			{myInfo && (
@@ -463,13 +469,34 @@ const Header = () => {
 						</Box>
 						<Box className="main__prof">
 							{' '}
-							{adm?.result?._id && (
+							{adm?.result?.profilepic ? (
 								<Avatar
 									onClick={() =>
 										main_dispatch({ type: PROFILE, profile })
 									}
 									sx={{ cursor: 'pointer' }}
 								/>
+							) : (
+								<div
+									onClick={() =>
+										main_dispatch({ type: PROFILE, profile })
+									}
+									className="bg-info"
+									style={{
+										cursor: 'pointer',
+										display: 'flex',
+										justifyContent: 'center',
+										alignItems: 'center',
+										width: '3rem',
+										height: '3rem',
+										fontSize: '1.2rem',
+										borderRadius: '100%',
+										fontWeight: 400,
+										color: 'yellow',
+									}}
+								>
+									{source}
+								</div>
 							)}
 							{profile && (
 								<Box className="d-flex flex-column position-absolute bg-dark prof">

@@ -74,6 +74,11 @@ const LandingPage = () => {
 	useEffect(() => {
 		random();
 	});
+	const [username, setName] = useState(() => {
+		let first = user.result.firstname;
+		let second = user.result.lastname;
+		return `${first}${second}`;
+	});
 	const [moreemail, setEmail] = useState(true);
 	return (
 		<div className="landing">
@@ -221,10 +226,7 @@ const LandingPage = () => {
 				<Box className="bottom__data">
 					<span className="text-light">
 						Username:
-						<span className="text-warning">
-							{' '}
-							{user?.result?.username}
-						</span>
+						<span className="text-warning"> {username}</span>
 					</span>
 					<span className="text-light">
 						Tel no:

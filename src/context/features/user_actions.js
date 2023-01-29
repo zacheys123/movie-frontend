@@ -9,7 +9,7 @@ import {
 	LOADING,
 	PLAN,
 } from '../action_type';
-const baseUrl = 'https://moviebackendz.com';
+const baseUrl = 'http://localhost:4000';
 
 export const update_user = async (
 	setMainContext,

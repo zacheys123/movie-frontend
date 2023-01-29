@@ -10,6 +10,7 @@ const Footer = () => {
 		if (!storedvalues) return {};
 		return JSON.parse(storedvalues);
 	});
+
 	return <div className="footer">&copy;{user?.result?.company}</div>;
 };
 export default Footer;
