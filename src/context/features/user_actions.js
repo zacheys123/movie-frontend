@@ -9,7 +9,7 @@ import {
 	LOADING,
 	PLAN,
 } from '../action_type';
-const baseUrl = 'http://localhost:4000';
+const baseUrl = 'https://moviebackendz.onrender.com';
 
 export const update_user = async (
 	setMainContext,
@@ -19,7 +19,7 @@ export const update_user = async (
 	ismodal,
 	success,
 ) => {
-	console.log(id);
+	console.log(myprof);
 	try {
 		let user = await axios.put(
 			`${baseUrl}/user/v2/update/${id}`,
@@ -37,9 +37,7 @@ export const update_user = async (
 					modalcontent: 'Data Succesfully Updated',
 				},
 			});
-			setTimeout(() => {
-				window.location.reload();
-			}, 2000);
+			setTimeout(() => {}, 2000);
 		}, 3000);
 		setMainContext({ type: LOADING });
 	} catch (error) {

@@ -114,8 +114,8 @@ const Profile = () => {
 		}
 	};
 	const update_acc = useCallback((ev) => {
-		let form = { prevData, imageref };
-		console.log(form?.imageref?.current);
+		let form = { prevData, image };
+		console.log(form?.imageref);
 		const myprofile = { form, userId: id };
 
 		ev.preventDefault();
@@ -173,10 +173,13 @@ const Profile = () => {
 			const response = await axios.get(`${baseUrl}/user/v2/${id}`);
 			console.log(response?.data);
 			setDataProfile(response?.data);
+			let username =
+				response?.data?.result?.firstname +
+				response?.data?.result?.lastname;
 			setProf({
 				firstname: response?.data?.result?.firstname,
 				lastname: response?.data?.result?.lastname,
-				username: response?.data?.result?.username,
+				username: username || response?.data?.username,
 				email: response?.data?.result?.email,
 				company: response?.data?.result?.company,
 				marital: response?.data?.result?.marital || '',
