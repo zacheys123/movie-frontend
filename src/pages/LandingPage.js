@@ -116,9 +116,10 @@ const LandingPage = () => {
 							<span
 								style={{
 									color: 'orange',
-									fontSize: '3.9rem ',
+									fontSize: '2.9rem ',
 									fontWeight: 'bold',
-									fontFamily: "'Tangerine', serif",
+									fontFamily: 'ariel',
+									fontStyle: 'italics',
 									textShadow: ' 4px 4px 4px #aae4a',
 								}}
 							>
@@ -129,7 +130,7 @@ const LandingPage = () => {
 								style={{
 									color: 'yellow',
 									fontWeight: 'bold',
-									fontFamily: "'Tangerine', serif",
+									fontFamily: 'sans',
 									textShadow: ' 4px 4px 4px #aae4a',
 								}}
 							>
