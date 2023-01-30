@@ -23,6 +23,10 @@ https://moviebackendz.onrender.com/register`,
 				'profile',
 				JSON.stringify(response.data),
 			);
+			window.localStorage.setItem(
+				'userInfo',
+				JSON.stringify(response?.data?.package),
+			);
 
 			dispatch({
 				type: SIGNUP,
@@ -60,7 +64,10 @@ export const adminLogin = async (
 				'profile',
 				JSON.stringify(response.data),
 			);
-
+			window.localStorage.setItem(
+				'userInfo',
+				JSON.stringify(response?.data?.package),
+			);
 			dispatch({
 				type: SIGNUP,
 				payload: {
