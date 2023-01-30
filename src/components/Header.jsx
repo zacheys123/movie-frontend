@@ -473,7 +473,7 @@ const Header = () => {
 							) : (
 								<div
 									onMouseOver={() => setShowuser((prev) => !prev)}
-									onMouseOut={() => setShowuser((prev) => prev)}
+									onMouseOut={() => setShowuser((prev) => !prev)}
 									onClick={() => {
 										setShowuser((prev) => !prev);
 										main_dispatch({ type: PROFILE, profile });
@@ -504,15 +504,24 @@ const Header = () => {
 								<div
 									className="d-flex flex-column position-absolute bg-dark text-light"
 									style={{
-										marginLeft: '-7rem ',
+										marginLeft: '-10rem ',
 									}}
 								>
-									<span className="mt-2 mx-2">
+									<span className="mt-2 mx-2 ">
+										<span className="mt-2 mx-2 text-info">
+											{' '}
+											Username:
+										</span>
+
 										{alldata?.result?.firstname +
 											alldata?.result?.lastname}
 									</span>
 									{''}
-									<span className="mx-2">
+									<span className="mx-2 ">
+										<span className="mt-2 mx-2 text-info">
+											{' '}
+											email:
+										</span>
 										{alldata?.result?.email}
 									</span>
 									{''}
