@@ -149,7 +149,7 @@ const Header = () => {
 		let second = user.result.lastname.toUpperCase().split('')[0];
 		return `${first}${second}`;
 	});
-
+	const [showUser, setShowuser] = useState(false);
 	return (
 		<>
 			{myInfo && (
@@ -467,7 +467,11 @@ const Header = () => {
 								</Box>
 							)}
 						</Box>
-						<Box className="main__prof">
+						<Box
+							className="main__prof position-relative"
+							onMouseOver={() => setShowuser((prev) => !prev)}
+							onMouseOut={() => setShowuser((prev) => prev)}
+						>
 							{' '}
 							{adm?.result?.profilepic ? (
 								<Avatar
@@ -496,6 +500,23 @@ const Header = () => {
 									}}
 								>
 									{source}
+								</div>
+							)}
+							{showUser && (
+								<div
+									className="d-flex flex-column position-absolute bg-dark text-light"
+									style={{
+										marginLeft: '-7rem ',
+									}}
+								>
+									<span className="mt-2 mx-2">
+										{user.result.firstname +
+											' ' +
+											user.result.lastname}
+									</span>
+									{''}
+									<span className="mx-2">{user.result.email}</span>
+									{''}
 								</div>
 							)}
 							{profile && (

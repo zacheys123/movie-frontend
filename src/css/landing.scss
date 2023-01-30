@@ -43,7 +43,7 @@ $breakpoint-lgdesktop: 1480px;
 }
 
 .landing {
-	background-image: url('../assets/landing.jpg');
+	background-image: url('../assets/movie.webp');
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -75,22 +75,22 @@ $breakpoint-lgdesktop: 1480px;
 		}
 	}
 	.center__landing {
-		flex: 8;
+		flex: 9;
 		justify-content: space-between;
 		display: flex;
 		align-items: center;
 		.center {
 			flex: 3;
-			max-width: 35rem;
+			max-width: 40rem;
 			height: 61% !important;
-			background: linear-gradient(
-				rgba(244, 244, 244, 0.6),
-				hsl(233, 34%, 45%)
-			);
+			background: transparent;
 			padding: 1rem;
 			margin-left: 2rem;
+			box-shadow: rgba(0, 0, 0, 0.4) 3px 4px 4px,
+				rgba(208, 194, 35, 0.3) 3px 12px 20px -3px,
+				rgba(206, 18, 197, 0.2) 0px -3px 0px inset;
 			button {
-				margin-top: 2rem;
+				margin-top: 0.8rem;
 				width: 40%;
 				border-radius: 50px;
 				padding: 1rem;
@@ -117,7 +117,7 @@ $breakpoint-lgdesktop: 1480px;
 	}
 	.bottom__landing {
 		display: block;
-		flex: 2;
+		flex: 1;
 		background: rgb(122, 22, 22);
 		.follow {
 			.icon {

@@ -60,8 +60,15 @@ const LandingPage = () => {
 			opacity: 1,
 			transition: {
 				delay: 1.7,
-				duration: 0.6,
+				duration: 0.7,
 			},
+		},
+	};
+	const variants2 = {
+		initial: { width: '10px' },
+		animate: {
+			width: '10px',
+			transition: { duration: Infinity },
 		},
 	};
 	const [randomtrailers, setRandom] = useState('');
@@ -85,41 +92,47 @@ const LandingPage = () => {
 			<Box className="head__landing">
 				<Email user={user} />
 			</Box>
+
 			<Box className="center__landing">
 				<motion.div
-					variants={variants}
+					variants={variants1}
 					initial="hidden"
 					animate="show"
 					className="center"
 				>
-					<h2>
+					<h2 style={{ color: 'white', fontSize: '1.4rem' }}>
 						<span
 							style={{
-								fontWeight: 'bold ',
+								fontWeight: '800 ',
+								fontFamily: 'georgia',
 								fontSize: '1.9rem',
 								color: 'cyan',
+								fontSize: '4rem',
 							}}
 						>
-							Welcome{' '}
-						</span>{' '}
-						to &nbsp;
-						<span style={{ fontWeight: 'bold', color: 'yellow' }}>
-							MOVIEHUBZ{' '}
+							Welcome &nbsp; to{' '}
+							<span style={{ color: 'yellow', fontWeight: 'bold' }}>
+								MovieHub
+							</span>{' '}
 						</span>
-						.The biggest{' '}
-						<span style={{ fontWeight: 'bold', color: 'red' }}>
-							Platform{' '}
+						where you get to{' '}
+						<span style={{ color: 'aqua' }}>organize, </span>{' '}
+						<span style={{ color: 'aqua' }}>optimize </span> and{' '}
+						<span style={{ color: 'greenyellow' }}>schedule </span>{' '}
+						your Movie Orders for faster, accurate, and Efficient
+						access to Data records{' '}
+						<span style={{ color: 'yellow', fontWeight: 'bold' }}>
+							Its scheduling feature further enables you
 						</span>{' '}
-						for Movies And Related Info, and Access To Movies and Your
-						Movie Data.With{' '}
-						<span style={{ fontWeight: 'bold', color: 'pink' }}>
-							MovieHubz{' '}
-						</span>{' '}
-						You Can{' '}
-						<span style={{ fontWeight: 'bold', color: 'purple' }}>
-							Access{' '}
-						</span>{' '}
-						From Anywhere AnyTime.
+						to stay on the loop with requested and upcoming movies.
+						<marquee
+							direction="right"
+							loop=""
+							style={{ color: 'cyan', fontWeight: '800' }}
+						>
+							{' '}
+							WE ARE REVOLUTIONIZING THE MOVIE BUSINESS!!
+						</marquee>
 					</h2>
 					{user?.result?._id ? (
 						<div className="d-flex flex-column py-2">
@@ -187,8 +200,8 @@ const LandingPage = () => {
 							initial={{ x: '-100%' }}
 							animate={{
 								x: ['-5%', '25%', '5%'],
-								y: '-8rem',
-								transition: { duration: 0.8, esae: 'easeInOut' },
+								y: '-6rem',
+								transition: { duration: 0.8, ease: 'easeInOut' },
 							}}
 							style={{
 								background: 'lightgrey',
