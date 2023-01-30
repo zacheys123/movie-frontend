@@ -4,22 +4,27 @@ import { Button, CircularProgress } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import { useMainContext } from '../context/contexts_/MainContext';
 import { LOADING } from '../context/action_type';
+import { useQuery } from '@tanstack/react-query';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-const Email = ({ user }) => {
-	const form = useRef();
+import axios from 'axios';
+const Email = () => {
 	const {
 		main_state: { loading },
 		main_dispatch,
 	} = useMainContext();
+	const adm = JSON.parse(window.localStorage.getItem('profile'));
+	const admId = adm?.result?._id;
+	const form = useRef();
+
 	const [message, setMessage] = useState('');
-	const [email, setEmail] = useState(user?.result?.email);
+	const [email, setEmail] = useState(adm?.result?.email);
 	const [username, setName] = useState(() => {
-		let first = user?.result?.firstname;
-		let second = user?.result?.lastname;
+		let first = adm?.result?.firstname;
+		let second = adm?.result?.lastname;
 		return `${first}${second}`;
 	});
-	console.log(username);
+
 	const sendEmail = async (e) => {
 		e.preventDefault();
 		if (email && username && message) {

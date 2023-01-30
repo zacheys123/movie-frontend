@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Sofia+Sans:wght@200&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Ubuntu');
+@import url('https://fonts.googleapis.com/css2?family=Aboreto&display=swap');
 $breakpoint-phone: 480px;
 $breakpoint-tablet: 768px;
 $breakpoint-laptop: 992px;
@@ -94,7 +95,7 @@ $breakpoint-lgdesktop: 1480px;
 				width: 40%;
 				border-radius: 50px;
 				padding: 1rem;
-				background: hsl(13, 17%, 16%) 50%, hsl(181, 84%, 47%) !important;
+				background: hsl(13, 17%, 16%) 50%, hsl(181, 83%, 30%);
 				font-family: helvetica sans-serif !important;
 				color: rgb(166, 164, 164);
 				border: 1px solid rgb(86, 85, 85);
@@ -121,13 +122,13 @@ $breakpoint-lgdesktop: 1480px;
 		background: rgb(122, 22, 22);
 		.follow {
 			.icon {
-				padding: 0.6rem;
+				padding: -2.3rem !important;
 			}
 		}
 		.bottom__data {
 			display: flex;
 			flex-direction: column;
-			padding: 0.6rem;
+			padding: -0.6rem;
 		}
 	}
 }

@@ -118,12 +118,21 @@ const LandingPage = () => {
 									color: 'orange',
 									fontSize: '3.9rem ',
 									fontWeight: 'bold',
+									fontFamily: "'Tangerine', serif",
+									textShadow: ' 4px 4px 4px #aae4a',
 								}}
 							>
 								{alldata?.result?.firstname}
 							</span>{' '}
-							&nbsp; to{' '}
-							<span style={{ color: 'yellow', fontWeight: 'bold' }}>
+							&nbsp; &nbsp; &nbsp; to{' '}
+							<span
+								style={{
+									color: 'yellow',
+									fontWeight: 'bold',
+									fontFamily: "'Tangerine', serif",
+									textShadow: ' 4px 4px 4px #aae4a',
+								}}
+							>
 								MovieHub
 							</span>{' '}
 						</span>
@@ -155,7 +164,6 @@ const LandingPage = () => {
 								onClick={() => navigate('/movie/feed')}
 								sx={{
 									textTransform: 'none',
-									background: 'blue !important',
 								}}
 							>
 								Explore Moviehubz
