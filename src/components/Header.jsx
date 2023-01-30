@@ -143,13 +143,6 @@ const Header = () => {
 		}
 	}, []);
 
-	const [source, setSource] = useState(() => {
-		let first = alldata?.result?.firstname.split('')[0];
-		let second = alldata?.result?.lastname.toUpperCase().split('')[0];
-		console.log(alldata);
-		return `${first}${second}`;
-	});
-
 	const [showUser, setShowuser] = useState(false);
 	return (
 		<>
@@ -498,7 +491,12 @@ const Header = () => {
 										color: 'yellow',
 									}}
 								>
-									{source}
+									{alldata?.result?.firstname
+										.toUpperCase()
+										.split('')[0] +
+										alldata?.result?.lastname
+											.toUpperCase()
+											.split('')[0]}
 								</div>
 							)}
 							{showUser && (
