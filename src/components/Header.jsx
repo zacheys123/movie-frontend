@@ -145,8 +145,8 @@ const Header = () => {
 	});
 
 	const [source, setSource] = useState(() => {
-		let first = user.result.firstname.split('')[0];
-		let second = user.result.lastname.toUpperCase().split('')[0];
+		let first = user?.result?.firstname.split('')[0];
+		let second = user?.result?.lastname.toUpperCase().split('')[0];
 		return `${first}${second}`;
 	});
 	const [showUser, setShowuser] = useState(false);
