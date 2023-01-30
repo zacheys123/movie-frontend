@@ -474,9 +474,10 @@ const Header = () => {
 								<div
 									onMouseOver={() => setShowuser((prev) => !prev)}
 									onMouseOut={() => setShowuser((prev) => prev)}
-									onClick={() =>
-										main_dispatch({ type: PROFILE, profile })
-									}
+									onClick={() => {
+										setShowuser((prev) => !prev);
+										main_dispatch({ type: PROFILE, profile });
+									}}
 									className="bg-info"
 									style={{
 										cursor: 'pointer',

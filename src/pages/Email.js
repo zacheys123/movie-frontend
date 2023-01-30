@@ -15,8 +15,8 @@ const Email = ({ user }) => {
 	const [message, setMessage] = useState('');
 	const [email, setEmail] = useState(user?.result?.email);
 	const [username, setName] = useState(() => {
-		let first = user.result.firstname;
-		let second = user.result.lastname;
+		let first = user?.result?.firstname;
+		let second = user?.result?.lastname;
 		return `${first}${second}`;
 	});
 	console.log(username);

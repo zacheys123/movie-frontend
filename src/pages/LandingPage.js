@@ -13,19 +13,24 @@ import netflix from '../assets/neflix.mp4';
 import home from '../assets/home.mp4';
 import palmer from '../assets/palmer.mp4';
 import slumber from '../assets/slumber.mp4';
+import axios from 'axios';
 import Email from './Email';
 const LandingPage = () => {
+	const adm = JSON.parse(window.localStorage.getItem('profile'));
+	const admId = adm?.result?._id;
+	const { data: alldata, refetch } = useQuery(['users'], async () => {
+		const response = await axios.get(
+			`https://moviebackendz.onrender.com/user/v2/${admId}`,
+		);
+
+		return response.data;
+	});
 	const {
-		main_state: { istheme, admin },
+		main_state: { istheme, admin, user },
 		main_dispatch,
 	} = useMainContext();
 	const navigate = useNavigate();
 
-	const [user, setUser] = useState(() => {
-		const storedvalues = localStorage.getItem('profile');
-		if (!storedvalues) return {};
-		return JSON.parse(storedvalues);
-	});
 	const buttonvariants = {
 		hover: {
 			scale: [1, 1.1, 1, 1.1],
@@ -81,16 +86,13 @@ const LandingPage = () => {
 	useEffect(() => {
 		random();
 	});
-	const [username, setName] = useState(() => {
-		let first = user.result.firstname;
-		let second = user.result.lastname;
-		return `${first}${second}`;
-	});
+	const username =
+		alldata?.result?.firstname + alldata?.result?.lastname;
 	const [moreemail, setEmail] = useState(true);
 	return (
 		<div className="landing">
 			<Box className="head__landing">
-				<Email user={user} />
+				<Email user={alldata} />
 			</Box>
 
 			<Box className="center__landing">
@@ -110,7 +112,17 @@ const LandingPage = () => {
 								fontSize: '4rem',
 							}}
 						>
-							Welcome &nbsp; to{' '}
+							Welcome{' '}
+							<span
+								style={{
+									color: 'orange',
+									fontSize: '3.9rem ',
+									fontWeight: 'bold',
+								}}
+							>
+								{alldata?.result?.firstname}
+							</span>{' '}
+							&nbsp; to{' '}
 							<span style={{ color: 'yellow', fontWeight: 'bold' }}>
 								MovieHub
 							</span>{' '}
@@ -134,7 +146,7 @@ const LandingPage = () => {
 							WE ARE REVOLUTIONIZING THE MOVIE BUSINESS!!
 						</marquee>
 					</h2>
-					{user?.result?._id ? (
+					{alldata?.result?._id ? (
 						<div className="d-flex flex-column py-2">
 							<motion.button
 								variants={buttonvariants}
@@ -245,14 +257,14 @@ const LandingPage = () => {
 						Tel no:
 						<span className="text-warning">
 							{' '}
-							{user?.result?.phone}
+							{alldata?.result?.phone}
 						</span>
 					</span>
 					<span className="text-light">
 						Email Address:
 						<span className="text-warning">
 							{' '}
-							{user?.result?.email}
+							{alldata?.result?.email}
 						</span>
 					</span>
 				</Box>
