@@ -25,7 +25,7 @@ https://moviebackendz.onrender.com/register`,
 			);
 			window.localStorage.setItem(
 				'userInfo',
-				JSON.stringify(response?.data?.package),
+				JSON.stringify(response?.data?.result?.package),
 			);
 
 			dispatch({
@@ -66,7 +66,7 @@ export const adminLogin = async (
 			);
 			window.localStorage.setItem(
 				'userInfo',
-				JSON.stringify(response?.data?.package),
+				JSON.stringify(response?.data?.result?.package),
 			);
 			dispatch({
 				type: SIGNUP,
@@ -75,7 +75,11 @@ export const adminLogin = async (
 					loading,
 				},
 			});
-			navigate('/');
+
+			setTimeout(() => {
+				navigate('/');
+				window.location.reload();
+			}, 500);
 		}, 1000);
 		console.log(response?.data);
 		dispatch({ type: 'LOADING', loading });
