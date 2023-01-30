@@ -24,6 +24,7 @@ function MainContext({ children }) {
 		loader: false,
 		isplan: false,
 		isheader: false,
+		source: '',
 	};
 	const [main_state, main_dispatch] = useReducer(
 		main_reducer,

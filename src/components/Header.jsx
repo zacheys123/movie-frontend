@@ -27,6 +27,7 @@ import {
 	CLOSEMODAL,
 	DELETEUSER,
 	HEADER_HIDE,
+	GETUSER,
 } from '../context/action_type';
 import { motion } from 'framer-motion';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
@@ -40,7 +41,7 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 const Header = () => {
 	const {
-		main_state: { istheme, isheader, profile },
+		main_state: { istheme, user, profile },
 		main_dispatch,
 	} = useMainContext();
 	const {
@@ -58,7 +59,10 @@ const Header = () => {
 		const response = await axios.get(
 			`https://moviebackendz.onrender.com/user/v2/${admId}`,
 		);
-
+		main_dispatch({
+			type: GETUSER,
+			payload: { user: response?.data },
+		});
 		return response.data;
 	});
 	const logout = (ev) => {
@@ -138,17 +142,14 @@ const Header = () => {
 				setPremium(refs);
 		}
 	}, []);
-	const [user, setUser] = useState(() => {
-		const storedvalues = localStorage.getItem('profile');
-		if (!storedvalues) return {};
-		return JSON.parse(storedvalues);
-	});
 
 	const [source, setSource] = useState(() => {
-		// let first = user?.result?.firstname.split('')[0];
-		// let second = user?.result?.lastname.toUpperCase().split('')[0];
-		// return `${first}${second}`;
+		let first = alldata?.result?.firstname.split('')[0];
+		let second = alldata?.result?.lastname.toUpperCase().split('')[0];
+		console.log(alldata);
+		return `${first}${second}`;
 	});
+
 	const [showUser, setShowuser] = useState(false);
 	return (
 		<>
@@ -467,11 +468,7 @@ const Header = () => {
 								</Box>
 							)}
 						</Box>
-						<Box
-							className="main__prof position-relative"
-							onMouseOver={() => setShowuser((prev) => !prev)}
-							onMouseOut={() => setShowuser((prev) => prev)}
-						>
+						<Box className="main__prof position-relative">
 							{' '}
 							{adm?.result?.profilepic ? (
 								<Avatar
@@ -482,6 +479,8 @@ const Header = () => {
 								/>
 							) : (
 								<div
+									onMouseOver={() => setShowuser((prev) => !prev)}
+									onMouseOut={() => setShowuser((prev) => prev)}
 									onClick={() =>
 										main_dispatch({ type: PROFILE, profile })
 									}
@@ -510,12 +509,13 @@ const Header = () => {
 									}}
 								>
 									<span className="mt-2 mx-2">
-										{user.result.firstname +
-											' ' +
-											user.result.lastname}
+										{alldata?.result?.firstname +
+											alldata?.result?.lastname}
 									</span>
 									{''}
-									<span className="mx-2">{user.result.email}</span>
+									<span className="mx-2">
+										{alldata?.result?.email}
+									</span>
 									{''}
 								</div>
 							)}
@@ -551,7 +551,7 @@ const Header = () => {
 									>
 										<span
 											onClick={() => {
-												navigate('//create/plan');
+												navigate('/create/plan');
 												window.location.reload();
 											}}
 										>
