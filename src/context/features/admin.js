@@ -11,7 +11,7 @@ export const createAdmin = async (
 	try {
 		const response = await axios.post(
 			`
-https://moviebackendz.onrender.com/register`,
+http://localhost:4000/register`,
 			data.current,
 		);
 
@@ -22,10 +22,6 @@ https://moviebackendz.onrender.com/register`,
 			window.localStorage.setItem(
 				'profile',
 				JSON.stringify(response.data),
-			);
-			window.localStorage.setItem(
-				'userInfo',
-				JSON.stringify(response?.data?.result?.package),
 			);
 
 			dispatch({
@@ -64,10 +60,7 @@ export const adminLogin = async (
 				'profile',
 				JSON.stringify(response.data),
 			);
-			window.localStorage.setItem(
-				'userInfo',
-				JSON.stringify(response?.data?.result?.package),
-			);
+
 			dispatch({
 				type: SIGNUP,
 				payload: {
