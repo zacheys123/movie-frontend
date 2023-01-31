@@ -14,7 +14,7 @@ import {
 	CLOSEMODAL,
 	EMPTYHOME,
 } from '../context/action_type';
-const Music = () => {
+const Music = (props) => {
 	const {
 		main_state: { istheme, profile },
 		main_dispatch,

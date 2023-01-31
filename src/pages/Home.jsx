@@ -648,7 +648,7 @@ const Feed = () => {
 							</Box>
 						</>
 					) : (
-						<MusicList />
+						<MusicList user={alldata} />
 					)}
 				</Box>
 			</Box>

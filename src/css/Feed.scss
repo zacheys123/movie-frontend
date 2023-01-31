@@ -97,7 +97,7 @@ $breakpoint-lgdesktop: 1480px;
 			}
 		}
 		.music {
-			flex: 6;
+			flex: 7 !important;
 			padding: 1rem !important;
 			border: none;
 			height: 60%;
@@ -107,7 +107,7 @@ $breakpoint-lgdesktop: 1480px;
 			background-repeat: no-repeat;
 			background-position: center;
 			background-size: cover;
-			margin: auto 0;
+			margin: 4rem 0 auto 0;
 			.form__input {
 				width: 28rem !important;
 			}
@@ -126,6 +126,7 @@ $breakpoint-lgdesktop: 1480px;
 			button {
 				width: 10rem;
 				background: rgb(18, 196, 142);
+				margin: 3rem 9rem !important;
 				border: none;
 				font-family: ariel;
 				color: yellow;
@@ -250,7 +251,9 @@ $breakpoint-lgdesktop: 1480px;
 		flex: 4 !important;
 		box-shadow: rgba(100, 20, 10, 0.08) -3px 4px 12px !important;
 		padding: 0.5rem;
-
+		.music__list {
+			flex: 4;
+		}
 		h4 {
 			color: rgb(188, 29, 213);
 		}

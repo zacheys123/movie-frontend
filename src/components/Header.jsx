@@ -39,9 +39,9 @@ import {
 import Delete from '@mui/icons-material/DeleteForever';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-const Header = () => {
+const Header = ({ user, refetch }) => {
 	const {
-		main_state: { istheme, user, profile },
+		main_state: { istheme, profile },
 		main_dispatch,
 	} = useMainContext();
 	const {
@@ -54,20 +54,6 @@ const Header = () => {
 	const adm = JSON.parse(window.localStorage.getItem('profile'));
 	const admId = adm?.result?._id;
 
-	// getting all movies for this user
-	const { data: alldata, refetch } = useQuery(
-		['allusers'],
-		async () => {
-			const response = await axios.get(
-				`https://moviebackendz.onrender.com/user/v2/${admId}`,
-			);
-			main_dispatch({
-				type: GETUSER,
-				payload: { user: response?.data },
-			});
-			return response.data;
-		},
-	);
 	const logout = (ev) => {
 		ev.preventDefault();
 		window.localStorage.removeItem('profile');
@@ -125,7 +111,7 @@ const Header = () => {
 	// 	});
 	// };
 	const myInfo = JSON.parse(window.localStorage.getItem('userInfo'));
-	const info = alldata?.result?.package;
+	const info = user?.result?.package;
 
 	const location = useLocation();
 	const refs = {
@@ -135,7 +121,7 @@ const Header = () => {
 	};
 
 	useEffect(() => {
-		switch (myInfo && info) {
+		switch (myInfo || info) {
 			case 'Free':
 				setFree(refs);
 			case 'Amateur':
@@ -145,12 +131,12 @@ const Header = () => {
 			case 'Premium':
 				setPremium(refs);
 		}
-	}, []);
+	});
 
 	const [showUser, setShowuser] = useState(false);
 	return (
 		<>
-			{info && myInfo && (
+			{info && (
 				<div className={istheme ? 'header' : 'header_darkmode'}>
 					{showform && (
 						<Box className="add">
@@ -516,8 +502,7 @@ const Header = () => {
 											Username:
 										</span>
 
-										{alldata?.result?.firstname +
-											alldata?.result?.lastname}
+										{user?.result?.firstname + user?.result?.lastname}
 									</span>
 									{''}
 									<span className="mx-2 ">
@@ -525,7 +510,7 @@ const Header = () => {
 											{' '}
 											email:
 										</span>
-										{alldata?.result?.email}
+										{user?.result?.email}
 									</span>
 									{''}
 								</div>

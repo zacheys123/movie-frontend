@@ -12,7 +12,8 @@ import {
 	RECORD_THREE,
 	MUSIC,
 } from '../../context/action_type';
-
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 import {
 	setFree,
 	setAmateur,
@@ -25,7 +26,24 @@ function Layout({ children }) {
 	const {
 		main_state: { istheme },
 	} = useMainContext();
+	const adm = JSON.parse(window.localStorage.getItem('profile'));
+	const admId = adm?.result?._id;
+
+	// get
+	// getting all movies for this user
+	const { data: alldata, refetch } = useQuery(
+		['allusers'],
+		async () => {
+			const response = await axios.get(
+				`https://moviebackendz.onrender.com/user/v2/${admId}`,
+			);
+
+			return response.data;
+		},
+	);
 	const myinfo = JSON.parse(localStorage.getItem('userInfo'));
+	const info = alldata?.result?.package;
+
 	const location = useLocation();
 
 	const tworef = useRef(null);
@@ -37,7 +55,7 @@ function Layout({ children }) {
 	};
 
 	useEffect(() => {
-		switch (myinfo) {
+		switch (info || myinfo) {
 			case 'Free':
 				setFree(refs);
 			case 'Amateur':
@@ -52,7 +70,7 @@ function Layout({ children }) {
 	return (
 		<div className={!istheme ? 'layout' : 'darkmode'}>
 			<Box className="layout_header_container">
-				<Header />
+				<Header user={alldata} refetch={refetch} />
 			</Box>
 
 			{location.pathname === '/movie/feed' && (
