@@ -479,7 +479,7 @@ const Header = () => {
 									onMouseOver={() => setShowuser((prev) => !prev)}
 									onMouseOut={() => setShowuser((prev) => !prev)}
 									onClick={() => {
-										setShowuser((prev) => !prev);
+										setShowuser((prev) => prev);
 										main_dispatch({ type: PROFILE, profile });
 									}}
 									className="bg-info"
@@ -556,11 +556,13 @@ const Header = () => {
 									<Button
 										variant="outlined"
 										onClick={() => {
+											main_dispatch({ type: PROFILE, profile });
 											navigate('/create/plan');
 										}}
 									>
 										<span
 											onClick={() => {
+												main_dispatch({ type: PROFILE, profile });
 												navigate('/create/plan');
 												window.location.reload();
 											}}

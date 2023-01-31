@@ -14,6 +14,7 @@ import {
 	EMPTYHOME,
 	LOGGED,
 	GETUSER,
+	PROFILE,
 } from '../context/action_type';
 import NoCellIcon from '@mui/icons-material/NoCell';
 import { useMainContext } from '../context/contexts_/MainContext';
@@ -44,7 +45,7 @@ const Feed = () => {
 	});
 
 	const {
-		main_state: { istheme, user },
+		main_state: { istheme, profile },
 		main_dispatch,
 	} = useMainContext();
 	const {
@@ -147,7 +148,12 @@ const Feed = () => {
 	};
 
 	return (
-		<div className="feed">
+		<div
+			className="feed"
+			onClick={() => {
+				profile && main_dispatch({ type: PROFILE, profile });
+			}}
+		>
 			<Box className="feed__movies">
 				{one_movie && (
 					<Form onSubmit={createMovies} className="formd">

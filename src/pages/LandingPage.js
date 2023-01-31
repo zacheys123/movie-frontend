@@ -13,6 +13,7 @@ import netflix from '../assets/neflix.mp4';
 import home from '../assets/home.mp4';
 import palmer from '../assets/palmer.mp4';
 import slumber from '../assets/slumber.mp4';
+import { PROFILE } from '../context/action_type';
 import axios from 'axios';
 import Email from './Email';
 const LandingPage = () => {
@@ -26,7 +27,7 @@ const LandingPage = () => {
 		return response.data;
 	});
 	const {
-		main_state: { istheme, admin, user },
+		main_state: { istheme, admin, user, profile },
 		main_dispatch,
 	} = useMainContext();
 	const navigate = useNavigate();
@@ -90,7 +91,12 @@ const LandingPage = () => {
 		alldata?.result?.firstname + alldata?.result?.lastname;
 	const [moreemail, setEmail] = useState(true);
 	return (
-		<div className="landing">
+		<div
+			className="landing"
+			onClick={() => {
+				main_dispatch({ type: PROFILE, profile });
+			}}
+		>
 			<Box className="head__landing">
 				<Email user={alldata} />
 			</Box>
