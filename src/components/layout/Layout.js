@@ -10,6 +10,7 @@ import {
 	RECORD_ONE,
 	RECORD_TWO,
 	RECORD_THREE,
+	MUSIC,
 } from '../../context/action_type';
 
 import {
@@ -56,6 +57,14 @@ function Layout({ children }) {
 
 			{location.pathname === '/movie/feed' && (
 				<Box className="movie_count">
+					<Button
+						variant="outlined"
+						onClick={() => movie_dispatch({ type: MUSIC })}
+						color="secondary"
+						size="small"
+					>
+						Music
+					</Button>
 					<Button
 						variant="outlined"
 						onClick={() => movie_dispatch({ type: RECORD_ONE })}

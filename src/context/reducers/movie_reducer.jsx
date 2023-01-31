@@ -15,6 +15,8 @@ import {
 	RECORD_ONE,
 	RECORD_TWO,
 	RECORD_THREE,
+	MUSIC,
+	MUSICRECORD,
 } from '../action_type';
 export const initialState = {
 	isgenre: false,
@@ -32,6 +34,7 @@ export const initialState = {
 	one_movie: false,
 	two_movie: false,
 	three_movie: false,
+	music: false,
 };
 export const moviereducer = (state = initialState, action) => {
 	switch (action.type) {
@@ -48,6 +51,17 @@ export const moviereducer = (state = initialState, action) => {
 				added: !action.movie_added,
 				loading: false,
 				success: !action.payload.success,
+				error: false,
+				logged: !state.logged,
+			};
+		case MUSICRECORD:
+			return {
+				...state,
+				ismodalhome: true,
+				modalcontent: action.payload.modalcontent,
+
+				loading: false,
+				success: !state.success,
 				error: false,
 				logged: !state.logged,
 			};
@@ -136,6 +150,7 @@ export const moviereducer = (state = initialState, action) => {
 				one_movie: true,
 				two_movie: false,
 				three_movie: false,
+				music: false,
 			};
 		case RECORD_TWO:
 			return {
@@ -143,6 +158,7 @@ export const moviereducer = (state = initialState, action) => {
 				one_movie: false,
 				two_movie: true,
 				three_movie: false,
+				music: false,
 			};
 		case RECORD_THREE:
 			return {
@@ -150,6 +166,15 @@ export const moviereducer = (state = initialState, action) => {
 				one_movie: false,
 				two_movie: false,
 				three_movie: true,
+				music: false,
+			};
+		case MUSIC:
+			return {
+				...state,
+				one_movie: false,
+				two_movie: false,
+				three_movie: false,
+				music: true,
 			};
 	}
 };

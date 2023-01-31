@@ -26,8 +26,10 @@ import { createMovie } from '../context/features/movieSlice';
 import { MOVIES } from '../context/action_type';
 import Movietwo from './Movietwo';
 import MovieThree from './Movie3';
+import Music from './Music';
 import { motion } from 'framer-motion';
 import { useQuery } from '@tanstack/react-query';
+import MusicList from './MusicList';
 const Feed = () => {
 	// fetch movies
 
@@ -61,6 +63,7 @@ const Feed = () => {
 			one_movie,
 			two_movie,
 			three_movie,
+			music,
 		},
 		movie_dispatch,
 	} = useMovieContext();
@@ -155,6 +158,7 @@ const Feed = () => {
 			}}
 		>
 			<Box className="feed__movies">
+				{music && <Music />}
 				{one_movie && (
 					<Form onSubmit={createMovies} className="formd">
 						{ismodalhome ? (
@@ -533,6 +537,7 @@ const Feed = () => {
 				)}
 				{two_movie && <Movietwo />}
 				{three_movie && <MovieThree />}
+
 				<Box
 					className={!showtable ? 'movie__list' : 'movie__listphone'}
 				>
@@ -541,7 +546,9 @@ const Feed = () => {
 						style={{ borderBottom: '1px solid lightgrey' }}
 					>
 						{' '}
-						<h4 className="h4">All Movies </h4>
+						<h4 className="h4">
+							{!music ? 'All Movies' : 'All Music'}{' '}
+						</h4>
 						{showtable && (
 							<Box
 								className="tabular text-secondary"
@@ -575,69 +582,74 @@ const Feed = () => {
 							</span>
 						</Box>
 					</Box>
+					{!music ? (
+						<>
+							<input
+								type="text"
+								placeholder="Search movie.."
+								value={searchquery}
+								onChange={(ev) => setQuery(ev.target.value)}
+							/>
 
-					<input
-						type="text"
-						placeholder="Search movie.."
-						value={searchquery}
-						onChange={(ev) => setQuery(ev.target.value)}
-					/>
+							<Box className="listing">
+								<table className="table table-bordered table-striped my-2 bg-dark">
+									<thead>
+										<tr>
+											<th>User</th>
+											<th>Movie</th>
+											<th>Ssn</th>
+											<th>Eps</th>
+											<th>Genre</th>
+											<th>Cust</th>
+											<th>Amt</th>
+											<th>Paid</th>
+											<th>Bal</th>
+										</tr>
+									</thead>
+									<tbody>
+										{movies &&
+											moviefunc().map(
+												({
+													_id,
+													user,
+													season,
+													episodes,
+													amount,
+													paid,
+													genre,
+													customer_name,
+													movie_name,
+												}) => {
+													return (
+														<tr key={_id}>
+															<td
+																style={{
+																	color: 'cyan',
+																	fontWeight: '400',
+																}}
+															>
+																{user}
+															</td>
+															<td>{movie_name}</td>
+															<td>{season}</td>
+															<td>{episodes}</td>
+															<td>{genre}</td>
+															<td>{customer_name}</td>
+															<td>{amount}</td>
+															<td>{paid}</td>
 
-					<Box className="listing">
-						<table className="table table-bordered table-striped my-2 bg-dark">
-							<thead>
-								<tr>
-									<th>User</th>
-									<th>Movie</th>
-									<th>Ssn</th>
-									<th>Eps</th>
-									<th>Genre</th>
-									<th>Cust</th>
-									<th>Amt</th>
-									<th>Paid</th>
-									<th>Bal</th>
-								</tr>
-							</thead>
-							<tbody>
-								{movies &&
-									moviefunc().map(
-										({
-											_id,
-											user,
-											season,
-											episodes,
-											amount,
-											paid,
-											genre,
-											customer_name,
-											movie_name,
-										}) => {
-											return (
-												<tr key={_id}>
-													<td
-														style={{
-															color: 'cyan',
-															fontWeight: '400',
-														}}
-													>
-														{user}
-													</td>
-													<td>{movie_name}</td>
-													<td>{season}</td>
-													<td>{episodes}</td>
-													<td>{genre}</td>
-													<td>{customer_name}</td>
-													<td>{amount}</td>
-													<td>{paid}</td>
-
-													<td>{parseFloat(amount - paid)}</td>
-												</tr>
-											);
-										},
-									)}
-							</tbody>
-						</table>
-					</Box>
+															<td>{parseFloat(amount - paid)}</td>
+														</tr>
+													);
+												},
+											)}
+									</tbody>
+								</table>
+							</Box>
+						</>
+					) : (
+						<MusicList />
+					)}
 				</Box>
 			</Box>
 		</div>

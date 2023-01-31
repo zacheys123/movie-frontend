@@ -34,3 +34,5 @@ export const RECORD_TWO = 'RECORD_TWO';
 export const RECORD_THREE = 'RECORD_THREE';
 export const HEADER_HIDE = 'HEADER_HIDE';
 export const GETSOURCE = 'GETSOURCE';
+export const MUSIC = 'MUSIC';
+export const MUSICRECORD = 'MUSICRECORD';

@@ -2,6 +2,7 @@ import axios from 'axios';
 
 import {
 	CREATEMOVIE,
+	MUSICRECORD,
 	ERRORADD,
 	ERROR,
 	LOADING,
@@ -135,6 +136,44 @@ export const createSuggested = async (
 		console.log(userId);
 		dispatch({
 			type: ERRORADD,
+			payload: {
+				modalcontent: error?.response?.data?.message,
+			},
+		});
+	}
+};
+
+export const createMusic = async (datah, dispatch) => {
+	const { userId, mymusic } = datah;
+	console.log(mymusic);
+	try {
+		let response = await axios.put(
+			`${baseUrl}/music/create/${userId}`,
+			mymusic,
+		);
+
+		setTimeout(() => {
+			dispatch({
+				type: LOADING,
+			});
+			dispatch({
+				type: MUSICRECORD,
+				payload: {
+					modalcontent: response?.data?.message,
+				},
+			});
+		}, 2000);
+		dispatch({
+			type: LOADING,
+		});
+	} catch (error) {
+		console.log(error.message);
+		console.log(error.response);
+		dispatch({
+			type: LOADING,
+		});
+		dispatch({
+			type: ERROR,
 			payload: {
 				modalcontent: error?.response?.data?.message,
 			},

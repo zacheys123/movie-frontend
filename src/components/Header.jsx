@@ -125,6 +125,7 @@ const Header = () => {
 	// 	});
 	// };
 	const myInfo = JSON.parse(window.localStorage.getItem('userInfo'));
+	const info = alldata?.result?.package;
 
 	const location = useLocation();
 	const refs = {
@@ -134,7 +135,7 @@ const Header = () => {
 	};
 
 	useEffect(() => {
-		switch (myInfo) {
+		switch (myInfo && info) {
 			case 'Free':
 				setFree(refs);
 			case 'Amateur':
@@ -149,7 +150,7 @@ const Header = () => {
 	const [showUser, setShowuser] = useState(false);
 	return (
 		<>
-			{myInfo && (
+			{info && myInfo && (
 				<div className={istheme ? 'header' : 'header_darkmode'}>
 					{showform && (
 						<Box className="add">

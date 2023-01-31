@@ -96,6 +96,45 @@ $breakpoint-lgdesktop: 1480px;
 				font-weight: bold !important;
 			}
 		}
+		.music {
+			flex: 6;
+			padding: 1rem !important;
+			border: none;
+			height: 60%;
+			position: relative;
+			border-radius: 10px;
+			background-image: url('../assets/music.jpg');
+			background-repeat: no-repeat;
+			background-position: center;
+			background-size: cover;
+			margin: auto 0;
+			.form__input {
+				width: 28rem !important;
+			}
+			input .form__input :focus {
+				outline-width: 0 !important;
+			}
+			input,
+			button,
+			label {
+				margin: 1.8rem 0 0 0 !important;
+			}
+			.col {
+				color: greenyellow !important;
+				border: none !important;
+			}
+			button {
+				width: 10rem;
+				background: rgb(18, 196, 142);
+				border: none;
+				font-family: ariel;
+				color: yellow;
+				&:hover {
+					background: rgb(131, 23, 220);
+					color: white;
+				}
+			}
+		}
 		.formd {
 			flex: 6;
 			padding: 1rem !important;

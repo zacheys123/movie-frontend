@@ -94,7 +94,7 @@ const LandingPage = () => {
 		<div
 			className="landing"
 			onClick={() => {
-				main_dispatch({ type: PROFILE, profile });
+				profile && main_dispatch({ type: PROFILE, profile });
 			}}
 		>
 			<Box className="head__landing">

@@ -32,6 +32,7 @@ function Login(props) {
 	};
 	const userdata = useRef();
 	const navigate = useNavigate();
+	const userinfo = JSON.parse(localStorage.getItem('profile'));
 	const handleLogin = useCallback(
 		(ev) => {
 			ev.preventDefault();
@@ -40,7 +41,13 @@ function Login(props) {
 					userdata?.current?.email.length > 6 &&
 					userdata?.current?.password.length > 6
 				) {
-					adminLogin(navigate, main_dispatch, loading, userdata);
+					adminLogin(
+						navigate,
+						main_dispatch,
+						loading,
+						userdata,
+						userinfo,
+					);
 				} else {
 					main_dispatch({
 						type: 'PASSWORDLENGTH',

@@ -47,6 +47,7 @@ export const adminLogin = async (
 	dispatch,
 	loading,
 	data,
+	userinfo,
 ) => {
 	try {
 		const response = await axios.post(
