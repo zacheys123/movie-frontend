@@ -108,60 +108,65 @@ const LandingPage = () => {
 					animate="show"
 					className="center"
 				>
-					<h2 style={{ color: 'white', fontSize: '1.4rem' }}>
+					<h2 style={{ color: 'white', fontSize: '3rem' }}>
+						Welcome{' '}
 						<span
 							style={{
-								fontWeight: '800 ',
-								fontFamily: 'georgia',
-								fontSize: '1.9rem',
-								color: 'cyan',
-								fontSize: '4rem',
+								color: 'orange',
+								fontSize: '2.4rem ',
+								fontWeight: 'bold',
+								fontFamily: 'ariel',
+								fontStyle: 'italics',
+								textShadow: ' 4px 4px 4px #aae4a',
 							}}
 						>
-							Welcome{' '}
-							<span
-								style={{
-									color: 'orange',
-									fontSize: '2.9rem ',
-									fontWeight: 'bold',
-									fontFamily: 'ariel',
-									fontStyle: 'italics',
-									textShadow: ' 4px 4px 4px #aae4a',
-								}}
-							>
-								{alldata?.result?.firstname}
-							</span>{' '}
-							&nbsp; &nbsp; &nbsp; to{' '}
-							<span
-								style={{
-									color: 'yellow',
-									fontWeight: 'bold',
-									fontFamily: 'sans',
-									textShadow: ' 4px 4px 4px #aae4a',
-								}}
-							>
-								MovieHub
-							</span>{' '}
-						</span>
-						where you get to{' '}
-						<span style={{ color: 'aqua' }}>organize, </span>{' '}
-						<span style={{ color: 'aqua' }}>optimize </span> and{' '}
-						<span style={{ color: 'greenyellow' }}>schedule </span>{' '}
-						your Movie Orders for faster, accurate, and Efficient
-						access to Data records{' '}
-						<span style={{ color: 'yellow', fontWeight: 'bold' }}>
-							Its scheduling feature further enables you
+							{alldata?.result?.firstname},
 						</span>{' '}
-						to stay on the loop with requested and upcoming movies.
-						<marquee
-							direction="right"
-							loop=""
-							style={{ color: 'cyan', fontWeight: '800' }}
-						>
-							{' '}
-							WE ARE REVOLUTIONIZING THE MOVIE BUSINESS!!
-						</marquee>
 					</h2>
+					<div className="wrapper">
+						<span
+							style={{
+								fontSize: '2rem ',
+								color: 'yellow',
+								fontWeight: 'bold',
+
+								textShadow: ' 4px 4px 4px #aae4a',
+							}}
+							className="static-txt"
+						>
+							to <span style={{ color: 'violet' }}>MovieHubz</span>{' '}
+							where you get to
+						</span>{' '}
+						<ul className="dynamic-txts">
+							<li>
+								<span style={{ color: 'cyan', fontWeight: '700' }}>
+									{' '}
+									organize.
+								</span>
+							</li>
+							<li>
+								<span style={{ color: 'magenta', fontWeight: '700' }}>
+									optimize.{' '}
+								</span>
+							</li>
+							<li>
+								<span
+									style={{ color: 'greenyellow', fontWeight: '700' }}
+								>
+									{' '}
+									and schedule
+								</span>
+							</li>
+						</ul>
+					</div>
+					<div className="description">
+						your Movie Orders for faster, accurate, and Efficient Its
+						scheduling feature further enables you to stay on the loop
+						with requested and upcoming movies.
+					</div>{' '}
+					{/*<span className="animate_header">
+						WE ARE REVOLUTIONIZING THE MOVIE BUSINESS!!
+						</span>*/}
 					{alldata?.result?._id ? (
 						<div className="d-flex flex-column py-2">
 							<motion.button
@@ -227,7 +232,7 @@ const LandingPage = () => {
 							initial={{ x: '-100%' }}
 							animate={{
 								x: ['-5%', '25%', '5%'],
-								y: '-6rem',
+								y: '-4rem',
 								transition: { duration: 0.8, ease: 'easeInOut' },
 							}}
 							style={{

@@ -1,6 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Sofia+Sans:wght@200&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Ubuntu');
-@import url('https://fonts.googleapis.com/css2?family=Aboreto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200&family=Poppins:wght@200&family=Tajawal:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200&family=Pacifico&family=Poppins:wght@200&family=Tajawal:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200&family=Poppins:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200&family=Poppins:wght@200&family=Tajawal:wght@700&display=swap');
 $breakpoint-phone: 480px;
 $breakpoint-tablet: 768px;
 $breakpoint-laptop: 992px;
@@ -83,15 +86,15 @@ $breakpoint-lgdesktop: 1480px;
 		.center {
 			flex: 3;
 			max-width: 40rem;
-			height: 61% !important;
+			height: 70% !important;
 			background: transparent;
 			padding: 1rem;
+			background: black;
 			margin-left: 2rem;
-			box-shadow: rgba(0, 0, 0, 0.4) 3px 4px 4px,
-				rgba(208, 194, 35, 0.3) 3px 12px 20px -3px,
-				rgba(206, 18, 197, 0.2) 0px -3px 0px inset;
+			opacity: 0.9 !important;
+
 			button {
-				margin-top: 0.8rem;
+				margin-top: 1.7rem;
 				width: 40%;
 				border-radius: 50px;
 				padding: 1rem;
@@ -102,6 +105,71 @@ $breakpoint-lgdesktop: 1480px;
 				font-weight: bold;
 				&:hover {
 					background: rgb(71, 8, 5);
+				}
+			}
+			.animate_header::before,
+			.animate_header::after {
+				content: '';
+			}
+			.description {
+				color: rgb(19, 61, 232);
+				background: rgb(223, 198, 198);
+				padding: 0.9rem;
+				font-family: 'Josefin Sans', sans-serif;
+
+				font-family: 'Poppins', sans-serif;
+
+				font-family: 'Tajawal', sans-serif;
+				font-weight: 400;
+				width: 100%;
+				margin-top: -1rem;
+			}
+			.static-txt {
+				font-size: 40px;
+				color: white;
+				font-weight: 400;
+				font-family: 'Sofia Sans', sans-serif;
+				top: calc(100% + 10px) !important;
+			}
+			.wrapper .dynamic-txts {
+				margin-left: -20px;
+				line-height: 90px;
+				width: 60% !important;
+				height: 90px;
+				overflow: hidden;
+			}
+			.dynamic-txts li {
+				font-family: 'Poppins', sans-serif;
+				color: rgb(249, 242, 243);
+				list-style: none;
+				font-size: 40px;
+				font-weight: 800 !important;
+				position: relative;
+				top: 0;
+				animation: slide 12s steps(4) infinite;
+			}
+			@keyframes slide {
+				100% {
+					top: -360px;
+				}
+			}
+			.dynamic-txts li::after {
+				content: '';
+				position: absolute;
+				left: 0;
+				height: 100%;
+				background: rgb(3, 4, 4);
+				width: 100% !important;
+				border-left: 2px solid rgb(3, 4, 4);
+				animation: typing 3s steps(8) infinite;
+			}
+			@keyframes typing {
+				40%,
+				60% {
+					left: calc(100% + 60px);
+				}
+				100% {
+					left: 0;
 				}
 			}
 		}
@@ -126,6 +194,7 @@ $breakpoint-lgdesktop: 1480px;
 			}
 		}
 		.bottom__data {
+			margin: -2rem 0 3rem 0.4rem;
 			display: flex;
 			flex-direction: column;
 			padding: -0.6rem;
