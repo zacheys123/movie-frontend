@@ -47,7 +47,7 @@ const Feed = () => {
 	});
 
 	const {
-		main_state: { istheme, profile },
+		main_state: { istheme, profile, user },
 		main_dispatch,
 	} = useMainContext();
 	const {
@@ -67,6 +67,7 @@ const Feed = () => {
 		},
 		movie_dispatch,
 	} = useMovieContext();
+
 	// input function
 	const handleChange = (ev) => {
 		const { name, value } = ev.target;
@@ -84,7 +85,8 @@ const Feed = () => {
 	const id = myid?.result?._id;
 
 	// getting all movies for this user
-	const { data: alldata, refetch } = useQuery(['users'], async () => {
+
+	const getUsers = async () => {
 		const response = await axios.get(
 			`https://moviebackendz.onrender.com/user/v2/${id}`,
 		);
@@ -96,9 +98,10 @@ const Feed = () => {
 			type: MOVIES,
 			payload: { movies: response?.data?.result?.movies },
 		});
-		return response.data;
-	});
-	const users = alldata?.result?.users;
+		return response?.data;
+	};
+
+	const users = user?.result?.users;
 
 	const createMovies = useCallback(
 		(ev) => {
@@ -149,7 +152,9 @@ const Feed = () => {
 		}
 		return sortedvalue;
 	};
-
+	useEffect(() => {
+		getUsers();
+	}, [logged]);
 	return (
 		<div
 			className="feed"
@@ -575,7 +580,6 @@ const Feed = () => {
 									fontWeight: 'bolder !important',
 									cursor: 'pointer',
 								}}
-								onClick={refetch}
 							/>{' '}
 							<span style={{ color: 'red', cursor: 'pointer' }}>
 								refresh
@@ -648,7 +652,7 @@ const Feed = () => {
 							</Box>
 						</>
 					) : (
-						<MusicList user={alldata} />
+						<MusicList user={user} />
 					)}
 				</Box>
 			</Box>

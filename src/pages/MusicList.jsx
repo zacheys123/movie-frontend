@@ -22,14 +22,15 @@ const MusicList = ({ user }) => {
 	const [searchquery, setQuery] = useState('');
 
 	const musicfunc = () => {
-		let sortedvalue = alldata?.result?.music || user?.result?.music;
+		let sortedvalue = user?.result?.music || alldata?.result?.music;
 		if (searchquery) {
 			sortedvalue = sortedvalue.filter((music) => {
+				console.log(music);
 				if (
 					music.user.toLowerCase().includes(searchquery) ||
 					music.song_name.toLowerCase().includes(searchquery) ||
 					music.music_type.toLowerCase().includes(searchquery) ||
-					music.created_at.toLowerCase().includes(searchquery)
+					music.createdAt.toLowerCase().includes(searchquery)
 				) {
 					return sortedvalue;
 				}

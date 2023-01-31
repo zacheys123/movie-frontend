@@ -65,7 +65,7 @@ function Layout({ children }) {
 			case 'Premium':
 				setPremium(refs);
 		}
-	}, []);
+	});
 
 	return (
 		<div className={!istheme ? 'layout' : 'darkmode'}>
