@@ -104,6 +104,7 @@ export const moviereducer = (state = initialState, action) => {
 			return {
 				...state,
 				newuser: action.payload.newuser,
+				error: false,
 				ismodal: false,
 				ismodalhome: false,
 				success: true,

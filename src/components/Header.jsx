@@ -99,7 +99,7 @@ const Header = () => {
 		};
 		const myuser = { userId: adm?.result?._id, newuser };
 		addUser(myuser, movie_dispatch, success, setForm, ismodal);
-		refetch();
+
 		console.log(adm?.result?._id);
 	}, []);
 
@@ -186,11 +186,12 @@ const Header = () => {
 												textAlign: 'center',
 											}}
 										>
-											All fields must be entered
+											{modalcontent}
 										</h6>
 									)}
 								</>
 								<Button
+									onClick={refetch}
 									variant="contained"
 									type="submit"
 									size="small"

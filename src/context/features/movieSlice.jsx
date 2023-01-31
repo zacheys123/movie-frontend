@@ -92,7 +92,6 @@ export const addUser = async (
 			type: LOADING,
 		});
 	} catch (error) {
-		console.log(userId);
 		dispatch({
 			type: ERRORADD,
 			payload: {
