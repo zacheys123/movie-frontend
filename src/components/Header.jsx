@@ -55,16 +55,19 @@ const Header = () => {
 	const admId = adm?.result?._id;
 
 	// getting all movies for this user
-	const { data: alldata, refetch } = useQuery(['users'], async () => {
-		const response = await axios.get(
-			`https://moviebackendz.onrender.com/user/v2/${admId}`,
-		);
-		main_dispatch({
-			type: GETUSER,
-			payload: { user: response?.data },
-		});
-		return response.data;
-	});
+	const { data: alldata, refetch } = useQuery(
+		['allusers'],
+		async () => {
+			const response = await axios.get(
+				`https://moviebackendz.onrender.com/user/v2/${admId}`,
+			);
+			main_dispatch({
+				type: GETUSER,
+				payload: { user: response?.data },
+			});
+			return response.data;
+		},
+	);
 	const logout = (ev) => {
 		ev.preventDefault();
 		window.localStorage.removeItem('profile');
@@ -492,12 +495,10 @@ const Header = () => {
 										color: 'yellow',
 									}}
 								>
-									{alldata?.result?.firstname
+									{user?.result?.firstname
 										.toUpperCase()
 										.split('')[0] +
-										alldata?.result?.lastname
-											.toUpperCase()
-											.split('')[0]}
+										user?.result?.lastname.toUpperCase().split('')[0]}
 								</div>
 							)}
 							{showUser && (
