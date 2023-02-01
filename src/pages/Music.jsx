@@ -1,6 +1,6 @@
 import { useState, useCallback, useRef, useEffect } from 'react';
 import { Form, Label } from 'react-bootstrap';
-import { Button } from '@mui/material';
+import { Button, CircularProgress } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { useMainContext } from '../context/contexts_/MainContext';
@@ -162,7 +162,11 @@ const Music = ({ user }) => {
 				</div>
 
 				<Button variant="contained" type="submit">
-					Enter Music
+					{!loading ? (
+						'Enter Music'
+					) : (
+						<CircularProgress size="20px" sx={{ color: 'white' }} />
+					)}
 				</Button>
 			</Form>
 		</div>
