@@ -12,7 +12,7 @@ import {
 	PLAN,
 	AUTH_COMPLETE,
 } from '../action_type';
-const baseUrl = 'http://localhost:4000';
+const baseUrl = 'https://moviebackendz.onrender.com';
 
 export const update_user = async (
 	setMainContext,
@@ -56,7 +56,12 @@ export const update_user = async (
 
 // update  password fields
 
-export const update_auth = async (dispatch, myprof, id) => {
+export const update_auth = async (
+	dispatch,
+	myprof,
+	id,
+	setDisabled,
+) => {
 	console.log(myprof);
 	try {
 		let user = await axios.put(
@@ -66,7 +71,7 @@ export const update_auth = async (dispatch, myprof, id) => {
 		setTimeout(() => {
 			setTimeout(() => {
 				dispatch({ type: AUTH_COMPLETE });
-			}, 1000);
+			}, 3000);
 			dispatch({ type: LOADING });
 			dispatch({
 				type: UPDATEAUTH,

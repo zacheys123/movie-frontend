@@ -42,13 +42,15 @@ export const Main = styled.div`
 		margin-top: 0.1rem;
 	}
 	select {
-		width: 70%;
-		background: lightgrey;
-		color: black;
+		width: 50%;
+		background: rgb(107, 37, 38);
+		color: white;
 		margin-top: 1rem;
 		margin-bottom: -1rem;
+		outline-width: 0 !important;
+		padding: 0.7rem;
 		margin-left: 0.9rem;
-		pointer-events: visible !important;
+		cursor: pointer;
 	}
 
 	/* media query */
@@ -95,7 +97,7 @@ export const Image_Data = styled.div`
 `;
 
 export const Profile_Data = styled.div`
-	margin-top: 2.5rem;
+	margin-top: 1.7rem;
 	color: ${({ istheme }) =>
 		istheme ? 'white !important' : 'black !important'};
 
@@ -111,12 +113,15 @@ export const Validate = styled.div`
 	top: 0.6rem;
 	width: 100%;
 	height: 110%;
-	opacity: 0.99;
-	z-index: 999;
+	opacity: 0.98;
+	z-index: ${({ showValidate }) => (!showValidate ? -999 : 999)};
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	background: ${({ showValidate }) => (!showValidate ? '' : 'white')};
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+		rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+		rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset !important;
 `;
 
 export const Auth = styled.div`
@@ -124,25 +129,29 @@ export const Auth = styled.div`
 	box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
 		rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
 		rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset !important;
+	display: flex;
 
-	width: 50%;
-	height: 54%;
+	justify-content: center;
+	align-items: center;
+	width: 60% !important;
+	height: 50%;
 	padding: 1rem;
+
 	z-index: 999;
 	button {
 		width: 50%;
 		background: lightblue;
-		margin: 1.9rem auto 0.9rem 4.9rem;
+		margin: 1.9rem auto 0.9rem 5.9rem;
 		font-size: 0.7rem;
 	}
 	.add_button {
-		width: 100% !important;
+		max-width: 90% !important;
 
 		button {
 			display: flex;
 			justify-content: space-evenly;
-			margin: 2rem auto 0.5rem auto;
-			width: 100%;
+			margin: 0 1rem 0 4rem;
+			width: 80%;
 			&:hover {
 				background: rgba(230, 237, 64, 0.35) !important;
 			}
@@ -151,11 +160,12 @@ export const Auth = styled.div`
 `;
 
 export const Profile_Auth = styled.div`
-	margin-top: 2.5rem;
+	margin-top: 3.5rem;
 
 	color: ${({ disabled }) =>
 		!disabled ? 'yellow ' : 'black !important'};
-
+	border: ${({ success, error }) => success && '1px solid green '};
+	border-bottom: none !important;
 	background: ${({ disabled }) => (!disabled ? 'white' : 'white')};
 
 	input[type='text'] {

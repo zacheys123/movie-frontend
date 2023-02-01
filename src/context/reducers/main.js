@@ -22,6 +22,9 @@ import {
 	UNPLAN,
 	PLAN_ERROR,
 	SETPASSWORD,
+	UPDATEAUTH,
+	UPDATEAUTH_ERROR,
+	AUTH_COMPLETE,
 } from '../action_type';
 export const main_reducer = (state = {}, action) => {
 	switch (action.type) {
@@ -193,6 +196,29 @@ export const main_reducer = (state = {}, action) => {
 			return {
 				...state,
 				isheader: !state.isheader,
+			};
+
+		case UPDATEAUTH:
+			return {
+				...state,
+				success: true,
+				error: false,
+				modalcontent: action.payload.modalcontent,
+			};
+		case UPDATEAUTH_ERROR:
+			return {
+				...state,
+				success: false,
+				error: true,
+				modalcontent: action.payload,
+			};
+		case AUTH_COMPLETE:
+			return {
+				...state,
+				showValidate: !state.showValidate,
+				success: !state.success,
+				error: !state.error,
+				modalcontent: '',
 			};
 		default:
 			return {

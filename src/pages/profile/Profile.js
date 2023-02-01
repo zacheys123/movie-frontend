@@ -132,7 +132,7 @@ const Profile = () => {
 
 			ev.preventDefault();
 
-			update_auth(main_dispatch, myprofile, id);
+			update_auth(main_dispatch, myprofile, id, setDisabled);
 		},
 		[main_dispatch, id],
 	);
@@ -311,7 +311,7 @@ const Profile = () => {
 								</h5>
 								<p>
 									{' '}
-									Email Address:
+									Email:
 									<span style={{ color: 'lightgrey', opacity: '.6' }}>
 										{' '}
 										{adm?.result?.email}
@@ -364,9 +364,10 @@ const Profile = () => {
 							Update Info
 						</Typography>
 					</Box>
-					<Form.Select>
-						<option value="">Choose Update Action</option>
+					<Form.Select size="2">
+						<option>Choose Update Action</option>
 						<option
+							style={{ fontFamily: "'Poppins', sans-serif" }}
 							value="profile"
 							onClick={() => setDisabled((prev) => !prev)}
 						>
@@ -378,7 +379,6 @@ const Profile = () => {
 								main_dispatch({
 									type: SETPASSWORD,
 									showValidate,
-									disablepass,
 								});
 							}}
 						>
@@ -660,10 +660,81 @@ const Profile = () => {
 						<Validate showValidate={showValidate}>
 							{showValidate && (
 								<Auth>
-									<Profile_Auth disabled={disablepass}>
-										<Box style={{ display: 'flex' }}>
+									{' '}
+									<Box className="auth">
+										<Profile_Auth success={success} error={error}>
+											<Box
+												style={{
+													display: 'flex',
+													width: '100%',
+													marginTop: '-7rem',
+													alignItems: 'center',
+													border:
+														error || auth_data.password.length < 6
+															? '2px solid red '
+															: 'none',
+												}}
+											>
+												<TextField
+													InputLabelProps={{
+														shrink: true,
+														style: {
+															color: istheme ? 'grey' : 'grey',
+															marginLeft: '.5rem',
+														},
+													}}
+													name="password"
+													labelid="demo-simple-select-standard-label"
+													id="demo-simple-select-standard"
+													variant="standard"
+													label="New Password"
+													type={!passw ? 'password' : 'text'}
+													sx={{
+														color: 'white',
+														width: '100%',
+														borderLeft: !istheme
+															? '2px solid grey'
+															: 'none',
+														borderBottom: '1px solid lightgrey',
+													}}
+													inputProps={{
+														style: {
+															marginLeft: '.5rem',
+															color: disabled
+																? 'black'
+																: 'rgb(201, 175, 175)',
+														},
+													}}
+													value={auth_data?.password || ''}
+													onChange={handleChange}
+												/>
+												{!passw ? (
+													<VisibilityOff
+														sx={{
+															cursor: 'pointer',
+															color: !istheme ? 'white' : 'black',
+															marginLeft: '.6rem',
+														}}
+														onClick={() => {
+															setPassword((prof) => !prof);
+														}}
+													/>
+												) : (
+													<VisibilityOn
+														sx={{
+															cursor: 'pointer',
+															color: !istheme ? 'white' : 'black',
+														}}
+														onClick={() => {
+															setPassword((prof) => !prof);
+														}}
+													/>
+												)}
+											</Box>
+										</Profile_Auth>
+
+										<Profile_Auth success={success} error={error}>
 											<TextField
-												disabled={!disablepass}
 												InputLabelProps={{
 													shrink: true,
 													style: {
@@ -671,12 +742,12 @@ const Profile = () => {
 														marginLeft: '.5rem',
 													},
 												}}
-												name="password"
+												type={!passw ? 'password' : 'text'}
+												name="confirmpassword"
 												labelid="demo-simple-select-standard-label"
 												id="demo-simple-select-standard"
 												variant="standard"
-												label="New Password"
-												type={!passw ? 'password' : 'text'}
+												label="Confirm New Password"
 												sx={{
 													color: 'white',
 													width: '100%',
@@ -684,6 +755,11 @@ const Profile = () => {
 														? '2px solid grey'
 														: 'none',
 													borderBottom: '1px solid lightgrey',
+													border:
+														error ||
+														auth_data.confirmpassword.length < 6
+															? '2px solid red '
+															: 'none',
 												}}
 												inputProps={{
 													style: {
@@ -693,104 +769,73 @@ const Profile = () => {
 															: 'rgb(201, 175, 175)',
 													},
 												}}
-												value={prof?.password || ''}
+												value={auth_data?.confirmpassword || ''}
 												onChange={handleChange}
 											/>
-											{!passw ? (
-												<VisibilityOff
-													sx={{
-														cursor: 'pointer',
-														color: !istheme ? 'white' : 'black',
+										</Profile_Auth>
+										<Box>
+											{error && (
+												<span
+													style={{
+														color: 'red',
+														margin: '3rem 0 0 1rem',
 													}}
-													onClick={() => {
-														setPassword((prof) => !prof);
+												>
+													{modalcontent}
+												</span>
+											)}
+											{success && (
+												<span
+													style={{
+														color: 'green',
+														margin: '2rem 0 0 3rem',
 													}}
-												/>
-											) : (
-												<VisibilityOn
-													sx={{
-														cursor: 'pointer',
-														color: !istheme ? 'white' : 'black',
-													}}
-													onClick={() => {
-														setPassword((prof) => !prof);
-													}}
-												/>
+												>
+													{modalcontent}
+												</span>
 											)}
 										</Box>
-									</Profile_Auth>
+										<Box>
+											<Button
+												disabled={loading}
+												onClick={update_pass}
+												variant="outlined"
+												sx={{
+													background: 'lightblue !important',
+													marginRight: '1rem',
+													color: 'black',
+												}}
+											>
+												{loading ? (
+													<>
+														<CircularProgress
+															value={progress}
+															size="27px"
+															sx={{ marginRight: '.6rem' }}
+														/>
 
-									<Profile_Auth disabled={disablepass}>
-										<TextField
-											disabled={!disablepass}
-											InputLabelProps={{
-												shrink: true,
-												style: {
-													color: istheme ? 'grey' : 'grey',
-													marginLeft: '.5rem',
-												},
-											}}
-											type={!passw ? 'password' : 'text'}
-											name="confirmpassword"
-											labelid="demo-simple-select-standard-label"
-											id="demo-simple-select-standard"
-											variant="standard"
-											label="Confirm New Password"
-											sx={{
-												color: 'white',
-												width: '100%',
-												borderLeft: !istheme
-													? '2px solid grey'
-													: 'none',
-												borderBottom: '1px solid lightgrey',
-											}}
-											inputProps={{
-												style: {
-													marginLeft: '.5rem',
-													color: disabled
-														? 'black'
-														: 'rgb(201, 175, 175)',
-												},
-											}}
-											value={auth_data?.confirmpassword || ''}
-											onChange={handleChange}
-										/>
-									</Profile_Auth>
-									<Box className="add_button">
-										{' '}
-										<Button
-											disabled={loading}
-											onClick={update_pass}
-											variant="outlined"
-											type="submit"
-											className="
-											bg-info"
-										>
-											Add Email Account
-											<span>
-												<AddIcon />
-											</span>
-										</Button>
+														<span>Updating...</span>
+													</>
+												) : (
+													<span>Update Password</span>
+												)}
+											</Button>
+										</Box>
+										<Box className="add_button">
+											{' '}
+											<Button
+												disabled={loading}
+												onClick={update_pass}
+												variant="outlined"
+												type="submit"
+											>
+												Create another account
+												<span>
+													<AddIcon />
+												</span>
+											</Button>
+										</Box>
 									</Box>
-									<Button
-										disabled={loading}
-										onClick={update_pass}
-										variant="outlined"
-										sx={{
-											background: 'lightblue',
-											marginRight: '1rem',
-											color: 'green',
-										}}
-									>
-										{loading && (
-											<CircularProgressWithLabel
-												value={progress}
-												size="27px"
-												sx={{ marginRight: '.6rem' }}
-											/>
-										)}
-										Update Password
-									</Button>
 								</Auth>
 							)}
 						</Validate>
@@ -812,14 +857,35 @@ const Profile = () => {
 										color: 'green',
 									}}
 								>
-									{loading && (
-										<CircularProgressWithLabel
-											value={progress}
-											size="27px"
-											sx={{ marginRight: '.6rem' }}
-										/>
+									{loading ? (
+										<>
+											{' '}
+											<CircularProgress
+												value={progress}
+												size="27px"
+												sx={{ color: 'secondary', width: '10%' }}
+											/>{' '}
+											<span
+												style={{
+													textTransform: 'none',
+													marginLeft: '.7rem',
+													fontWeight: 'bold',
+												}}
+											>
+												Updating...
+											</span>
+										</>
+									) : (
+										<span
+											style={{
+												textTransform: 'none',
+												marginLeft: '.7rem',
+												fontWeight: 'bold',
+											}}
+										>
+											Update data
+										</span>
 									)}
-									Update data
 								</Button>
 
 								<Button
@@ -833,7 +899,15 @@ const Profile = () => {
 											sx={{ color: 'white' }}
 										/>
 									) : (
-										'Delete Account'
+										<span
+											style={{
+												textTransform: 'none',
+												marginLeft: '.7rem',
+												fontWeight: 'bold',
+											}}
+										>
+											Delete Account
+										</span>
 									)}
 								</Button>
 							</Box>
