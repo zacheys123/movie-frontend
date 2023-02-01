@@ -85,7 +85,7 @@ $breakpoint-lgdesktop: 1480px;
 		align-items: center;
 
 		.center {
-			flex: 2;
+			flex: 4;
 			max-width: 40rem;
 			height: 74% !important;
 			background: transparent;
@@ -178,12 +178,13 @@ $breakpoint-lgdesktop: 1480px;
 			}
 		}
 		.videos {
-			flex: 6;
+			flex: 4;
 			height: 100%;
 
 			display: flex;
 			justify-content: center;
 			align-items: center;
+			overflow: none;
 			video {
 				width: 70%;
 				height: 100%;
@@ -230,6 +231,7 @@ $breakpoint-lgdesktop: 1480px;
 		margin-right: 1rem;
 		flex: 5 !important;
 		.center {
+			display: none !important;
 			height: 21.5rem !important;
 			h2 {
 				font-size: 1.2rem;
@@ -259,6 +261,7 @@ $breakpoint-lgdesktop: 1480px;
 		display: flex;
 		align-items: center;
 		.center {
+			display: none !important;
 			flex: 5;
 			max-width: 35rem;
 			height: 61% !important;
@@ -305,6 +308,7 @@ $breakpoint-lgdesktop: 1480px;
 		display: flex;
 		align-items: center;
 		.center {
+			display: none !important;
 			flex: 5;
 			max-width: 35rem;
 			height: 61% !important;
