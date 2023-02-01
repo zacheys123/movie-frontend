@@ -259,7 +259,7 @@ $breakpoint-lgdesktop: 1480px;
 		display: flex;
 		align-items: center;
 		.center {
-			flex: 3;
+			flex: 5;
 			max-width: 35rem;
 			height: 61% !important;
 			background: linear-gradient(
@@ -285,13 +285,13 @@ $breakpoint-lgdesktop: 1480px;
 		}
 		.videos {
 			display: none;
-			flex: 5 !important;
+			flex: 4 !important;
 			height: 100%;
 			display: flex;
 			justify-content: center;
 			align-items: center;
 			video {
-				width: 60%;
+				width: 70%;
 				height: 60%;
 			}
 		}
@@ -305,7 +305,7 @@ $breakpoint-lgdesktop: 1480px;
 		display: flex;
 		align-items: center;
 		.center {
-			flex: 3;
+			flex: 5;
 			max-width: 35rem;
 			height: 61% !important;
 			background: linear-gradient(
@@ -337,7 +337,7 @@ $breakpoint-lgdesktop: 1480px;
 			justify-content: center;
 			align-items: center;
 			video {
-				width: 60% !important;
+				width: 80% !important;
 				height: 70%;
 			}
 		}
@@ -351,7 +351,7 @@ $breakpoint-lgdesktop: 1480px;
 		display: flex;
 		align-items: center;
 		.center {
-			flex: 3;
+			flex: 5;
 			max-width: 35rem;
 			height: 61% !important;
 			background: linear-gradient(
@@ -382,7 +382,7 @@ $breakpoint-lgdesktop: 1480px;
 			justify-content: center;
 			align-items: center;
 			video {
-				width: 60% !important;
+				width: 70% !important;
 				height: 80%;
 			}
 		}
@@ -396,7 +396,7 @@ $breakpoint-lgdesktop: 1480px;
 		display: flex;
 		align-items: center;
 		.center {
-			flex: 3;
+			flex: 5;
 			max-width: 35rem;
 			height: 61% !important;
 			background: linear-gradient(
@@ -427,7 +427,7 @@ $breakpoint-lgdesktop: 1480px;
 			justify-content: center;
 			align-items: center;
 			video {
-				width: 60%;
+				width: 70%;
 				height: 80%;
 			}
 		}
@@ -441,7 +441,7 @@ $breakpoint-lgdesktop: 1480px;
 		display: flex;
 		align-items: center;
 		.center {
-			flex: 3;
+			flex: 5;
 			max-width: 35rem;
 			height: 61% !important;
 			background: linear-gradient(
