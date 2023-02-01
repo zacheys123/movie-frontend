@@ -159,11 +159,20 @@ const LandingPage = () => {
 							</li>
 						</ul>
 					</div>
-					<div className="description">
-						your Movie Orders for faster, accurate, and Efficient Its
-						scheduling feature further enables you to stay on the loop
-						with requested and upcoming movies.
-					</div>{' '}
+					<motion.div
+						initial={{ x: '-200%', opacity: 0 }}
+						animate={{
+							x: ['-5%', '15%', '25%', '25%', '0%'],
+							y: '1rem',
+							opacity: 1,
+							transition: { duration: 0.5, delay: 10 },
+						}}
+						className="description"
+					>
+						your Movie Orders faster, accurate, and Efficient. Its
+						scheduling feature further enables you to bewell informed
+						with suggested, latest and upcoming movies.
+					</motion.div>{' '}
 					{/*<span className="animate_header">
 						WE ARE REVOLUTIONIZING THE MOVIE BUSINESS!!
 						</span>*/}

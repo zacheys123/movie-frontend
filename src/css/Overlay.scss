@@ -138,7 +138,7 @@ input[type='text']:first-child {
 }
 .loading {
 	z-index: 999 !important;
-	position: absolute !important;
+	position: absolute;
 	background: rgb(131, 98, 98) !important;
 	height: 100% !important;
 	width: 100% !important;
@@ -157,10 +157,11 @@ input[type='text']:first-child {
 	box-shadow: rgba(13, 138, 154, 0.4) 5px 5px,
 		rgba(176, 19, 194, 0.3) 10px 10px,
 		rgba(226, 204, 62, 0.2) 25px 15px;
-	height: 45% !important;
-	width: 50% !important;
+	height: 40% !important;
+	max-width: 50% !important;
 	display: flex !important;
 	justify-content: center !important;
+	padding: 0.4rem;
 	align-items: center;
 	flex-direction: column !important;
 	border-radius: 20px;

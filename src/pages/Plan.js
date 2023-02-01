@@ -155,13 +155,31 @@ const ConfirmData = () => {
 		return response.data;
 	});
 	const myuserInfo = JSON.parse(localStorage.getItem('userInfo'));
+	const myinfo = alldata?.result?.package;
+
 	return (
-		<Container
-			sx={{ height: '85vh' }}
-			className="main"
+		<Box
+			sx={{ height: '100vh' }}
+			className="main container-fluid"
 			style={{ background: !istheme ? 'black' : 'inherit' }}
 		>
-			<Box
+			{loading && (
+				<motion.div
+					initial={{ opacity: 0, transform: 'scale(0)' }}
+					animate={{
+						transform: 'scale(1)',
+						opacity: 0.7,
+						transition: { duration: 0.9 },
+					}}
+					className="loading"
+				>
+					<CircularProgress
+						size="100px"
+						sx={{ color: 'lightgrey', opacity: 0.3 }}
+					/>
+				</motion.div>
+			)}
+			<Container
 				className="main__plan"
 				sx={{
 					display: 'flex',
@@ -178,7 +196,7 @@ const ConfirmData = () => {
 						Choose A Plan
 					</h4>
 
-					{myuserInfo ? (
+					{myuserInfo || myinfo ? (
 						<div
 							style={{
 								fontWeight: '600',
@@ -291,6 +309,7 @@ const ConfirmData = () => {
 								placeholder=" Free 50ksh/day"
 							/>
 							<Button
+								disabled={isplan}
 								onClick={free_plan}
 								variant="contained"
 								sx={{
@@ -392,6 +411,7 @@ const ConfirmData = () => {
 								placeholder=" 100ksh/day"
 							/>
 							<Button
+								disabled={isplan}
 								onClick={amateur}
 								variant="contained"
 								sx={{
@@ -495,11 +515,12 @@ const ConfirmData = () => {
 								style={{ marginTop: '.7rem' }}
 								type="text"
 								onChange={handlePlan}
-								value={plan.world}
+								value={plan.premium}
 								placeholder=" 650ksh/day"
 							/>
 							<Button
-								onClick={world}
+								disabled={isplan}
+								onClick={premium}
 								variant="contained"
 								sx={{
 									background: 'red',
@@ -593,12 +614,13 @@ const ConfirmData = () => {
 								readOnly="readOnly"
 								type="text"
 								onChange={handlePlan}
-								value={plan.premium}
+								value={plan.world}
 								placeholder="2500ksh/month"
 								style={{ fontSize: '.8rem', marginTop: '.7rem' }}
 							/>
 							<Button
-								onClick={premium}
+								disabled={isplan}
+								onClick={world}
 								variant="contained"
 								sx={{
 									background: 'red',
@@ -618,22 +640,7 @@ const ConfirmData = () => {
 						</Box>
 					</Box>
 				</Stack>
-				{loading && (
-					<motion.div
-						initial={{ opacity: 0, transform: 'scale(0)' }}
-						animate={{
-							transform: 'scale(1)',
-							opacity: 0.7,
-							transition: { duration: 0.9 },
-						}}
-						className="loading"
-					>
-						<CircularProgress
-							size="100px"
-							sx={{ color: 'lightgrey', opacity: 0.3 }}
-						/>
-					</motion.div>
-				)}
+
 				{isplan && (
 					<motion.div
 						initial={{ transform: 'scale(0)', opacity: 0 }}
@@ -695,8 +702,8 @@ const ConfirmData = () => {
 						</Box>
 					</motion.div>
 				)}
-			</Box>
-		</Container>
+			</Container>
+		</Box>
 	);
 };
 
