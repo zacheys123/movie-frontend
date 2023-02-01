@@ -133,7 +133,7 @@ export const Auth = styled.div`
 
 	justify-content: center;
 	align-items: center;
-	width: 60% !important;
+	width: 45% !important;
 	height: 50%;
 	padding: 1rem;
 
@@ -141,7 +141,7 @@ export const Auth = styled.div`
 	button {
 		width: 50%;
 		background: lightblue;
-		margin: 1.9rem auto 0.9rem 5.9rem;
+		margin: 1.9rem auto 0.9rem 4.9rem;
 		font-size: 0.7rem;
 	}
 	.add_button {
@@ -150,7 +150,7 @@ export const Auth = styled.div`
 		button {
 			display: flex;
 			justify-content: space-evenly;
-			margin: 0 1rem 0 4rem;
+			margin: 0 1rem 0 3rem;
 			width: 80%;
 			&:hover {
 				background: rgba(230, 237, 64, 0.35) !important;
