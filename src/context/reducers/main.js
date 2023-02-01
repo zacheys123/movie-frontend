@@ -25,6 +25,7 @@ import {
 	UPDATEAUTH,
 	UPDATEAUTH_ERROR,
 	AUTH_COMPLETE,
+	SETPASS,
 } from '../action_type';
 export const main_reducer = (state = {}, action) => {
 	switch (action.type) {
@@ -171,6 +172,11 @@ export const main_reducer = (state = {}, action) => {
 				...state,
 				showValidate: !action.showValidate,
 				disablepass: !action.disablepass,
+			};
+		case SETPASS:
+			return {
+				...state,
+				showValidate: !action.showValidate,
 			};
 		case PLAN:
 			return {

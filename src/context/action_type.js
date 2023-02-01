@@ -37,5 +37,6 @@ export const GETSOURCE = 'GETSOURCE';
 export const MUSIC = 'MUSIC';
 export const MUSICRECORD = 'MUSICRECORD';
 export const UPDATEAUTH = 'UPDATEAUTH';
+export const SETPASS = 'SETPASS';
 export const UPDATEAUTH_ERROR = 'UPDAAUTHTE_ERROR';
 export const AUTH_COMPLETE = 'AUTH_COMPLETE';
