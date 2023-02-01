@@ -170,7 +170,7 @@ const LandingPage = () => {
 						className="description"
 					>
 						your Movie Orders faster, accurate, and Efficient. Its
-						scheduling feature further enables you to bewell informed
+						scheduling feature further enables you to be well informed
 						with suggested, latest and upcoming movies.
 					</motion.div>{' '}
 					{/*<span className="animate_header">
