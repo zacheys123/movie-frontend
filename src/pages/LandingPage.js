@@ -134,19 +134,19 @@ const LandingPage = () => {
 							}}
 							className="static-txt"
 						>
-							to <span style={{ color: 'violet' }}>MovieHubz</span>{' '}
-							where you get to
-						</span>{' '}
+							<span style={{ color: 'violet' }}>MovieHubz</span> is a
+							platform that makes it easy for you to
+						</span>
 						<ul className="dynamic-txts">
 							<li>
 								<span style={{ color: 'cyan', fontWeight: '700' }}>
 									{' '}
-									organize.
+									Organize.
 								</span>
 							</li>
 							<li>
 								<span style={{ color: 'magenta', fontWeight: '700' }}>
-									optimize.{' '}
+									Optimize.{' '}
 								</span>
 							</li>
 							<li>
@@ -154,7 +154,7 @@ const LandingPage = () => {
 									style={{ color: 'greenyellow', fontWeight: '700' }}
 								>
 									{' '}
-									and schedule
+									and Schedule
 								</span>
 							</li>
 						</ul>
@@ -169,9 +169,9 @@ const LandingPage = () => {
 						}}
 						className="description"
 					>
-						your Movie Orders faster, accurate, and Efficient. Its
-						scheduling feature further enables you to be well informed
-						with suggested, latest and upcoming movies.
+						Access your Movie Orders faster, accurate, and Efficient.
+						Its scheduling feature further enables you to be well
+						informed with suggested, latest and upcoming movies.
 					</motion.div>{' '}
 					{/*<span className="animate_header">
 						WE ARE REVOLUTIONIZING THE MOVIE BUSINESS!!
