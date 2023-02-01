@@ -361,6 +361,7 @@ $breakpoint-lgdesktop: 1480px;
 			padding: 1rem;
 			margin-left: 1rem;
 			button {
+				font-size: 0.4rem;
 				margin-top: 2rem;
 				width: 40%;
 				border-radius: 50px;
@@ -396,7 +397,8 @@ $breakpoint-lgdesktop: 1480px;
 		display: flex;
 		align-items: center;
 		.center {
-			flex: 5;
+			flex: 3;
+
 			max-width: 35rem;
 			height: 61% !important;
 			background: linear-gradient(
@@ -427,7 +429,7 @@ $breakpoint-lgdesktop: 1480px;
 			justify-content: center;
 			align-items: center;
 			video {
-				width: 70%;
+				width: 60%;
 				height: 80%;
 			}
 		}
@@ -441,7 +443,7 @@ $breakpoint-lgdesktop: 1480px;
 		display: flex;
 		align-items: center;
 		.center {
-			flex: 5;
+			flex: 3;
 			max-width: 35rem;
 			height: 61% !important;
 			background: linear-gradient(
