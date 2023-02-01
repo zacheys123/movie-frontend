@@ -35,7 +35,8 @@ const Music = ({ user }) => {
 		music_type: '',
 		amount: '',
 		paid: '',
-		count_data: '',
+		countdata: '',
+		pre_amount: '',
 	});
 	// input function
 	const handleChange = (ev) => {
@@ -126,11 +127,11 @@ const Music = ({ user }) => {
 					<Form.Group className="row movie">
 						<div className="col">
 							<Form.Control
-								value={mymusic.count_data || ''}
+								value={mymusic.countdata || ''}
 								onChange={handleChange}
 								className="form__inputs mx-2"
 								type="text"
-								name="count_data"
+								name="countdata"
 								placeholder="Number of singles/Mix"
 							/>
 						</div>
@@ -140,14 +141,25 @@ const Music = ({ user }) => {
 					<Form.Group className="row movie">
 						<div className="col">
 							<Form.Control
-								value={mymusic.amount || ''}
+								value={mymusic.pre_amount || ''}
 								onChange={handleChange}
 								className="form__inputs mx-2"
-								type="number"
-								name="amount"
+								type="text"
+								name="pre_amount"
 								placeholder="Enter Amount"
+								onKeyUp={(ev) =>
+									setMusic((prev) => {
+										return {
+											...prev,
+											amount: parseInt(
+												mymusic.countdata * mymusic.pre_amount,
+											),
+										};
+									})
+								}
 							/>
 						</div>
+
 						<div className="col">
 							<Form.Control
 								value={mymusic.paid || ''}
@@ -156,6 +168,20 @@ const Music = ({ user }) => {
 								type="number"
 								name="paid"
 								placeholder="Enter Amount Paid"
+							/>
+						</div>
+					</Form.Group>
+				</div>
+				<div className="row">
+					<Form.Group className="row movie">
+						<div className="col">
+							<Form.Control
+								disabled
+								value={mymusic.amount}
+								className="form__inputs mx-2"
+								type="number"
+								name="amount"
+								placeholder="Total Amount"
 							/>
 						</div>
 					</Form.Group>

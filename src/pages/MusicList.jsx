@@ -18,7 +18,7 @@ const MusicList = ({ user }) => {
 
 		return response?.data;
 	});
-	console.log(user);
+
 	const [searchquery, setQuery] = useState('');
 
 	const musicfunc = () => {
@@ -70,7 +70,7 @@ const MusicList = ({ user }) => {
 									music_type,
 									amount,
 									paid,
-									count_data,
+									countdata,
 								}) => {
 									return (
 										<tr key={_id}>
@@ -84,8 +84,8 @@ const MusicList = ({ user }) => {
 											</td>
 											<td>{song_name}</td>
 											<td>{music_type}</td>
-											<td>{count_data}</td>
-											<td>{parseInt(amount * count_data)}</td>
+											<td>{countdata}</td>
+											<td>{amount}</td>
 											<td>{paid}</td>
 
 											<td>{parseFloat(amount - paid)}</td>

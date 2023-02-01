@@ -17,7 +17,10 @@ import {
 	MainStack,
 	Profile_Data,
 	Validate,
+	Profile_Auth,
+	Auth,
 } from './styles';
+import AddIcon from '@mui/icons-material/Add';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { motion } from 'framer-motion';
@@ -27,6 +30,7 @@ import logo from '../../assets/lohin.jpg';
 import {
 	update_user,
 	delete_user,
+	update_auth,
 } from '../../context/features/user_actions';
 import './profile.scss';
 import Modal from '../../components/Modal';
@@ -43,10 +47,12 @@ import {
 	NO_DATA,
 	SETPASSWORD,
 } from '../../context/action_type';
+import { Form } from 'react-bootstrap';
 const Profile = () => {
 	const [image, setImage] = useState();
 
 	const prevData = useRef({});
+	const prevAuth = useRef({});
 	const {
 		main_state: {
 			istheme,
@@ -59,6 +65,7 @@ const Profile = () => {
 			disablepass,
 			showValidate,
 			logged,
+			error,
 		},
 		main_dispatch,
 	} = useMainContext();
@@ -69,11 +76,13 @@ const Profile = () => {
 		firstname: '',
 		lastname: ' ',
 		username: '',
-		email: ' ',
+
 		marital: '',
 		company: '',
 		occupation: '',
 		city: '',
+	});
+	const [auth_data, setAuthData] = useState({
 		password: '',
 		confirmpassword: '',
 	});
@@ -91,6 +100,9 @@ const Profile = () => {
 		setProf(() => {
 			return { ...prof, [ev.target.name]: ev.target.value };
 		});
+		setAuthData(() => {
+			return { ...auth_data, [ev.target.name]: ev.target.value };
+		});
 	};
 
 	const adm = JSON.parse(window.localStorage.getItem('profile'));
@@ -106,36 +118,45 @@ const Profile = () => {
 		const reader = new FileReader();
 		if (file) {
 			reader.readAsDataURL(file);
-			reader.onloadend = () => {
-				setImage(reader.result);
+			reader.onloadend = (e) => {
+				console.log(e.target.result.replace(/(?:\r\n|\r|\n)/g, ''));
+				setImage(reader.result.replace(/(?:\r\n|\r|\n)/g, ''));
 			};
 		} else {
 			setImage('');
 		}
 	};
+	const update_pass = useCallback(
+		(ev) => {
+			const myprofile = { prevAuth, userId: id };
+
+			ev.preventDefault();
+
+			update_auth(main_dispatch, myprofile, id);
+		},
+		[main_dispatch, id],
+	);
+
 	const update_acc = useCallback((ev) => {
 		let form = { prevData, image };
-		console.log(form?.imageref);
+		console.log(form.imageref);
 		const myprofile = { form, userId: id };
 
 		ev.preventDefault();
-		if (prevData?.current?.username && prevData?.current?.email) {
-			if (
-				prevData?.current?.password ===
-				prevData?.current?.confirmpassword
-			) {
-				update_user(
-					main_dispatch,
-					loading,
-					myprofile,
-					id,
-					ismodal,
-					success,
-					navigate,
-				);
-			} else {
-				main_dispatch({ type: WRONGPASSWORD });
-			}
+		if (
+			prevData?.current?.firstname &&
+			prevData?.current?.lastname &&
+			prevData?.current?.company
+		) {
+			update_user(
+				main_dispatch,
+				loading,
+				myprofile,
+				id,
+				ismodal,
+				success,
+				navigate,
+			);
 		} else {
 			main_dispatch({ type: NO_DATA });
 		}
@@ -171,7 +192,7 @@ const Profile = () => {
 
 		try {
 			const response = await axios.get(`${baseUrl}/user/v2/${id}`);
-			console.log(response?.data);
+
 			setDataProfile(response?.data);
 			let username =
 				response?.data?.result?.firstname +
@@ -180,15 +201,13 @@ const Profile = () => {
 				firstname: response?.data?.result?.firstname,
 				lastname: response?.data?.result?.lastname,
 				username: username || response?.data?.username,
-				email: response?.data?.result?.email,
+
 				company: response?.data?.result?.company,
 				marital: response?.data?.result?.marital || '',
 				occupation: response?.data?.result?.occupation,
 				city: response?.data?.result?.city,
 				package: response?.data?.result?.package,
 				company: response?.data?.result?.company,
-				password: response?.data?.result?.password,
-				confirmpassword: response?.data?.result?.password,
 			});
 		} catch (error) {
 			console.log(error.message);
@@ -212,8 +231,9 @@ const Profile = () => {
 	React.useEffect(() => {
 		profile.current = allprof;
 		prevData.current = prof;
+		prevAuth.current = auth_data;
 		imageref.current = image;
-	}, [prof]);
+	}, [prof, auth_data, image]);
 	const closemodal = () => {
 		main_dispatch({ type: 'CLOSEMODAL', ismodal });
 	};
@@ -294,7 +314,7 @@ const Profile = () => {
 									Email Address:
 									<span style={{ color: 'lightgrey', opacity: '.6' }}>
 										{' '}
-										{prof?.email}
+										{adm?.result?.email}
 									</span>
 								</p>
 								<p>
@@ -343,29 +363,34 @@ const Profile = () => {
 						>
 							Update Info
 						</Typography>
-						<Button
-							disabled={disable}
-							variant="outlined"
-							color="secondary"
-							sx={{
-								color: istheme ? 'green' : 'white',
-								fontWeight: 'bold',
-								marginTop: '.8rem',
-								border: '1px solid green',
-							}}
-							onClick={() => setDisabled((prev) => !prev)}
-							className="head__update"
-						>
-							Edit Profile
-							<EditIcon />
-						</Button>
 					</Box>
-
+					<Form.Select>
+						<option value="">Choose Update Action</option>
+						<option
+							value="profile"
+							onClick={() => setDisabled((prev) => !prev)}
+						>
+							Update Profile Info
+						</option>
+						<option
+							value="password"
+							onClick={() => {
+								main_dispatch({
+									type: SETPASSWORD,
+									showValidate,
+									disablepass,
+								});
+							}}
+						>
+							Change Password
+						</option>
+					</Form.Select>
 					{ismodal && (
 						<Modal
 							modalcontent={modalcontent}
 							closemodal={closemodal}
 							success={success}
+							error={error}
 						/>
 					)}
 					<Box
@@ -489,6 +514,7 @@ const Profile = () => {
 								type="text"
 							/>
 						</Profile_Data>
+
 						<Profile_Data disabled={disable}>
 							<TextField
 								disabled={!disable}
@@ -499,42 +525,7 @@ const Profile = () => {
 										marginLeft: '.5rem',
 									},
 								}}
-								name="email"
-								labelid="demo-simple-select-standard-label"
-								id="demo-simple-select-standard"
-								variant="standard"
-								label="Email Address"
-								sx={{
-									color: 'white',
-									width: '100%',
-									borderLeft: !istheme ? '2px solid grey' : 'none',
-									borderBottom: '1px solid lightgrey',
-								}}
-								inputProps={{
-									style: {
-										marginLeft: '.5rem',
-										color: !istheme
-											? disabled
-												? 'black'
-												: 'white'
-											: 'white',
-									},
-								}}
-								value={prof?.email || ''}
-								onChange={handleChange}
-							/>
-						</Profile_Data>
-						<Profile_Data disabled={disable}>
-							<TextField
-								disabled={!disable}
-								InputLabelProps={{
-									shrink: true,
-									style: {
-										color: istheme ? 'grey' : 'grey',
-										marginLeft: '.5rem',
-									},
-								}}
-								name="bsname"
+								name="company"
 								labelid="demo-simple-select-standard-label"
 								id="demo-simple-select-standard"
 								variant="standard"
@@ -665,23 +656,11 @@ const Profile = () => {
 								onChange={handleChange}
 							/>
 						</Profile_Data>
-						<Button
-							style={{ marginTop: '1.6rem' }}
-							variant="outlined"
-							onClick={() => {
-								main_dispatch({
-									type: SETPASSWORD,
-									showValidate,
-									disablepass,
-								});
-							}}
-						>
-							{!showValidate ? 'Change password' : 'Hide Dialogue'}
-						</Button>
+
 						<Validate showValidate={showValidate}>
 							{showValidate && (
-								<div>
-									<Profile_Data disabled={disablepass}>
+								<Auth>
+									<Profile_Auth disabled={disablepass}>
 										<Box style={{ display: 'flex' }}>
 											<TextField
 												disabled={!disablepass}
@@ -709,11 +688,9 @@ const Profile = () => {
 												inputProps={{
 													style: {
 														marginLeft: '.5rem',
-														color: !istheme
-															? disabled
-																? 'black'
-																: 'white'
-															: 'black',
+														color: disabled
+															? 'black'
+															: 'rgb(201, 175, 175)',
 													},
 												}}
 												value={prof?.password || ''}
@@ -741,9 +718,9 @@ const Profile = () => {
 												/>
 											)}
 										</Box>
-									</Profile_Data>
+									</Profile_Auth>
 
-									<Profile_Data disabled={disablepass}>
+									<Profile_Auth disabled={disablepass}>
 										<TextField
 											disabled={!disablepass}
 											InputLabelProps={{
@@ -770,58 +747,99 @@ const Profile = () => {
 											inputProps={{
 												style: {
 													marginLeft: '.5rem',
-													color: !istheme ? 'white' : 'black',
+													color: disabled
+														? 'black'
+														: 'rgb(201, 175, 175)',
 												},
 											}}
-											value={prof?.confirmpassword || ''}
+											value={auth_data?.confirmpassword || ''}
 											onChange={handleChange}
 										/>
-									</Profile_Data>
-								</div>
+									</Profile_Auth>
+									<Box className="add_button">
+										{' '}
+										<Button
+											disabled={loading}
+											onClick={update_pass}
+											variant="outlined"
+											type="submit"
+											className="
+											bg-info"
+										>
+											Add Email Account
+											<span>
+												<AddIcon />
+											</span>
+										</Button>
+									</Box>
+									<Button
+										disabled={loading}
+										onClick={update_pass}
+										variant="outlined"
+										sx={{
+											background: 'lightblue',
+											marginRight: '1rem',
+											color: 'green',
+										}}
+									>
+										{loading && (
+											<CircularProgressWithLabel
+												value={progress}
+												size="27px"
+												sx={{ marginRight: '.6rem' }}
+											/>
+										)}
+										Update Password
+									</Button>
+								</Auth>
 							)}
 						</Validate>
 
-						<Box style={{ color: 'red', textAlign: 'center' }}></Box>
-						<Box
-							sx={{
-								marginTop: '2rem',
-							}}
-							className="actions"
-						>
-							<Button
-								disabled={loading}
-								onClick={update_acc}
-								variant="outlined"
+						{!showValidate ? (
+							<Box
 								sx={{
-									background: 'lightblue',
-									marginRight: '1rem',
-									color: 'green',
+									marginTop: '2rem',
 								}}
+								className="actions"
 							>
-								{loading && (
-									<CircularProgressWithLabel
-										value={progress}
-										size="27px"
-										sx={{ marginRight: '.6rem' }}
-									/>
-								)}
-								Update data
-							</Button>
-							<Button
-								onClick={delete_acc}
-								variant="contained"
-								sx={{ background: 'red' }}
-							>
-								{loader ? (
-									<CircularProgress
-										size="20px"
-										sx={{ color: 'white' }}
-									/>
-								) : (
-									'Delete Account'
-								)}
-							</Button>
-						</Box>
+								<Button
+									disabled={loading}
+									onClick={update_acc}
+									variant="outlined"
+									sx={{
+										background: 'lightblue',
+										marginRight: '1rem',
+										color: 'green',
+									}}
+								>
+									{loading && (
+										<CircularProgressWithLabel
+											value={progress}
+											size="27px"
+											sx={{ marginRight: '.6rem' }}
+										/>
+									)}
+									Update data
+								</Button>
+
+								<Button
+									onClick={delete_acc}
+									variant="contained"
+									sx={{ background: 'red' }}
+								>
+									{loader ? (
+										<CircularProgress
+											size="20px"
+											sx={{ color: 'white' }}
+										/>
+									) : (
+										'Delete Account'
+									)}
+								</Button>
+							</Box>
+						) : (
+							''
+						)}
 					</Box>
 				</Main>
 			</MainStack>

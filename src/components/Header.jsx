@@ -134,7 +134,7 @@ const Header = ({ user, refetch }) => {
 	});
 
 	const [showUser, setShowuser] = useState(false);
-	console.log(user);
+
 	return (
 		<>
 			{info && (

@@ -1,5 +1,7 @@
 import axios from 'axios';
 import {
+	UPDATEAUTH,
+	UPDATEAUTH_ERROR,
 	UPDATE,
 	UPDATE_ERROR,
 	DELETE_USER,
@@ -8,8 +10,9 @@ import {
 	HEADER_HIDE,
 	LOADING,
 	PLAN,
+	AUTH_COMPLETE,
 } from '../action_type';
-const baseUrl = 'https://moviebackendz.onrender.com';
+const baseUrl = 'http://localhost:4000';
 
 export const update_user = async (
 	setMainContext,
@@ -34,19 +37,54 @@ export const update_user = async (
 					success,
 					ismodal,
 					updated_user: user?.data,
-					modalcontent: 'Data Succesfully Updated',
+					modalcontent: user?.data?.message,
 				},
 			});
-			setTimeout(() => {}, 2000);
+			setTimeout(() => {
+				window.location.reload();
+			}, 100);
 		}, 3000);
 		setMainContext({ type: LOADING });
 	} catch (error) {
+		console.log(error.response);
 		setMainContext({
 			type: UPDATE_ERROR,
-			payload: error.response.data || error.message,
+			payload: error?.response?.data?.message,
 		});
 	}
 };
+
+// update  password fields
+
+export const update_auth = async (dispatch, myprof, id) => {
+	console.log(myprof);
+	try {
+		let user = await axios.put(
+			`${baseUrl}/user/v2/update_auth/${id}`,
+			myprof,
+		);
+		setTimeout(() => {
+			setTimeout(() => {
+				dispatch({ type: AUTH_COMPLETE });
+			}, 1000);
+			dispatch({ type: LOADING });
+			dispatch({
+				type: UPDATEAUTH,
+				payload: {
+					modalcontent: user?.data?.message,
+				},
+			});
+		}, 3000);
+		dispatch({ type: LOADING });
+	} catch (error) {
+		console.log(error.response);
+		dispatch({
+			type: UPDATEAUTH_ERROR,
+			payload: error?.response?.data?.message,
+		});
+	}
+};
+//
 
 export const delete_user = async (
 	setMainContext,

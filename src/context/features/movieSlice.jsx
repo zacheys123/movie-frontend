@@ -169,9 +169,7 @@ export const createMusic = async (datah, dispatch) => {
 	} catch (error) {
 		console.log(error.message);
 		console.log(error.response);
-		dispatch({
-			type: LOADING,
-		});
+
 		dispatch({
 			type: ERROR,
 			payload: {

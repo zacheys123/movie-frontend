@@ -135,9 +135,8 @@ export const main_reducer = (state = {}, action) => {
 		case UPDATE_ERROR:
 			return {
 				...state,
-				ismodal: !action.ismodal,
+
 				modalcontent: action.payload,
-				loading: false,
 			};
 		case DELETE_USER:
 			return {

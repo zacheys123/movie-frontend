@@ -36,3 +36,6 @@ export const HEADER_HIDE = 'HEADER_HIDE';
 export const GETSOURCE = 'GETSOURCE';
 export const MUSIC = 'MUSIC';
 export const MUSICRECORD = 'MUSICRECORD';
+export const UPDATEAUTH = 'UPDATEAUTH';
+export const UPDATEAUTH_ERROR = 'UPDAAUTHTE_ERROR';
+export const AUTH_COMPLETE = 'AUTH_COMPLETE';
