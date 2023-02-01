@@ -35,6 +35,7 @@ const Music = ({ user }) => {
 		music_type: '',
 		amount: '',
 		paid: '',
+		count_data: '',
 	});
 	// input function
 	const handleChange = (ev) => {
@@ -105,7 +106,6 @@ const Music = ({ user }) => {
 						</Form.Select>
 					</div>
 				</div>
-
 				<div className="row">
 					{' '}
 					<div className="col-md-12 select mt-4 mx-2">
@@ -121,6 +121,20 @@ const Music = ({ user }) => {
 							<option value="mix">Mix</option>{' '}
 						</Form.Select>
 					</div>
+				</div>{' '}
+				<div className="row">
+					<Form.Group className="row movie">
+						<div className="col">
+							<Form.Control
+								value={mymusic.count_data || ''}
+								onChange={handleChange}
+								className="form__inputs mx-2"
+								type="text"
+								name="count_data"
+								placeholder="Number of singles/Mix"
+							/>
+						</div>
+					</Form.Group>
 				</div>
 				<div className="row">
 					<Form.Group className="row movie">
@@ -160,8 +174,7 @@ const Music = ({ user }) => {
 						</div>
 					</Form.Group>
 				</div>
-
-				<Button variant="contained" type="submit">
+				<Button disabled={loading} variant="contained" type="submit">
 					{!loading ? (
 						'Enter Music'
 					) : (

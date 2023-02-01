@@ -54,10 +54,10 @@ const MusicList = ({ user }) => {
 							<th>User</th>
 							<th>Song</th>
 							<th>Type</th>
-							<th>amount</th>
-							<th>paid</th>
-							<th>balance</th>
-							<th>void</th>
+							<th>No_</th>
+							<th>Amount</th>
+							<th>Paid</th>
+							<th>Balance</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -70,6 +70,7 @@ const MusicList = ({ user }) => {
 									music_type,
 									amount,
 									paid,
+									count_data,
 								}) => {
 									return (
 										<tr key={_id}>
@@ -83,8 +84,8 @@ const MusicList = ({ user }) => {
 											</td>
 											<td>{song_name}</td>
 											<td>{music_type}</td>
-
-											<td>{amount}</td>
+											<td>{count_data}</td>
+											<td>{parseInt(amount * count_data)}</td>
 											<td>{paid}</td>
 
 											<td>{parseFloat(amount - paid)}</td>
