@@ -14,7 +14,7 @@ import {
 	CLOSEMODAL,
 	EMPTYHOME,
 } from '../context/action_type';
-const Music = (props) => {
+const Music = ({ user }) => {
 	const {
 		main_state: { istheme, profile },
 		main_dispatch,
@@ -52,14 +52,6 @@ const Music = (props) => {
 	});
 	const id = myid?.result?._id;
 	const musicref = useRef();
-	//  getting all movies for this user
-	const { data: users, refetch } = useQuery(['users'], async () => {
-		const response = await axios.get(
-			`https:moviebackendz.onrender.com/user/v2/${id}`,
-		);
-
-		return response.data?.result?.users;
-	});
 
 	const create_music = useCallback(
 		(ev) => {
@@ -79,6 +71,7 @@ const Music = (props) => {
 	useEffect(() => {
 		musicref.current = mymusic;
 	}, []);
+	const users = user?.result?.users;
 	return (
 		<div>
 			<Form className="music" onSubmit={create_music}>

@@ -163,7 +163,7 @@ const Feed = () => {
 			}}
 		>
 			<Box className="feed__movies">
-				{music && <Music />}
+				{music && <Music user={user} />}
 				{one_movie && (
 					<Form onSubmit={createMovies} className="formd">
 						{ismodalhome ? (
