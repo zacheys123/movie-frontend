@@ -154,7 +154,7 @@ const LandingPage = () => {
 									style={{ color: 'greenyellow', fontWeight: '700' }}
 								>
 									{' '}
-									and Schedule
+									Schedule
 								</span>
 							</li>
 						</ul>
