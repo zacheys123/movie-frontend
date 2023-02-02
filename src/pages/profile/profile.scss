@@ -10,6 +10,18 @@
 	.auth {
 		width: 100% !important;
 	}
+	.new_account {
+		margin-top: 2.5rem;
+
+		input {
+			border: none;
+			outline: none;
+			margin-top: 1rem;
+			border-bottom: 1px solid lightgrey;
+			padding: 0.6rem;
+			width: 100%;
+		}
+	}
 }
 @media screen and (max-device-width: 480px) and (min-device-width: 320px) {
 	.profile {

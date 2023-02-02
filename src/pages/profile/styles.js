@@ -146,6 +146,9 @@ export const Auth = styled.div`
 		padding: 0.6rem;
 		font-family: georgia;
 		font-size: 0.8rem;
+		&:hover {
+			background: aqua !important;
+		}
 	}
 	.add_button {
 		display: flex;
@@ -166,17 +169,33 @@ export const Auth = styled.div`
 			font-size: 1.1rem !important;
 		}
 	}
-	.close {
-		position: absolute;
-		top: 0.5rem;
-		z-index: 999 !important;
-		cursor: pointer;
-		right: 1.3rem;
-		color: grey;
-		font-size: 1.9rem !important;
-		font-weight: bold !important;
-		&:hover {
-			color: red;
+	.top {
+		.close_icon {
+			position: absolute;
+
+			z-index: 999 !important;
+			cursor: pointer;
+			top: 0.5rem;
+			right: 1.3rem;
+			color: grey;
+			font-size: 1.9rem !important;
+			font-weight: bold !important;
+			&:hover {
+				color: red;
+			}
+		}
+		.back_icon {
+			position: absolute;
+			top: 0.5rem;
+			z-index: 999 !important;
+			cursor: pointer;
+			left: 1.3rem;
+			color: grey;
+			font-size: 1.9rem !important;
+			font-weight: bold !important;
+			&:hover {
+				color: orange;
+			}
 		}
 	}
 `;

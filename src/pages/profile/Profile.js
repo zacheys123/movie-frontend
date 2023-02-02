@@ -21,6 +21,7 @@ import {
 	Profile_Auth,
 	Auth,
 } from './styles';
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import AddIcon from '@mui/icons-material/Add';
 import PropTypes from 'prop-types';
 import axios from 'axios';
@@ -88,6 +89,11 @@ const Profile = () => {
 		password: '',
 		confirmpassword: '',
 	});
+	const [new_user, setNewUser] = useState({
+		newemail: '',
+		newpass: '',
+		newconfirmpass: '',
+	});
 
 	const [passw, setPassword] = useState(false);
 	const [isDataChanged, setChanged] = useState(false);
@@ -104,6 +110,10 @@ const Profile = () => {
 		});
 		setAuthData(() => {
 			return { ...auth_data, [ev.target.name]: ev.target.value };
+		});
+
+		setNewUser(() => {
+			return { ...new_user, [ev.target.name]: ev.target.value };
 		});
 	};
 
@@ -241,11 +251,27 @@ const Profile = () => {
 	};
 
 	const [disable, setDisabled] = useState(false);
+	const [new_account, setNewAccount] = useState(false);
 
 	React.useEffect(() => {
 		getUserData();
 	}, [logged]);
 
+	//
+	const variants = {
+		initial: {
+			x: '100%',
+			opacity: 0,
+		},
+		animate: {
+			x: ['100%', '0%', '-5%', '0%'],
+			opacity: 1,
+			transition: {
+				delay: 0.5,
+				duration: 0.6,
+			},
+		},
+	};
 	return (
 		<Stack
 			sx={{
@@ -334,6 +360,7 @@ const Profile = () => {
 										padding: '.4rem',
 										background: 'maroon',
 										width: '50%',
+										cursor: 'pointer',
 									}}
 									onClick={() => navigate('/')}
 								>
@@ -663,32 +690,108 @@ const Profile = () => {
 							{showValidate && (
 								<Auth>
 									{' '}
-									<Box
-										className="close"
-										onClick={() => {
-											main_dispatch({ type: SETPASS, showValidate });
-										}}
-									>
-										&times;
-									</Box>
-									<>
-										<Box className="account">
-											<h6>{adm?.result?.email}</h6>
-										</Box>
-										<Box className="auth">
-											<Profile_Auth success={success} error={error}>
-												<Box
-													style={{
-														display: 'flex',
-														width: '100%',
+									<div className="top">
+										<span
+											onClick={() => {
+												setNewAccount((prev) => !prev);
+											}}
+											className="back_icon"
+										>
+											<KeyboardBackspaceIcon />
+										</span>
+										<span
+											onClick={() =>
+												main_dispatch({
+													type: SETPASS,
+													showValidate,
+												})
+											}
+											className="close_icon"
+										>
+											{' '}
+											&times;
+										</span>
+									</div>
+									{!new_account ? (
+										<>
+											<Box className="account">
+												<h6>{adm?.result?.email}</h6>
+											</Box>
 
-														alignItems: 'center',
-														border:
-															error || auth_data.password.length < 6
-																? '2px solid red '
-																: 'none',
-													}}
-												>
+											<motion.div
+												variants={variants}
+												initial="initial"
+												animate="animate"
+												className="auth"
+											>
+												<Profile_Auth success={success} error={error}>
+													<Box
+														style={{
+															display: 'flex',
+															width: '100%',
+
+															alignItems: 'center',
+														}}
+													>
+														<TextField
+															InputLabelProps={{
+																shrink: true,
+																style: {
+																	color: istheme ? 'grey' : 'grey',
+																	marginLeft: '.5rem',
+																},
+															}}
+															name="password"
+															labelid="demo-simple-select-standard-label"
+															id="demo-simple-select-standard"
+															variant="standard"
+															label="New Password"
+															type={!passw ? 'password' : 'text'}
+															sx={{
+																color: 'white',
+																width: '100%',
+																borderLeft: !istheme
+																	? '2px solid grey'
+																	: 'none',
+																borderBottom: '1px solid lightgrey',
+															}}
+															inputProps={{
+																style: {
+																	marginLeft: '.5rem',
+																	color: disabled
+																		? 'black'
+																		: 'rgb(201, 175, 175)',
+																},
+															}}
+															value={auth_data?.password || ''}
+															onChange={handleChange}
+														/>
+														{!passw ? (
+															<VisibilityOff
+																sx={{
+																	cursor: 'pointer',
+																	color: !istheme ? 'white' : 'black',
+																	marginLeft: '.6rem',
+																}}
+																onClick={() => {
+																	setPassword((prof) => !prof);
+																}}
+															/>
+														) : (
+															<VisibilityOn
+																sx={{
+																	cursor: 'pointer',
+																	color: !istheme ? 'white' : 'black',
+																}}
+																onClick={() => {
+																	setPassword((prof) => !prof);
+																}}
+															/>
+														)}
+													</Box>
+												</Profile_Auth>
+
+												<Profile_Auth success={success} error={error}>
 													<TextField
 														InputLabelProps={{
 															shrink: true,
@@ -697,12 +800,12 @@ const Profile = () => {
 																marginLeft: '.5rem',
 															},
 														}}
-														name="password"
+														type={!passw ? 'password' : 'text'}
+														name="confirmpassword"
 														labelid="demo-simple-select-standard-label"
 														id="demo-simple-select-standard"
 														variant="standard"
-														label="New Password"
-														type={!passw ? 'password' : 'text'}
+														label="Confirm New Password"
 														sx={{
 															color: 'white',
 															width: '100%',
@@ -719,138 +822,114 @@ const Profile = () => {
 																	: 'rgb(201, 175, 175)',
 															},
 														}}
-														value={auth_data?.password || ''}
+														value={auth_data?.confirmpassword || ''}
 														onChange={handleChange}
 													/>
-													{!passw ? (
-														<VisibilityOff
-															sx={{
-																cursor: 'pointer',
-																color: !istheme ? 'white' : 'black',
-																marginLeft: '.6rem',
+												</Profile_Auth>
+												<Box>
+													{error && (
+														<span
+															style={{
+																color: 'red',
+																margin: '3rem 0 0 1rem',
 															}}
-															onClick={() => {
-																setPassword((prof) => !prof);
+														>
+															{modalcontent}
+														</span>
+													)}
+													{success && (
+														<span
+															style={{
+																color: 'green',
+																margin: '2rem 0 0 3rem',
 															}}
-														/>
-													) : (
-														<VisibilityOn
-															sx={{
-																cursor: 'pointer',
-																color: !istheme ? 'white' : 'black',
-															}}
-															onClick={() => {
-																setPassword((prof) => !prof);
-															}}
-														/>
+														>
+															{modalcontent}
+														</span>
 													)}
 												</Box>
-											</Profile_Auth>
-
-											<Profile_Auth success={success} error={error}>
-												<TextField
-													InputLabelProps={{
-														shrink: true,
-														style: {
-															color: istheme ? 'grey' : 'grey',
-															marginLeft: '.5rem',
-														},
-													}}
-													type={!passw ? 'password' : 'text'}
-													name="confirmpassword"
-													labelid="demo-simple-select-standard-label"
-													id="demo-simple-select-standard"
-													variant="standard"
-													label="Confirm New Password"
-													sx={{
-														color: 'white',
-														width: '100%',
-														borderLeft: !istheme
-															? '2px solid grey'
-															: 'none',
-														borderBottom: '1px solid lightgrey',
-														border:
-															error ||
-															auth_data.confirmpassword.length < 6
-																? '2px solid red '
-																: 'none',
-													}}
-													inputProps={{
-														style: {
-															marginLeft: '.5rem',
-															color: disabled
-																? 'black'
-																: 'rgb(201, 175, 175)',
-														},
-													}}
-													value={auth_data?.confirmpassword || ''}
-													onChange={handleChange}
-												/>
-											</Profile_Auth>
-											<Box>
-												{error && (
-													<span
-														style={{
-															color: 'red',
-															margin: '3rem 0 0 1rem',
+												<Box>
+													<Button
+														disabled={loading}
+														onClick={update_pass}
+														variant="outlined"
+														sx={{
+															background: 'orange !important',
+															marginRight: '1rem',
+															color: 'black',
 														}}
 													>
-														{modalcontent}
-													</span>
-												)}
-												{success && (
-													<span
-														style={{
-															color: 'green',
-															margin: '2rem 0 0 3rem',
-														}}
-													>
-														{modalcontent}
-													</span>
-												)}
-											</Box>
-											<Box>
-												<Button
-													disabled={loading}
-													onClick={update_pass}
-													variant="outlined"
-													sx={{
-														background: 'lightblue !important',
-														marginRight: '1rem',
-														color: 'black',
-													}}
-												>
-													{loading ? (
-														<>
-															<CircularProgress
-																value={progress}
-																size="27px"
-																sx={{ marginRight: '.6rem' }}
-															/>
+														{loading ? (
+															<>
+																<CircularProgress
+																	value={progress}
+																	size="27px"
+																	sx={{ marginRight: '.6rem' }}
+																/>
 
-															<span>Updating...</span>
-														</>
-													) : (
-														<span>Update Password</span>
-													)}
-												</Button>
-											</Box>
-											<Box className="add_button">
-												{' '}
-												<Button
-													disabled={loading}
-													onClick={update_pass}
-													variant="outlined"
-													type="submit"
+																<span>Updating...</span>
+															</>
+														) : (
+															<span style={{ color: 'indigo' }}>
+																Update Password
+															</span>
+														)}
+													</Button>
+												</Box>
+												<Box
+													className="add_button"
+													onClick={() =>
+														setNewAccount((prev) => !prev)
+													}
 												>
-													Create another account
-													<span>
-														<AddIcon />
-													</span>
-												</Button>
-											</Box>
-										</Box>
-									</>
+													{' '}
+													<Button
+														disabled={loading}
+														onClick={update_pass}
+														variant="outlined"
+														type="submit"
+													>
+														Add another account
+														<span>
+															<AddIcon />
+														</span>
+													</Button>
+												</Box>
+											</motion.div>
+										</>
+									) : (
+										<motion.div
+											variants={variants}
+											initial="initial"
+											animate="animate"
+											className="new_account"
+										>
+											<input
+												value={new_user?.newemail || ''}
+												onChange={handleChange}
+												name="newemail"
+												type="email"
+												placeholder="New Email"
+											/>
+											<input
+												value={new_user?.newpass || ''}
+												name="newpass"
+												onChange={handleChange}
+												type="text"
+												placeholder="Password"
+											/>
+											<input
+												value={new_user?.newconfirm || ''}
+												name="newconfirm"
+												onChange={handleChange}
+												type="text"
+												placeholder="Confirm password"
+											/>
+											<Button variant="outlined" color="info">
+												Create Account
+											</Button>
+										</motion.div>
+									)}
 								</Auth>
 							)}
 						</Validate>
