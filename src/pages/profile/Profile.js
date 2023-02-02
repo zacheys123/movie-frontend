@@ -362,7 +362,10 @@ const Profile = () => {
 										width: '50%',
 										cursor: 'pointer',
 									}}
-									onClick={() => navigate('/')}
+									onClick={() => {
+										navigate('/');
+										window.location.reload();
+									}}
 								>
 									{' '}
 									<ArrowBackIcon />
