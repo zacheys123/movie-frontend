@@ -395,24 +395,42 @@ const Profile = () => {
 					</Box>
 					<Form.Select size="2">
 						<option>Choose Update Action</option>
-						<option
-							style={{ fontFamily: "'Poppins', sans-serif" }}
-							value="profile"
-							onClick={() => setDisabled((prev) => !prev)}
-						>
-							Update Profile Info
-						</option>
-						<option
-							value="password"
-							onClick={() => {
-								main_dispatch({
-									type: SETPASSWORD,
-									showValidate,
-								});
-							}}
-						>
-							Change Password
-						</option>
+						{!showValidate ? (
+							<option
+								style={{ fontFamily: "'Poppins', sans-serif" }}
+								value="profile"
+								onClick={() => setDisabled((prev) => !prev)}
+							>
+								Update Profile Info
+							</option>
+						) : (
+							''
+						)}
+						{!showValidate ? (
+							<option
+								value="password"
+								onClick={() => {
+									main_dispatch({
+										type: SETPASSWORD,
+										showValidate,
+									});
+								}}
+							>
+								Change Password
+							</option>
+						) : (
+							<option
+								value="password"
+								onClick={() => {
+									main_dispatch({
+										type: SETPASSWORD,
+										showValidate,
+									});
+								}}
+							>
+								Update Profile
+							</option>
+						)}
 					</Form.Select>
 					{ismodal && (
 						<Modal
@@ -883,12 +901,7 @@ const Profile = () => {
 													}
 												>
 													{' '}
-													<Button
-														disabled={loading}
-														onClick={update_pass}
-														variant="outlined"
-														type="submit"
-													>
+													<Button variant="outlined">
 														Add another account
 														<span>
 															<AddIcon />
