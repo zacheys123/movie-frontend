@@ -44,7 +44,7 @@ function App() {
 		<QueryClientProvider client={client}>
 			<Layout>
 				<Routes>
-					<Route path="/">
+					<Route exact path="/">
 						<Route
 							index
 							element={
@@ -55,6 +55,7 @@ function App() {
 							}
 						/>
 						<Route
+							exact
 							path="/movie/feed"
 							element={
 								<PrivateRoutes>
@@ -63,6 +64,7 @@ function App() {
 							}
 						/>
 						<Route
+							exact
 							path="dashboard"
 							element={
 								<PrivateRoutes>
@@ -70,7 +72,7 @@ function App() {
 								</PrivateRoutes>
 							}
 						/>
-						<Route path="login" element={<Login />} />
+						<Route exact path="login" element={<Login />} />
 						<Route
 							exact
 							path="/movie-list/:id/latest"
@@ -80,9 +82,10 @@ function App() {
 								</PrivateRoutes>
 							}
 						/>
-						<Route path="register" element={<Register />} />
+						<Route exact path="register" element={<Register />} />
 
 						<Route
+							exact
 							path="/profile/:adminId"
 							element={
 								<PrivateRoutes>
@@ -91,6 +94,7 @@ function App() {
 							}
 						/>
 						<Route
+							exact
 							path="/create/plan"
 							element={
 								<PrivateRoutes>
@@ -99,7 +103,7 @@ function App() {
 							}
 						/>
 					</Route>
-					<Route path="*" element={<NoPage />} />
+					<Route exact path="*" element={<NoPage />} />
 				</Routes>
 			</Layout>
 		</QueryClientProvider>
