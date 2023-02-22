@@ -1,7 +1,8 @@
 {
   "name": "admin_client",
   "version": "0.1.0",
-  "private": true,
+  "private": true, 
+   "homepage":"https://moviehubz.onrender.com",
   "dependencies": {
     "@emailjs/browser": "^3.10.0",
     "@emotion/react": "^11.10.5",
