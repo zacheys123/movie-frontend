@@ -231,7 +231,10 @@ const ConfirmData = () => {
 				>
 					<Box
 						className="box free "
-						style={{ opacity: isplan || loading ? 0.4 : 1 }}
+						style={{
+							opacity: isplan || loading ? 0.4 : 1,
+							pointerEvents: isplan ? 'none' : 'visible',
+						}}
 					>
 						<h5
 							style={{
@@ -332,7 +335,10 @@ const ConfirmData = () => {
 					</Box>
 					<Box
 						className="box amateur"
-						style={{ opacity: isplan || loading ? 0.4 : 1 }}
+						style={{
+							opacity: isplan || loading ? 0.4 : 1,
+							pointerEvents: isplan ? 'none' : 'visible',
+						}}
 					>
 						{' '}
 						<h5
@@ -541,7 +547,10 @@ const ConfirmData = () => {
 					</Box>
 					<Box
 						className="box world"
-						style={{ opacity: isplan || loading ? 0.4 : 1 }}
+						style={{
+							opacity: isplan || loading ? 0.4 : 1,
+							pointerEvents: isplan ? 'none' : 'visible',
+						}}
 					>
 						<h5
 							style={{
